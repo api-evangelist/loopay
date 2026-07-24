@@ -1,0 +1,90 @@
+openapi: 3.0.0
+info:
+  title: loopay-api Affiliate User API
+  version: 3.2.0
+  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  contact:
+    name: Loopay Team
+servers:
+- url: https://api.loopay.com
+tags:
+- name: User
+paths:
+  /login:
+    post:
+      x-controller-name: User
+      x-operation-name: login
+      tags:
+      - User
+      description: "## Login\n Login to the system"
+      responses:
+        '200':
+          description: Token to access the system
+          content:
+            application/json:
+              schema:
+                type: string
+                example: eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk3OWVkMTU1OTdhYjM1Zjc4MjljZTc0NDMwN2I3OTNiN2ViZWIyZjAiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiZHJvcGlmeSBjcmlzIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2xvb3BheS10ZXN0IiwiYXVkIjoibG9vcGF5LXRlc3QiLCJhdXRoX3RpbWUiOjE2Nzk2MzUwNzAsInVzZXJfaWQiOiJITHRheWpvQlJ2YnFaRkE1TWJYbWx6WE1nb3IyIiwic3ViIjoiSEx0YXlqb0JSdmJxWkZBNU1iWG1selhNZ29yMiIsImlhdCI6MTY3OTYzNTA3MCwiZXhwIjoxNjc5NjM4NjcwLCJlbWFpbCI6ImFkbWluQGRyb3BpZnkuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImFkbWluQGRyb3BpZnkuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.eIxuBNgzWdoQmn-NbI6jVrrcY25p0Kbiv7ctLvQ6f7GqOcukJMLTrUX9YCakC7-C1AvxU6YpoU6pA8IKLJqRdnBIPcTAuh32LVdYy7PU51WSaG-YON3NdrsWfD9HW05FnIViQAWG3kqx5qhC7dyGq_qyep1_nwm671jMYNuAX1hYEZObOpmak2IHWKBMZzChI5eAedkjwzefs09pHmwThUpxpY6QPxVDviLx1XyumJWRLc1hMN9t2YqMEeWKWbvR_xUVS0OJFiFUe_TtlfsQSrlo8j1ti4xfbFLyuVyBVW69axzpSGO6QiU8l1pDQCFDDn4vUda-gP1qeO9tQCSj6w
+      parameters:
+      - name: email
+        in: query
+        schema:
+          type: string
+        description: Email of the user
+        required: true
+        example: user1@yahoo.com
+      - name: password
+        in: query
+        schema:
+          type: string
+          format: password
+        description: Password of the user
+        required: true
+        example: '12345678'
+      operationId: User.login
+  /users:
+    get:
+      x-controller-name: User
+      x-operation-name: users
+      tags:
+      - User
+      description: "## Get users\n Get all users available by companies logged in user"
+      responses:
+        '200':
+          description: Array of User model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    authUid:
+                      type: string
+                      example: asdf46547ASFDAFDFWW
+                    createdAt:
+                      type: string
+                      example: '2021-03-01T00:00:00.000Z'
+                    email:
+                      type: string
+                      example: user@.example.com
+                    name:
+                      type: string
+                      example: John Doe
+                    policy:
+                      type: boolean
+                      example: true
+                    updatedAt:
+                      type: string
+                      example: '2021-03-01T00:00:00.000Z'
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      operationId: User.users

@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: loopay-api Affiliate PaidMethods API
+  version: 3.2.0
+  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  contact:
+    name: Loopay Team
+servers:
+- url: https://api.loopay.com
+tags:
+- name: PaidMethods
+paths:
+  /paid-methods:
+    get:
+      x-controller-name: PaidMethods
+      x-operation-name: paidMethods
+      tags:
+      - PaidMethods
+      description: "## Get paid methods\n Get all available payment methods for the products I am subscribed to and that are enabled as a collection source"
+      responses:
+        '200':
+          description: 'Array of paid methods, containing id (paidMethodId), description and paymentChannel: electronic (PSE, bank transfer), pos (point of sale), cripto, cash (cash payment)'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    description:
+                      type: string
+                      example: transferencia en linea - PSE
+                    paymentChannel:
+                      type: string
+                      example: electronic
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      - name: companyProductId
+        in: query
+        schema:
+          type: number
+        description: 'companyProductId: Company product id. See /company-products endpoint an get the id'
+        required: true
+      operationId: PaidMethods.paidMethods

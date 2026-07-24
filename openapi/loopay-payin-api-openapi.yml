@@ -1,0 +1,322 @@
+openapi: 3.0.0
+info:
+  title: loopay-api Affiliate PayIn API
+  version: 3.2.0
+  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  contact:
+    name: Loopay Team
+servers:
+- url: https://api.loopay.com
+tags:
+- name: PayIn
+paths:
+  /payIns/bySourceOfPaymentSlug:
+    get:
+      x-controller-name: PayIn
+      x-operation-name: sourceOfPaymentDetailBySlug
+      tags:
+      - PayIn
+      description: "## Get PayIns \n Get all PayIns by source of payment slug and company product id"
+      responses:
+        '200':
+          description: array payins and pagination info
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payIns:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        Amount:
+                          type: number
+                        active:
+                          type: boolean
+                        createdAt:
+                          type: string
+                        id:
+                          type: number
+                        metaData:
+                          type: string
+                        payInGetWay:
+                          type: string
+                        product:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            slug:
+                              type: string
+                        type:
+                          type: string
+                        AmountCurrency:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                        Company:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                        CompanyProduct:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                        creatorUser:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                        file:
+                          type: object
+                          properties:
+                            fileName:
+                              type: string
+                            id:
+                              type: number
+                        ProductTransaction:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                        state:
+                          type: string
+                        trasnferedAt:
+                          type: string
+                        userId:
+                          type: number
+                        validatedAt:
+                          type: string
+                        SourceOfPayment:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                        LendsPayed:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                  paginationInfo:
+                    type: object
+                    properties:
+                      currentPage:
+                        type: number
+                      recordsPerPage:
+                        type: number
+                      totalRecords:
+                        type: number
+                      totalPages:
+                        type: number
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      - name: sourceOfPaymentSlug
+        in: query
+        schema:
+          type: string
+        description: Source of payment slug
+        required: true
+      - name: companyProductId
+        in: query
+        schema:
+          type: number
+        description: Company product id. Required, read  id from /company-products
+        required: true
+      - name: startDate
+        in: query
+        schema:
+          type: string
+        description: 'Returns all fields created after to this creation date '
+      - name: endDate
+        in: query
+        schema:
+          type: string
+        description: 'returns all fields created before to this creation date '
+      - name: state
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            description: 'returns all fields with this states '
+            enum:
+            - accepted
+            - rejected
+            - cancelled
+            - abandoned
+            - initial
+            - pending
+      - name: page
+        in: query
+        schema:
+          type: number
+        description: Page number to paginate
+      - name: recordsPerPage
+        in: query
+        schema:
+          type: number
+        description: Number of records per page
+      operationId: PayIn.sourceOfPaymentDetailBySlug
+  /payIns/{sourceOfPaymentId}:
+    get:
+      x-controller-name: PayIn
+      x-operation-name: sourceOfPaymentDetail
+      tags:
+      - PayIn
+      description: "## Get PayIns by source of payment \n Get all PayIns by source of payment id and by applied filters"
+      responses:
+        '200':
+          description: array payins and pagination info
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payIns:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        Amount:
+                          type: number
+                        active:
+                          type: boolean
+                        createdAt:
+                          type: string
+                        id:
+                          type: number
+                        metaData:
+                          type: string
+                        payInGetWay:
+                          type: string
+                        product:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            slug:
+                              type: string
+                        type:
+                          type: string
+                        AmountCurrency:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                        Company:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                        CompanyProduct:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                        creatorUser:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                        file:
+                          type: object
+                          properties:
+                            fileName:
+                              type: string
+                            id:
+                              type: number
+                        ProductTransaction:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                        state:
+                          type: string
+                        trasnferedAt:
+                          type: string
+                        userId:
+                          type: number
+                        validatedAt:
+                          type: string
+                        SourceOfPayment:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                        LendsPayed:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                  paginationInfo:
+                    type: object
+                    properties:
+                      currentPage:
+                        type: number
+                      recordsPerPage:
+                        type: number
+                      totalRecords:
+                        type: number
+                      totalPages:
+                        type: number
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      - name: sourceOfPaymentId
+        in: path
+        schema:
+          type: number
+        description: Source of payment id required read from /source-of-payment/filtered
+        required: true
+      - name: startDate
+        in: query
+        schema:
+          type: string
+        description: 'Returns all fields created after to this creation date '
+      - name: endDate
+        in: query
+        schema:
+          type: string
+        description: 'returns all fields created before to this creation date '
+      - name: state
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            description: 'returns all fields with this states '
+            enum:
+            - accepted
+            - rejected
+            - cancelled
+            - abandoned
+            - initial
+            - pending
+      - name: page
+        in: query
+        schema:
+          type: number
+        description: Page number to paginate
+      - name: recordsPerPage
+        in: query
+        schema:
+          type: number
+        description: Number of records per page
+      operationId: PayIn.sourceOfPaymentDetail

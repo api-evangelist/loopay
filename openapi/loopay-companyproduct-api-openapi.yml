@@ -1,0 +1,73 @@
+openapi: 3.0.0
+info:
+  title: loopay-api Affiliate CompanyProduct API
+  version: 3.2.0
+  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  contact:
+    name: Loopay Team
+servers:
+- url: https://api.loopay.com
+tags:
+- name: CompanyProduct
+paths:
+  /company-products:
+    get:
+      x-controller-name: CompanyProduct
+      x-operation-name: companyProducts
+      tags:
+      - CompanyProduct
+      description: "## Get company-products\n Get all companiesProducs  belonging to a company where the user is a member"
+      responses:
+        '200':
+          description: Array of CompanyProduct model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    companyId:
+                      type: number
+                      example: 1
+                    balance:
+                      type: number
+                      example: 1000
+                    createdAt:
+                      type: string
+                      example: '2021-03-01T00:00:00.000Z'
+                    updatedAt:
+                      type: string
+                      example: '2021-03-01T00:00:00.000Z'
+                    active:
+                      type: boolean
+                      example: true
+                    product:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          example: 1
+                        name:
+                          type: string
+                          example: Prefactoring
+                        description:
+                          type: string
+                          example: Prefactoring default product
+                        createdAt:
+                          type: string
+                          example: '2021-03-01T00:00:00.000Z'
+                        countryId:
+                          type: number
+                          example: 1
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      operationId: CompanyProduct.companyProducts

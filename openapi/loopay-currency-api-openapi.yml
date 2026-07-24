@@ -1,0 +1,49 @@
+openapi: 3.0.0
+info:
+  title: loopay-api Affiliate Currency API
+  version: 3.2.0
+  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  contact:
+    name: Loopay Team
+servers:
+- url: https://api.loopay.com
+tags:
+- name: Currency
+paths:
+  /currencies:
+    get:
+      x-controller-name: Currency
+      x-operation-name: currencies
+      tags:
+      - Currency
+      description: "## Get currencies\n\n Get all currencies available"
+      responses:
+        '200':
+          description: Array of Currency model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    cc:
+                      type: string
+                      example: USD
+                    name:
+                      type: string
+                      example: dollar
+                    symbol:
+                      type: string
+                      example: $
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      operationId: Currency.currencies

@@ -1,0 +1,394 @@
+openapi: 3.0.0
+info:
+  title: loopay-api Affiliate API
+  version: 3.2.0
+  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  contact:
+    name: Loopay Team
+servers:
+- url: https://api.loopay.com
+tags:
+- name: Affiliate
+paths:
+  /affiliates/balance:
+    get:
+      x-controller-name: Affiliate
+      x-operation-name: getCompaniesBalance
+      tags:
+      - Affiliate
+      description: '## Get balance for multiple companies'
+      responses: {}
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      - name: productId
+        in: query
+        schema:
+          type: string
+        description: Product id
+        required: true
+        example: 7
+      - name: managedCustomerData
+        in: query
+        content:
+          application/json:
+            schema:
+              type: object
+              description: 'data is an array of objects with the data of the afiliates: documentNumber, documentTypeId'
+              nullable: false
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - documentTypeId
+                    - documentNumber
+                    properties:
+                      documentTypeId:
+                        type: number
+                        description: Document type id
+                        nullable: false
+                      documentNumber:
+                        type: string
+                        description: Document number
+                        nullable: false
+                    additionalProperties: false
+                  uniqueItems: true
+                  minItems: 1
+                  example:
+                  - documentTypeId: 1
+                    documentNumber: '123456789'
+              required:
+              - data
+              additionalProperties: false
+      operationId: Affiliate.getCompaniesBalance
+  /affiliates/create:
+    post:
+      x-controller-name: Affiliate
+      x-operation-name: createManyAffiliates
+      tags:
+      - Affiliate
+      description: "## Create many affiliates\n\n Create many users, companies, and companyUsers given an array of UsersData"
+      responses:
+        '200':
+          description: Affiliate model instance
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  companies:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - slug
+                      - name
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: John Doe Inc
+                        slug:
+                          type: string
+                          example: jhon-doe-inc
+                        CompanyProduct:
+                          type: array
+                          items:
+                            type: object
+                            required:
+                            - id
+                            - slug
+                            properties:
+                              id:
+                                type: integer
+                                example: 1
+                              slug:
+                                type: string
+                                example: jhon-doe-inc
+                        errors:
+                          type: array
+                          items:
+                            type: object
+                            required:
+                            - reason
+                            - documentTypeId
+                            - documentNumber
+                            - status
+                            properties:
+                              reason:
+                                type: string
+                                example: Document number already exists
+                              documentTypeId:
+                                type: integer
+                                example: 1
+                              documentNumber:
+                                type: string
+                                example: '123456789'
+                              status:
+                                type: string
+                                example: error
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      - name: productId
+        in: query
+        schema:
+          type: string
+        description: Product id
+        required: true
+        example: 7
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                required:
+                - name
+                - documentTypeId
+                - documentNumber
+                properties:
+                  name:
+                    type: string
+                    example: John Doe
+                  documentTypeId:
+                    type: integer
+                    example: 1
+                  documentNumber:
+                    type: string
+                    example: '1234567890'
+        description: "## Array of users data\n\n "
+        required: true
+        x-parameter-index: 2
+      operationId: Affiliate.createManyAffiliates
+  /affiliates/payouts:
+    get:
+      x-controller-name: Affiliate
+      x-operation-name: getPayOutsForAffiliates
+      tags:
+      - Affiliate
+      description: "## Get all payOuts for affiliates\n\n Gets all payOuts for affiliates created by the currently registered user, belonging to the company of the user"
+      responses:
+        '200':
+          description: Array of Affiliate model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    name:
+                      type: string
+                      example: Global INC
+                    documentNumber:
+                      type: number
+                      example: 900200001
+                    documentTypeId:
+                      type: number
+                      example: 1
+                    PayOut:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                            example: 5087
+                          uid:
+                            type: string
+                            example: 5f9b9b9b9b9b9b9b
+                          beneficiaryName:
+                            type: string
+                            example: John Doe
+                          documentTypeId:
+                            type: number
+                            example: 1
+                          documentNumber:
+                            type: number
+                            example: 19373737
+                          bankBaseId:
+                            type: number
+                            example: 23
+                          bankAccountType:
+                            type: string
+                            example: ahorros
+                          bankAccount:
+                            type: string
+                            example: '81234678944'
+                          Amount:
+                            type: number
+                            example: 5000000
+                          externalIdentifier:
+                            type: string
+                            example: REF123456789
+                          tags:
+                            type: Object
+                            example:
+                              tagIdentifier:
+                              - indentifier1
+                              - indentifier2
+                              - indent 22
+                              - indent 4
+                          currencyId:
+                            type: number
+                            example: 1
+                          signedBy:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                                example: 122
+                              createdAt:
+                                type: string
+                                example: '2020-10-28T15:33:19.000Z'
+                              userId:
+                                type: number
+                                example: 13
+                          companyProductId:
+                            type: number
+                            example: 4451
+                          state:
+                            type: string
+                            example: delivered
+                          createdAt:
+                            type: string
+                            example: '2020-10-28T15:33:19.000Z'
+                          scheduledAt:
+                            type: string
+                            example: '2020-10-28T15:33:19.000Z'
+                          updatedAt:
+                            type: string
+                            example: '2020-10-28T15:33:19.000Z'
+                          validatedAt:
+                            type: string
+                            example: '2020-10-28T15:33:19.000Z'
+                          trasnferedAt:
+                            type: string
+                            example: '2020-10-28T15:33:19.000Z'
+                          reversedAt:
+                            type: string
+                            example: '2020-10-28T15:33:19.000Z'
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      - name: companiesIds
+        in: query
+        schema:
+          type: string
+        description: Comma separated list of company ids
+        required: true
+        example: 16,17,18
+      operationId: Affiliate.getPayOutsForAffiliates
+  /affiliates:
+    get:
+      x-controller-name: Affiliate
+      x-operation-name: getAffiliates
+      tags:
+      - Affiliate
+      description: "## Get all affiliates\n\n Gets all affiliates created by the currently registered user, belonging to the company of the user"
+      responses:
+        '200':
+          description: Array of Affiliate model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: John Doe Inc
+                    documentTypeId:
+                      type: integer
+                      example: 1
+                    documentNumber:
+                      type: string
+                      example: '900200001'
+                    isActive:
+                      type: boolean
+                      example: true
+                    stateCompany:
+                      type: string
+                      example: initial
+                    stateStudyCompany:
+                      type: string
+                      example: missInfo
+                    countryId:
+                      type: integer
+                      example: 1
+                    createdAt:
+                      type: string
+                      example: '2020-10-28T15:33:19.000Z'
+                    companyUser:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 1
+                          role:
+                            type: string
+                            example: admin
+                          user:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 1
+                              name:
+                                type: string
+                                example: John Doe
+                              email:
+                                type: string
+                                example: johnDoe@doeInc.com
+                              phone:
+                                type: string
+                                example: '+1234567890'
+                              createdAt:
+                                type: string
+                                example: '2020-10-28T15:33:19.000Z'
+                              updatedAt:
+                                type: string
+                                example: '2020-10-28T15:33:19.000Z'
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      - name: adminId
+        in: query
+        schema:
+          type: string
+        description: id of the current Affiliate company admin user
+        required: true
+        example: 13
+      operationId: Affiliate.getAffiliates

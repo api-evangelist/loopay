@@ -1,0 +1,107 @@
+openapi: 3.0.0
+info:
+  title: loopay-api Affiliate Bank API
+  version: 3.2.0
+  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  contact:
+    name: Loopay Team
+servers:
+- url: https://api.loopay.com
+tags:
+- name: Bank
+paths:
+  /banks:
+    get:
+      x-controller-name: Bank
+      x-operation-name: bankBases
+      tags:
+      - Bank
+      description: "## Get banks\n Get all banks available"
+      responses:
+        '200':
+          description: Array of BankBase model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: Banco de Bogotá
+                    countryId:
+                      type: integer
+                      example: 1
+                    accountValidator:
+                      type: object
+                      properties:
+                        type:
+                          type: object
+                          properties:
+                            ahorros:
+                              type: object
+                              properties:
+                                $id:
+                                  type: string
+                                  example: bank_ahorros_bancolombia
+                                title:
+                                  type: string
+                                  example: account_fields
+                                description:
+                                  type: string
+                                  example: validator fields for account
+                                type:
+                                  type: string
+                                  example: string
+                                maxLength:
+                                  type: integer
+                                  example: 11
+                                minLength:
+                                  type: integer
+                                  example: 3
+                                pattern:
+                                  type: string
+                                  example: ^[0-9]+$
+                            corriente:
+                              type: object
+                              properties:
+                                $id:
+                                  type: string
+                                  example: bank_corriente_bancolombia
+                                title:
+                                  type: string
+                                  example: account_fields
+                                description:
+                                  type: string
+                                  example: validator fields for account
+                                type:
+                                  type: string
+                                  example: string
+                                maxLength:
+                                  type: integer
+                                  example: 11
+                                minLength:
+                                  type: integer
+                                  example: 3
+                                pattern:
+                                  type: string
+                                  example: ^[0-9]+$
+                    active:
+                      type: boolean
+                      example: true
+                    createdAt:
+                      type: string
+                      example: '2020-10-01T00:00:00.000Z'
+                    updatedAt:
+                      type: string
+                      example: '2020-10-01T00:00:00.000Z'
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+      operationId: Bank.bankBases

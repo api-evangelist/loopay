@@ -1,0 +1,133 @@
+openapi: 3.0.0
+info:
+  title: loopay-api Affiliate Movements API
+  version: 3.2.0
+  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  contact:
+    name: Loopay Team
+servers:
+- url: https://api.loopay.com
+tags:
+- name: Movements
+paths:
+  /movements/{companyProductId}:
+    get:
+      x-controller-name: Movements
+      x-operation-name: selfPayOuts
+      tags:
+      - Movements
+      description: "## Get all movements by companyProductId\n\n Gets all movements by companyProductId"
+      responses:
+        '200':
+          description: Array of movements model instances
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  movements:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MovementWithRelations'
+                  paginationInfo:
+                    type: object
+                    properties:
+                      currentPage:
+                        type: number
+                      recordsPerPage:
+                        type: number
+                      totalRecords:
+                        type: number
+                      totalPages:
+                        type: number
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      - name: companyProductId
+        in: path
+        schema:
+          type: number
+        description: Company product id see /company-products for more info (refers as id)
+        required: true
+      - name: page
+        in: query
+        schema:
+          type: number
+        description: Page number of the totalPages
+      - name: recordsPerPage
+        in: query
+        schema:
+          type: number
+          maximum: 1000
+        description: Records to be returned per page (max 1000) (default 1000)
+        required: false
+      - name: endDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: End date of the movements
+        required: false
+        example: '2050-03-01T00:00:00.000Z'
+      - name: startDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Start date of the movements
+        required: false
+        example: '1992-11-24T00:00:00.000Z'
+      - name: type
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - PAYOUT
+            - CREDIT
+            - COLLECTION
+            - DEPOSIT
+      operationId: Movements.selfPayOuts
+components:
+  schemas:
+    MovementWithRelations:
+      title: MovementWithRelations
+      type: object
+      description: '(tsType: MovementWithRelations, schemaOptions: { includeRelations: true })'
+      properties:
+        id:
+          type: number
+        uid:
+          type: string
+        type:
+          type: string
+        state:
+          type: string
+        ref:
+          type: string
+        amount:
+          type: number
+        origin:
+          type: string
+        destination:
+          type: string
+        user:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+      - type
+      - state
+      - ref
+      - amount
+      - origin
+      - destination
+      - user
+      additionalProperties: false
+      x-typescript-type: MovementWithRelations

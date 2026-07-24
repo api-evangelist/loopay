@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: loopay-api Affiliate Company API
+  version: 3.2.0
+  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  contact:
+    name: Loopay Team
+servers:
+- url: https://api.loopay.com
+tags:
+- name: Company
+paths:
+  /companies:
+    get:
+      x-controller-name: Company
+      x-operation-name: companies
+      tags:
+      - Company
+      description: "## Get companies\n Get all companies available where the user is associated"
+      responses:
+        '200':
+          description: Array of Company model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    name:
+                      type: string
+                      example: Monsters Inc
+                    countryId:
+                      type: number
+                      example: 1
+                    documentNumber:
+                      type: string
+                      example: '123456789'
+                    documentTypeId:
+                      type: number
+                      example: 1
+                    stateCompany:
+                      type: string
+                      example: active
+                    stateStudyCompany:
+                      type: string
+                      example: active
+                    createdAt:
+                      type: string
+                      example: '2021-03-01T00:00:00.000Z'
+                    updatedAt:
+                      type: string
+                      example: '2021-03-01T00:00:00.000Z'
+                    isActive:
+                      type: boolean
+                      example: true
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      operationId: Company.companies

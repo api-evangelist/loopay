@@ -1,0 +1,799 @@
+openapi: 3.0.0
+info:
+  title: loopay-api Affiliate Payout API
+  version: 3.2.0
+  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  contact:
+    name: Loopay Team
+servers:
+- url: https://api.loopay.com
+tags:
+- name: Payout
+paths:
+  /payout/create:
+    post:
+      x-controller-name: Payout
+      x-operation-name: createSelfPayOut
+      tags:
+      - Payout
+      description: "## Create a payOut\n\n Create a single payout given a  payout object"
+      responses:
+        '200':
+          description: "## Create a payOut with bank transfer \n\nCreate one payout given a company id, company product id\n\n"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayOut'
+        '202':
+          description: " ## Create single cashOut payOut\n\nCreates a single payout to be withdrawn in cash at a physical point \n\nTo consult the available physical points in your region, please consult the endpoint /physical-point/{country}.\n\nexpiresAt [optional: The payout will expire at the indicated date, if the payout is not withdrawn before the expiration date, the payout will be rejected and the money will be returned to the company balance.\n\n* expriresAt must be in the format YYYY-MM-DD\n\n* expiresAt must be 2 h greater than the current date and less than 24 hr from the current date\n\n* expiresAt is optional and only applies to bankAccountType: @cash\n\n* if expiresAt is not set, the payout will expire in 2 hours\n\n### Example input:\n\nTo indicate that a dispersion will be withdrawn through a physical point, the bankbaseId must correspond to the ID of the Cash EC bank that belongs to the country where the dispersion will be made (consult the /banks endpoint, see id key). in the following example the input \"bankBaseId\": 48 corresponds to the id of the ecuador bank cashOut ec to be able to make withdrawals in physical point.\n\nAlert: The bankBaseId must be the id of the cash ec bank of the country where the dispersion will be made. Values in the example are for demonstration purposes only and may be diferent for your country in production. (consult the /banks endpoint in production)\n\nThe response is an object will contain the id of the payout and the externalIdentifier of the payout, which is unique for each payout. \n\n The payout will have a state that will indicate the status of the payout, the state can be one of the following: \n\n* RECEIVED: The payout has been received, this state is the initial state of the payout. Indicates that the payout has been received by the system. \n\n* SCHEDULED: The payout has been scheduled this state is set when the payout is scheduled to be delivered. \n\nMake sure to put the user's full name and surname in the benefciaryName parameters, as well as set the appropriate document type documentTypeId ( endpoint documentTypes see id key)\n\nThe ```bankAccount``` should be set as ```@cash``` and ```\"bankAccountType\": \"ahorros\"```. See the following input example:\n\n~~~{\n  \"Amount\": 200,\n  \"bankBaseId\": 48,\n  \"bankAccountType\": \"ahorros\",\n  \"bankAccount\": \"@cash\",\n  \"beneficiaryName\": \"John Doe\",\n  \"companyId\": 13,\n  \"companyProductId\": 20,\n  \"currencyId\": 2,\n  \"documentTypeId\": 4,\n  \"documentNumber\": 123456789,\n  \"externalIdentifier\": \"physical-ABC1\",\n  \"expiresAt\": \"2025-10-30T18:00:00.000Z\",\n  \"metaData\": {}"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    example: 1
+                    description: PayOut id
+                  uid:
+                    type: string
+                    example: clod9uqdf00003kects29nf5q
+                    description: PayOut uid
+                  externalIdentifier:
+                    type: string
+                    example: physical-ABC1
+                    description: PayOut externalIdentifier
+                  Amount:
+                    type: number
+                    example: 200
+                    description: PayOut amount
+                  bankBaseId:
+                    type: number
+                    example: 48
+                    description: bankBaseId id cash ec where the cash will be withdrawn
+                  bankAccountType:
+                    type: string
+                    example: ahorros
+                    description: PayOut bankAccountType
+                  bankAccount:
+                    type: string
+                    example: '@cash'
+                    description: Bank account number
+                  beneficiaryName:
+                    type: string
+                    example: John Doe
+                    description: Beneficiary name who will be able to withdraw the cash
+                  documentTypeId:
+                    type: number
+                    example: 4
+                    description: Beneficiary documentTypeId who will be able to withdraw the cash
+                  documentNumber:
+                    type: integer
+                    example: 123456789
+                    description: Beneficiary documentNumber who will be able to withdraw the cash
+                  state:
+                    type: string
+                    example: received
+                    description: 'PayOut state can be one of the following: received, scheduled, rejected, cancelled'
+                  companyId:
+                    type: number
+                    example: 13
+                    description: Company id who created the payout
+                  companyProductId:
+                    type: number
+                    example: 20
+                    description: Company product id who created the payout
+                  userId:
+                    type: number
+                    example: 16
+                    description: User id who created the payout
+                  metaData:
+                    type: object
+                    example:
+                      cashOutData:
+                        pin: 598361
+                        beneficiaryName: John Prince
+                        documentTypeId: 4
+                        documentNumber: 103244400
+                        createAt: '2023-10-30T19:07:12.586Z'
+                        expiresAt: '2023-10-30T21:07:12.586Z'
+                    description: 'PayOut metaData object. For cashOut payouts, the metaData object will contain the following keys: pin, createAt, documentNumber, documentTypeId, expirationDate, beneficiaryName'
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      - name: signPayOut
+        in: query
+        schema:
+          type: boolean
+        description: 'Set to true to sign (approve) the payout after creation (default: false)'
+        required: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreaateSelfPayOut'
+        description: '**Create payOut  data description**
+
+
+          Create a payout from a company ID and companyProduct ID
+
+
+          ***companyId:***(number) Is the ID of the company.Check /companies endpoint to see company id.
+
+
+          ***companyProductId:*** (number) is the ID of the company product. It specifies which company product (virtual wallet) the collection source can be associated with. Check the companyProduct endpoint to see the available wallets, which must be of the deposit type.
+
+
+          ***Amount***: (number): Amount to delivered.
+
+
+          ***bankAccount***: (string) Bank account number.
+
+
+          ***bankAccountType***: (string) must be `ahorros` for *savings* accounts or `corriente` for checking accounts. Accounts for virtual wallets, such as Nequi or Daviplata, are of type `ahorros`.
+
+
+          ***bankBaseId***: (number) ID of the bank to disburse. To obtain the ID of the bank, consult the Bank/banks endpoint.
+
+
+          ***beneficiaryName***: (string) Name of the beneficiary to disburse.
+
+
+          ***documentTypeId***: (number) The ID of the document type. Please refer to the /documentTypes endpoint to retrieve this information.
+
+
+          ***documentNumber***: (number | string) Document identification number.
+
+
+          ***externalIdentifier***: (string) is a unique payment reference. It is an identifier that should not be repeated per payOut.
+
+
+          ***currencyId***: (number)[optional] Currency ID. Please refer to the /currencies endpoint to retrieve this information.
+
+
+          ***metadata***: (object) [optional] Additional information about the payOut.
+
+
+          ***expiresAt***: (Date) [optional]  only applies to `bankAccountType: @cash`
+
+
+          ***phone***: (string) [optional] phone number of the beneficiary to disburse.  must be write in format like "+57XXXXXXXXX"
+
+
+          ***email***: (string) [optional] email of the beneficiary to disburse.'
+        required: true
+        x-parameter-index: 1
+      operationId: Payout.createSelfPayOut
+  /payout/{id}:
+    get:
+      x-controller-name: Payout
+      x-operation-name: selfPayOut
+      tags:
+      - Payout
+      description: "## Get a payOut\n\n Get a single payout given a  payout id"
+      responses:
+        '200':
+          description: Payout model instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayOutWithRelations'
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: number
+        required: true
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      operationId: Payout.selfPayOut
+  /payouts/byExternalIdentifierList:
+    post:
+      x-controller-name: Payout
+      x-operation-name: getSelfPayOutsByExternalIdentifierList
+      tags:
+      - Payout
+      description: '## Get self payOuts by externalIdentifier
+
+
+        Get a list of payOuts by a list of externalIdentifier and companyProductId'
+      responses:
+        '200':
+          description: Array of PayOut model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                      description: PayOut id
+                    externalIdentifier:
+                      type: string
+                      example: XYZ123456789
+                      description: PayOut externalIdentifier
+                    Amount:
+                      type: number
+                      example: 1000
+                      description: PayOut amount
+                    bankBaseId:
+                      type: number
+                      example: 1
+                      description: PayOut bankBaseId
+                    bankAccountType:
+                      type: string
+                      example: ahorros
+                      description: PayOut bankAccountType
+                    bankAccount:
+                      type: string
+                      example: '123456789'
+                      description: Bank account number
+                    beneficiaryName:
+                      type: string
+                      example: John Doe
+                      description: PayOut beneficiaryName
+                    documentTypeId:
+                      type: number
+                      example: 1
+                      description: Beneficiary documentTypeId
+                    documentNumber:
+                      type: integer
+                      example: 123456789
+                      description: Beneficiary documentNumber
+                    state:
+                      type: string
+                      example: DELIVERED
+                      description: PayOut state
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                externalIdentifierList:
+                  type: array
+                  items:
+                    type: string
+                    example: XYZ123456789
+                companyProductId:
+                  type: number
+                  example: 1
+        description: "## Get self payOuts by externalIdentifier\n Parameter considerations\n > **externalIdentifierList**: must be an array of externalIdentifier"
+        required: true
+        x-parameter-index: 1
+      operationId: Payout.getSelfPayOutsByExternalIdentifierList
+  /payouts/create:
+    post:
+      x-controller-name: Payout
+      x-operation-name: createSelfPayOutMany
+      tags:
+      - Payout
+      description: '## Create payOuts
+
+
+        Create several payouts given a company id, company product id and a data array of payout objects'
+      responses:
+        '200':
+          description: "## Create payOuts with bank transfers \n\nCreate several payouts given a company id, company product id and a data array of payout objects. \n\n"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                      description: PayOut id
+                    externalIdentifier:
+                      type: string
+                      example: XYZ123456789
+                      description: PayOut externalIdentifier is unique field
+                    Amount:
+                      type: number
+                      example: 1000
+                      description: PayOut amount
+                    bankBaseId:
+                      type: number
+                      example: 1
+                      description: PayOut bankBaseId
+                    bankAccountType:
+                      type: string
+                      example: ahorros
+                      description: PayOut bankAccountType
+                    bankAccount:
+                      type: string
+                      example: '123456789'
+                      description: Bank account number
+                    beneficiaryName:
+                      type: string
+                      example: John Doe
+                      description: PayOut beneficiaryName
+                    documentTypeId:
+                      type: number
+                      example: 1
+                      description: Beneficiary documentTypeId
+                    documentNumber:
+                      type: integer
+                      example: 123456789
+                      description: Beneficiary documentNumber
+                    state:
+                      type: string
+                      example: RECEIVED
+                      description: PayOut state
+        '202':
+          description: " ## Create cashOut payOuts\n\nCreates several payouts to be withdrawn in cash at a physical point \n\nTo consult the available physical points in your region, please consult the endpoint /physical-point/{country}.\n\n### Example input:\n\nTo indicate that a dispersion will be withdrawn through a physical point, the bankbaseId must correspond to the ID of the Cash EC bank that belongs to the country where the dispersion will be made (consult the /banks endpoint, see id key). in the following example the input \"bankBaseId\": 48 corresponds to the id of the ecuador bank cashOut ec to be able to make withdrawals in physical point.\n\nThe response will be an array of objects where each object will contain the id of the payout and the externalIdentifier of the payout, which is unique for each payout. \n\n Each payout will have a state that will indicate the status of the payout, the state can be one of the following: \n\n* RECEIVED: The payout has been received, this state is the initial state of the payout. Indicates that the payout has been received by the system. \n\n* SCHEDULED: The payout has been scheduled this state is set when the payout is scheduled to be delivered. \n\nMake sure to put the user's full name and surname in the benefciaryName parameters, as well as set the appropriate document type documentTypeId ( endpoint documentTypes see id key)\n\nThe ```bankAccount``` should be set as ```@cash``` and ```\"bankAccountType\": \"ahorros\"```. See the following input example:\n\n~~~{\n  \"companyId\": 13,\n  \"companyProductId\": 20,\n  \"data\": [\n    {\n      \"Amount\": 1000,\n      \"bankBaseId\": 48,\n      \"bankAccountType\": \"ahorros\",\n      \"bankAccount\": \"@cash\",\n      \"beneficiaryName\": \"John Doe\",\n      \"documentTypeId\": 4,\n      \"documentNumber\": 123456789,\n      \"externalIdentifier\": \"physical-1\"\n    }\n  ]"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                      description: PayOut id
+                    externalIdentifier:
+                      type: string
+                      example: physical-1
+                      description: PayOut externalIdentifier
+                    Amount:
+                      type: number
+                      example: 1000
+                      description: PayOut amount
+                    bankBaseId:
+                      type: number
+                      example: 48
+                      description: bankBaseId id cash ec where the cash will be withdrawn
+                    bankAccountType:
+                      type: string
+                      example: ahorros
+                      description: PayOut bankAccountType
+                    bankAccount:
+                      type: string
+                      example: '@cash'
+                      description: Bank account number
+                    beneficiaryName:
+                      type: string
+                      example: John Doe
+                      description: PayOut beneficiaryName
+                    documentTypeId:
+                      type: number
+                      example: 4
+                      description: Beneficiary documentTypeId
+                    documentNumber:
+                      type: integer
+                      example: 123456789
+                      description: Beneficiary documentNumber
+                    state:
+                      type: string
+                      example: RECEIVED
+                      description: PayOut state
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      - name: signPayOuts
+        in: query
+        schema:
+          type: boolean
+        description: 'Set to true to sign (approve) the payouts after creation (default: false)'
+        required: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                companyId:
+                  type: number
+                  example: 13
+                companyProductId:
+                  type: number
+                  example: 20
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      Amount:
+                        type: number
+                        example: 1000
+                      bankAccount:
+                        type: string
+                        example: '123456789'
+                        description: Bank account number
+                      bankAccountType:
+                        type: string
+                        example: ahorros
+                      bankBaseId:
+                        type: number
+                        example: 1
+                      beneficiaryName:
+                        type: string
+                        example: John Doe
+                      documentTypeId:
+                        type: number
+                        example: 1
+                      documentNumber:
+                        type: integer
+                        example: 123456789
+                        maxLength: 10
+                      externalIdentifier:
+                        type: string
+                        example: XYZ123456789
+          application/text:
+            schema:
+              type: string
+              example: 'Amount,bankAccount,bankAccountType,bankBaseId,beneficiaryName,documentTypeId,documentNumber,externalIdentifier
+
+                1000,123456789,ahorros,1,John Doe,1,123456789,XYZ123456789'
+        description: '**Create payOuts  data description**
+
+
+          Create multiple payouts from a company ID and companyProduct ID, use a data array containing different payout objects.
+
+
+          ***companyProductId:*** (number) is the ID of the company product. It specifies which company product (virtual wallet) the collection source can be associated with. Check the companyProduct endpoint to see the available wallets, which must be of the deposit type.
+
+
+          ***data:*** (object) : This is an array of different objects, each object represents a payOut with the following fields:
+
+
+          ***Amount***: (number): Amount to delivered.
+
+
+          ***bankAccount***: (string) Bank account number.
+
+
+          ***bankAccountType***: (string) must be `ahorros` for *savings* accounts or `corriente` for checking accounts. Accounts for virtual wallets, such as Nequi or Daviplata, are of type `ahorros`.
+
+
+          ***bankBaseId***: (number) ID of the bank to disburse. To obtain the ID of the bank, consult the Bank/banks endpoint.
+
+
+          ***beneficiaryName***: (string) Name of the beneficiary to disburse.
+
+
+          ***documentTypeId***: (number) The ID of the document type. Please refer to the /documentTypes endpoint to retrieve this information.
+
+
+          ***documentNumber***: (number | string) Document identification number.
+
+
+          ***externalIdentifier***: (string) is a unique payment reference. It is an identifier that should not be repeated per payOut.
+
+
+          ***phone***: (string) [optional] phone number of the beneficiary to disburse.  must be write in format like "+57XXXXXXXXX"
+
+
+          ***email***: (string) [optional] email of the beneficiary to disburse.
+
+
+          '
+        required: true
+        x-parameter-index: 1
+      operationId: Payout.createSelfPayOutMany
+  /payouts/sign:
+    post:
+      x-controller-name: Payout
+      x-operation-name: createManySignedPayouts
+      tags:
+      - Payout
+      description: "## Sign payOuts\n\n Sign several payouts given an array of payout ids"
+      responses:
+        '200':
+          description: Count Payout model instance signed
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    payoutId:
+                      type: number
+                      example: 1
+                      description: Payout id
+                    id:
+                      type: number
+                      description: Signature id
+                      example: 1
+                    createdAt:
+                      type: string
+                      format: date-time
+                      description: Signature creation date
+                      example: '2021-01-01T00:00:00.000Z'
+                    user:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          example: 1
+                          description: User id
+                        name:
+                          type: string
+                          example: John Doe
+                          description: User name
+                    PayOut:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          example: 1
+                          description: PayOut id
+                        Amount:
+                          type: number
+                          example: 1000
+                          description: PayOut amount
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: number
+                example: 1
+        description: "## Sign several payOut\n Parameter considerations\n > **payoutIds**: must be an array of payout ids"
+        required: true
+        x-parameter-index: 1
+      operationId: Payout.createManySignedPayouts
+  /payouts:
+    get:
+      x-controller-name: Payout
+      x-operation-name: selfPayOuts
+      tags:
+      - Payout
+      description: "## Get all payOuts\n\n Gets all payOuts created by the currently registered user, belonging to the company of the user"
+      responses:
+        '200':
+          description: Array of Payout model instances
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payOuts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PayOutWithRelations'
+                  paginationInfo:
+                    type: object
+                    properties:
+                      currentPage:
+                        type: number
+                      recordsPerPage:
+                        type: number
+                      totalRecords:
+                        type: number
+                      totalPages:
+                        type: number
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      - name: page
+        in: query
+        schema:
+          type: number
+      - name: recordsPerPage
+        in: query
+        schema:
+          type: number
+      operationId: Payout.selfPayOuts
+components:
+  schemas:
+    CreaateSelfPayOut:
+      title: CreaateSelfPayOut
+      type: object
+      description: '(tsType: CreateSelfPayOutInput, schemaOptions: { title: ''CreaateSelfPayOut'' })'
+      properties:
+        Amount:
+          type: number
+        bankAccount:
+          type: string
+        bankAccountType:
+          type: string
+        bankBaseId:
+          type: number
+        beneficiaryName:
+          type: string
+        companyId:
+          type: number
+        companyProductId:
+          type: number
+        currencyId:
+          type: number
+        documentNumber: {}
+        documentTypeId:
+          type: number
+        externalIdentifier:
+          type: string
+        metaData:
+          type: object
+        expiresAt:
+          type: string
+          format: date-time
+        email:
+          type: string
+        phone:
+          type: string
+      required:
+      - Amount
+      - bankAccount
+      - bankAccountType
+      - bankBaseId
+      - beneficiaryName
+      - companyId
+      - companyProductId
+      - documentNumber
+      - documentTypeId
+      additionalProperties: false
+      x-typescript-type: CreateSelfPayOutInput
+    PayOut:
+      title: PayOut
+      type: object
+      properties:
+        id:
+          type: number
+        active:
+          type: boolean
+        Amount:
+          type: number
+        AmountUsd:
+          type: number
+        bankAccount:
+          type: string
+        bankAccountType:
+          type: string
+        bankBaseId:
+          type: number
+        beneficiaryName:
+          type: string
+        companyId:
+          type: number
+        companyProductId:
+          type: number
+        currencyId:
+          type: number
+        deleted:
+          type: boolean
+        documentNumber: {}
+        documentTypeId:
+          type: number
+        externalIdentifier:
+          type: string
+        metaData:
+          type: object
+        reversedAt:
+          type: string
+          format: date-time
+        startedProcessAt:
+          type: string
+          format: date-time
+        state:
+          type: string
+        trasnferedAt:
+          type: string
+          format: date-time
+        userId:
+          type: number
+        validatedAt:
+          type: string
+          format: date-time
+        uid:
+          type: string
+      required:
+      - Amount
+      - bankAccount
+      - bankAccountType
+      - bankBaseId
+      - beneficiaryName
+      - companyProductId
+      - currencyId
+      - documentNumber
+      - documentTypeId
+      - externalIdentifier
+      - userId
+      additionalProperties: false
+    PayOutWithRelations:
+      title: PayOutWithRelations
+      type: object
+      description: '(tsType: PayOutWithRelations, schemaOptions: { includeRelations: true })'
+      properties:
+        id:
+          type: number
+        active:
+          type: boolean
+        Amount:
+          type: number
+        AmountUsd:
+          type: number
+        bankAccount:
+          type: string
+        bankAccountType:
+          type: string
+        bankBaseId:
+          type: number
+        beneficiaryName:
+          type: string
+        companyId:
+          type: number
+        companyProductId:
+          type: number
+        currencyId:
+          type: number
+        deleted:
+          type: boolean
+        documentNumber: {}
+        documentTypeId:
+          type: number
+        externalIdentifier:
+          type: string
+        metaData:
+          type: object
+        reversedAt:
+          type: string
+          format: date-time
+        startedProcessAt:
+          type: string
+          format: date-time
+        state:
+          type: string
+        trasnferedAt:
+          type: string
+          format: date-time
+        userId:
+          type: number
+        validatedAt:
+          type: string
+          format: date-time
+        uid:
+          type: string
+      required:
+      - Amount
+      - bankAccount
+      - bankAccountType
+      - bankBaseId
+      - beneficiaryName
+      - companyProductId
+      - currencyId
+      - documentNumber
+      - documentTypeId
+      - externalIdentifier
+      - userId
+      additionalProperties: false
+      x-typescript-type: PayOutWithRelations

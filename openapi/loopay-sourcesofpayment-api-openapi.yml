@@ -1,0 +1,823 @@
+openapi: 3.0.0
+info:
+  title: loopay-api Affiliate SourcesOfPayment API
+  version: 3.2.0
+  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  contact:
+    name: Loopay Team
+servers:
+- url: https://api.loopay.com
+tags:
+- name: SourcesOfPayment
+paths:
+  /source-of-payment/create:
+    post:
+      x-controller-name: SourcesOfPayment
+      x-operation-name: createSourceOfPayment
+      tags:
+      - SourcesOfPayment
+      description: "## Create source of payment\n\n Create a new payment source belonging to a companyProductId"
+      responses:
+        '200':
+          description: source of payment model instance
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    example: 240
+                    description: Source of payment id
+                  name:
+                    type: string
+                    example: test url 2
+                    description: Source of payment name
+                  active:
+                    type: boolean
+                    example: true
+                    description: Source of payment active, is available
+                  slug:
+                    type: string
+                    example: test-url-2
+                    description: Source of payment slug
+                  companyProductId:
+                    type: number
+                    example: 1
+                    description: Source of payment company product id
+                  createdAt:
+                    type: string
+                    example: '2021-08-30T17:00:00.000Z'
+                    description: Source of payment created date
+                  fixedValue:
+                    type: number
+                    example: 0
+                    description: Source of payment fixed value
+                    nullable: true
+                  maxPayments:
+                    type: number
+                    example: 0
+                    description: Source of maximum payments. If the value is 0, no limit is set, unlimited payments.
+                    nullable: true
+                  expiresAt:
+                    type: string
+                    example: '2021-08-30T17:00:00.000Z'
+                    description: Source of maximum payments. If the value is 0, no limit is set.
+                    nullable: true
+                  url:
+                    type: string
+                    example: '@troop/d30/test-url-2'
+                    description: 'Base URL of the payment to be use in web: https://app.loopay.com/@troop/d30/test-url-2 | in demo: https://demo.loopay.com/@troop/d30/test-url-2'
+                  hasFastCheckOut:
+                    type: boolean
+                    example: false
+                    description: Source of payment has fast check out
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Source of payment 1
+                companyProductId:
+                  type: number
+                slug:
+                  type: string
+                  example: Source of payment 1
+                clientCommentsAvailable:
+                  type: boolean
+                  example: false
+                active:
+                  type: boolean
+                  example: true
+                descriptionOnClientForm:
+                  type: boolean
+                  example: false
+                isPredefinedPayerDetails:
+                  type: boolean
+                  example: false
+                paidMethods:
+                  type: array
+                  items:
+                    type: number
+                clientDefinesReference:
+                  type: boolean
+                  example: false
+                customFields:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 1691515792228
+                      name:
+                        type: string
+                        example: campo 2
+                      type:
+                        type: string
+                        enum:
+                        - text
+                        - number
+                        - date
+                        - email
+                        example: text
+                      required:
+                        type: boolean
+                        example: false
+                    additionalProperties: false
+                    required:
+                    - id
+                    - name
+                    - type
+                    - required
+                  maxItems: 5
+                description:
+                  type: string
+                  example: descrption
+                expiresAt:
+                  type: string
+                  example: '2090-09-30T00:00:00.000Z'
+                fixedValue:
+                  type: number
+                  example: 100000.5
+                maxPayments:
+                  type: number
+                  example: 10
+                payerDetails:
+                  type: object
+                  properties:
+                    ref:
+                      type: string
+                      example: ref-001
+                    email:
+                      type: string
+                      example: johnD@gmail.com
+                    phone:
+                      type: string
+                      example: +57 310 3297014
+                    fullName:
+                      type: string
+                      example: John Doe
+                    documentType:
+                      type: string
+                      example: CC
+                    documentNumber:
+                      type: string
+                      example: '1000000888'
+                urlCallback:
+                  type: string
+                  example: https://myurl.com/callback
+                hasFastCheckOut:
+                  type: boolean
+                  example: false
+        description: "## Source of payment data description \n\n ***clientDefinesReference*:** (boolean) If set to true, a reference field is enabled on the payment form for the payer to fill out. If the value is false, then the field `payerDetails.ref` should be completed with text. \n\n ***isPredefinedPayerDetails*:** (boolean) If true, payer data must be predefined in the *payerDetails* field. \n\n ***payerDetails*** *: (object) You should predefine this field if *isPredefinedPayerDetails* is true. If *clientDefinesReference* is false, you should predefine the reference (`payerDetails.ref`) in this field. \n\n *payerDetails* is an object that predefines payer data in the form, such as email, phone, fullName, and documentType. The *documentType* property is a string of type *documentType.type*, whose value can be \"cc\", \"nit\", or \"rut\" for instance. Please consult the *documentType* endpoint for more information. \n\n ***customFields*** *: (array of objects) are custom fields that can be added to the payment form, up to a maximum of 5. These fields must be completed by the payer and have the following structure: `{\"id\": 1691554828946, \"name\": \"field2\", \"type\": \"text\", \"required\": false}`. The \"id\" field must be unique, \"name\" is the name of the field to be completed, and \"type\" can be **[\"text\", \"number\", \"date\", \"email\"]**. \n\n ***descriptionOnClientForm:*** (boolean) If this field is set to true, the value defined in the \"description\" field will appear on the payment form. \n\n ***description*** *: (string) You must define this field if *descriptionOnClientForm* is set to true. You can use this field to indicate important information to the payer on the payment form, such as details, instructions, or notes that you consider necessary. If *descriptionOnClientForm* is set to false, you can also fill in this field to have your own details that will not be rendered on the payment form, but that you can see on your dashboard. \n\n ***expiresAt*** *: (date) is the expiration date until which you can receive payments through this collection source. \n\n ***fixedValue*** *: (number) a fixed value that the payer must pay. If not defined, the payer is free to enter any amount to pay. \n\n ***maxPayments*** *: *(number)* is an integer value that represents the maximum number of payments that can be accepted. Once the number of processed payments reaches this value, no further payments can be accepted. If the value is set to zero, the number of payments is unlimited.\n\n ***slug:*** (string) A unique identifier or alias that should be written in lowercase and contain a maximum of 40 characters. It should only contain alphanumeric characters and spaces separated by (-). \n\n***paidMethods:*** (array number) An array of paidMethodsId corresponding to the ID of a paidMethod. This array enables and connects payment methods that can be used to pay a collection source. Consult the paidMethod endpoint to see the available payment methods.\n\n***companyProductId:*** (number) is the ID of the company product. It specifies which company product (virtual wallet) the collection source can be associated with. Check the companyProduct endpoint to see the available wallets, which must be of the deposit type.\n\n***active:*** (boolean) If active is true, the collection source is enabled. Otherwise, it is disabled and will not accept payments.\n\n ***name:*** (string) Name of the collection source \n\n ***urlCallback*** *: (string)  URL to receive notifications when the payment process is completed \n\n***hasFastCheckOut*** *: (boolean) Source of payment has fast check out, if the value is true only allows setting one paidMethod in the array and payerDetails must be defined  \n\n\n\n > **|Note**: The values with asterisk (*) are optional and do not need to be included in the request body, unless otherwise indicated. **|**"
+        required: true
+        x-parameter-index: 1
+      operationId: SourcesOfPayment.createSourceOfPayment
+  /source-of-payment/create-direct-payment:
+    post:
+      x-controller-name: SourcesOfPayment
+      x-operation-name: createDirectPayment
+      tags:
+      - SourcesOfPayment
+      description: "## Create direct payment and source of payment\n\nCreate a new source of payment direct form backend, without a front interface, belonging to a companyProductId.\n\n***expiresAt*** [optional]: Only avaylable for \"paymentChannel\": \"pos\" cashIn. \n\n* By default it is set to 7 days expiration \n\n* expiresAt value must be greater than 24h from current date \n\n* expiresAt must be less than 7 from current date\n\n** expiration for bank transfers is by default 1 hr online and 24 hr in a physical bank with the bank code generated.***callbackUrl*** : url to return after payment is processed \n\n***userType*** [optional]: only required for transactions in colombia \n\n***metadata*** [optional]: object with additional information \n\n"
+      responses:
+        '200':
+          description: source of payment model instance
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fastPaymentProcessorEngine:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: '200'
+                      message:
+                        type: string
+                        example: success
+                      body:
+                        type: object
+                        properties:
+                          pdf:
+                            type: string
+                            example: https://myurl.com/pdf
+                          pdfUrl:
+                            type: string
+                            example: https://myurl.com/pdf
+                  sourceOfPayment:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 240
+                        description: Source of payment id
+                      name:
+                        type: string
+                        example: test url 2
+                        description: Source of payment name
+                      active:
+                        type: boolean
+                        example: true
+                        description: Source of payment active, is available
+                      slug:
+                        type: string
+                        example: test-url-2
+                        description: Source of payment slug
+                      companyProductId:
+                        type: number
+                        example: 1
+                        description: Source of payment company product id
+                      createdAt:
+                        type: string
+                        example: '2021-08-30T17:00:00.000Z'
+                        description: Source of payment created date
+                      fixedValue:
+                        type: number
+                        example: 0
+                        description: Source of payment fixed value
+                        nullable: true
+                      maxPayments:
+                        type: number
+                        example: 0
+                        description: Source of maximum payments. If the value is 0, no limit is set, unlimited payments.
+                        nullable: true
+                      expiresAt:
+                        type: string
+                        example: '2021-08-30T17:00:00.000Z'
+                        description: Source of maximum payments. If the value is 0, no limit is set.
+                        nullable: true
+                      url:
+                        type: string
+                        example: '@troop/d30/test-url-2'
+                        description: 'Base URL of the payment to be use in web: https://app.loopay.com/@troop/d30/test-url-2 | in demo: https://demo.loopay.com/@troop/d30/test-url-2'
+                      hasFastCheckOut:
+                        type: boolean
+                        example: false
+                        description: Source of payment has fast check out
+        '202':
+          description: " ## Create-direct-payment with card \n\nCreate a direct source of payment with a card pay method, belonging to a companyProductId.\n\nTo consult the available paidMethods belonging to a companyProductId, see the /paid-methods endpoint.\n\n* cardCVV card CVV applies only to card payments\n\n* cardNumber card number applies only to card payments\n\n* expirationDate card expiration date, \"MM/YY\" applies only to card payments\n\n### Example input:\n\n~~~{\n  \"name\": \"test url 2\",\n  \"slug\": \"test-url-2\",\n  \"paidMethod\": 16,\n  \"companyProductId\": 203,\n  \"documentType\": \"DNI\",\n  \"documentNumber\": \"1000000888\",\n  \"currencyId\": 2,\n  \"amount\": 25,\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"jdoe@gmail.com\",\n  \"phone\": \"+573103297014\",\n  \"description\": \"test url 2\",\n  \"callbackUrl\": \"https://www.loopay.com/\",\n  \"cardCVV\": 355,\n  \"cardNumber\": \"5303710409428783\",\n  \"cardExpirationDate\": \"05/26\""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fastPaymentProcessorEngine:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: '200'
+                      message:
+                        type: string
+                        example: success
+                      body:
+                        type: object
+                        properties:
+                          result:
+                            type: string
+                            example: '200'
+                          data:
+                            type: object
+                            properties:
+                              order:
+                                type: object
+                                properties:
+                                  amount:
+                                    type: string
+                                    example: '25.0'
+                                  date:
+                                    type: string
+                                    example: '2024-07-30T20:04:27Z'
+                                  tax:
+                                    type: string
+                                    example: '0.00'
+                                  total:
+                                    type: string
+                                    example: '25.0'
+                                  number:
+                                    type: string
+                                    example: '2472713'
+                              transaction:
+                                type: object
+                                properties:
+                                  date:
+                                    type: string
+                                    example: '2024-07-30T20:04:27Z'
+                                  responseCode:
+                                    type: string
+                                    example: APROBADA
+                                  installments:
+                                    type: string
+                                    example: '1'
+                                  accountType:
+                                    type: string
+                                    example: CREDITO
+                                  cus:
+                                    type: string
+                                    example: 2024-07-30T20:04:27Z_2546896a-8537-4db0-a6ad-58930ba0fed2_577174
+                                  invoiceNumber:
+                                    type: string
+                                    example: '577174'
+                                  franchise:
+                                    type: string
+                                    example: MasterCard
+                                  response:
+                                    type: string
+                                    example: APPROVED
+                                  cardNumber:
+                                    type: string
+                                    example: '************8783'
+                                  error:
+                                    type: string
+                                    example: '1'
+                                  numAprobacion:
+                                    type: string
+                                    example: '577174'
+                                  idTransaccionAutorizador:
+                                    type: string
+                                    example: 2546896a-8537-4db0-a6ad-58930ba0fed2
+                              commerce:
+                                type: object
+                                properties:
+                                  url:
+                                    type: string
+                                    example: https://www.payvalida.com
+                                  terminal:
+                                    type: string
+                                    example: loopaysas
+                                  name:
+                                    type: string
+                                    example: VALIDDA S.A.S
+                                  code:
+                                    type: string
+                                    example: '203065'
+                                  email:
+                                    type: string
+                                    example: jon@gmail.com
+                                  net:
+                                    type: string
+                                    example: PAYMENTEZ
+                              user: {}
+                          error:
+                            type: string
+                            example: '1'
+                          details:
+                            type: object
+                            properties:
+                              metadata:
+                                type: object
+                                properties:
+                                  uid:
+                                    type: string
+                                    example: 8d9e700f9a75cd7726732d15b8f77ac7
+                  sourceOfPayment:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 240
+                        description: Source of payment id
+                      name:
+                        type: string
+                        example: test url 2
+                        description: Source of payment name
+                      active:
+                        type: boolean
+                        example: true
+                        description: Source of payment active, is available
+                      slug:
+                        type: string
+                        example: test-url-2
+                        description: Source of payment slug
+                      companyProductId:
+                        type: number
+                        example: 203
+                        description: Source of payment company product id
+                      createdAt:
+                        type: string
+                        example: '2021-08-30T17:00:00.000Z'
+                        description: Source of payment created date
+                      fixedValue:
+                        type: number
+                        example: 25
+                        description: Source of payment fixed value
+                        nullable: true
+                      maxPayments:
+                        type: number
+                        example: 1
+                        description: Source of maximum payments. If the value is 0, no limit is set, unlimited payments.
+                        nullable: true
+                      expiresAt:
+                        type: string
+                        example: '2026-08-30T17:00:00.000Z'
+                        description: Source of maximum payments. If the value is 0, no limit is set.
+                        nullable: true
+                      url:
+                        type: string
+                        example: '@alexaflowers53/econo-fast8g/payvalida-visa-30may-008'
+                        description: 'Base URL of the payment to be use in web: https://app.loopay.com/@troop/d30/test-url-2 | in demo: https://demo.loopay.com/@troop/d30/test-url-2'
+                      productId:
+                        type: number
+                        example: 11
+                        description: Product id
+                      companyId:
+                        type: number
+                        example: 444
+                        description: Company id
+                      paidMethods:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            paidMethod:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                  example: 16
+                                nameStrategy:
+                                  type: string
+                                  example: payvalidaCard
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: test url 2
+                slug:
+                  type: string
+                  example: test-url-2
+                paidMethod:
+                  type: number
+                  example: 1
+                  description: ' see /paid-methods : PSE, 2: Credit card'
+                companyProductId:
+                  type: number
+                  example: 1
+                  description: Company product id, see /company-products
+                expiresAt:
+                  type: string
+                  example: '2021-08-30T17:00:00.000Z'
+                documentType:
+                  type: string
+                  example: CC
+                documentNumber:
+                  type: string
+                  example: '1000000888'
+                currencyId:
+                  type: number
+                  example: 1
+                  description: Currency id, see /currencies
+                amount:
+                  type: number
+                  example: 10000.5
+                firstName:
+                  type: string
+                  example: John
+                lastName:
+                  type: string
+                  example: Doe
+                email:
+                  type: string
+                  example: user1@gmail.com
+                phone:
+                  type: string
+                  example: '+573103297014'
+                userType:
+                  type: string
+                  example: '1'
+                  description: '"0": Natural person, "1": Legal person'
+                description:
+                  type: string
+                  example: test url 2
+                callbackUrl:
+                  type: string
+                  example: https://myurl.com/callback
+                  description: Url to  return after payment
+                metadata:
+                  type: object
+                  example:
+                    key1: value1
+                    key2: value2
+                  description: Metadata to save in payment, optional
+        description: "## Source of payment data description \n\n Source of payment data description"
+        required: true
+        x-parameter-index: 1
+      operationId: SourcesOfPayment.createDirectPayment
+  /source-of-payment/filtered:
+    get:
+      x-controller-name: SourcesOfPayment
+      x-operation-name: bankBases
+      tags:
+      - SourcesOfPayment
+      description: "## Get source of payment\n Get  all source of payments by company id"
+      responses:
+        '200':
+          description: Array of source of payment model and pagination info
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sourceOfPayments:
+                    type: array
+                    items:
+                      type: object
+                  paginationInfo:
+                    type: object
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token. String returned in /login
+        required: true
+      - name: companyId
+        in: query
+        schema:
+          type: number
+        description: 'Company id. Id returned in /companies '
+        required: true
+        example: 7
+      operationId: SourcesOfPayment.bankBases
+  /source-of-payment/update:
+    post:
+      x-controller-name: SourcesOfPayment
+      x-operation-name: updateSourceOfPayment
+      tags:
+      - SourcesOfPayment
+      description: "## Update source of payment\n\n Update source of payment"
+      responses:
+        '200':
+          description: id source of payment updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      - name: sourceOfPaymentId
+        in: query
+        schema:
+          type: number
+        description: Source of payment id
+        required: true
+        example: 7
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Source of payment 1
+                countryId:
+                  type: number
+                  example: 10
+                companyProductId:
+                  type: number
+                  example: 4
+                deleted:
+                  type: boolean
+                  example: false
+                styles:
+                  type: object
+                  example:
+                    primary: '#f0f1fe'
+                    secondary: '#aaafc4'
+                slug:
+                  type: string
+                  example: Source of payment 1
+                clientCommentsAvailable:
+                  type: boolean
+                  example: false
+                clientComments:
+                  type: string
+                  example: clientComments
+                active:
+                  type: boolean
+                  example: true
+                descriptionOnClientForm:
+                  type: boolean
+                  example: false
+                isPredefinedPayerDetails:
+                  type: boolean
+                  example: false
+                clientDefinesReference:
+                  type: boolean
+                  example: false
+                customFields:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 1691515792228
+                      name:
+                        type: string
+                        example: campo 2
+                      type:
+                        type: string
+                        enum:
+                        - text
+                        - number
+                        - date
+                        - email
+                        example: text
+                      required:
+                        type: boolean
+                        example: false
+                    additionalProperties: false
+                    required:
+                    - id
+                    - name
+                    - type
+                    - required
+                  maxItems: 5
+                description:
+                  type: string
+                  example: descrption
+                expiresAt:
+                  type: string
+                  example: '2090-09-30T00:00:00.000Z'
+                fixedValue:
+                  type: number
+                  example: 100000.5
+                maxPayments:
+                  type: number
+                  example: 10
+                payerDetails:
+                  type: object
+                  properties:
+                    ref:
+                      type: string
+                      example: ref-001
+                    email:
+                      type: string
+                      example: johnD@gmail.com
+                    phone:
+                      type: string
+                      example: +57 310 3297014
+                    fullName:
+                      type: string
+                      example: John Doe
+                    documentType:
+                      type: string
+                      example: CC
+                    documentNumber:
+                      type: string
+                      example: '1000000888'
+                urlCallback:
+                  type: string
+                  example: https://myurl.com/callback
+        description: "## Source of payment data description \n\n **clientDefinesReference:** (boolean) If set to true, a reference field is enabled on the payment form for the payer to fill out. If the value is false, then the field `payerDetails.ref` should be completed with text. \n\n **isPredefinedPayerDetails:** (boolean) If true, payer data must be predefined in the *payerDetails* field. \n\n ***payerDetails*** : (object) You should predefine this field if *isPredefinedPayerDetails* is true. If *clientDefinesReference* is false, you should predefine the reference (`payerDetails.ref`) in this field. \n\n *payerDetails* is an object that predefines payer data in the form, such as email, phone, fullName, and documentType. The *documentType* property is a string of type *documentType.type*, whose value can be \"cc\", \"nit\", or \"rut\" for instance. Please consult the *documentType* endpoint for more information. \n\n ***customFields*** : (array of objects) are custom fields that can be added to the payment form, up to a maximum of 5. These fields must be completed by the payer and have the following structure: `{\"id\": 1691554828946, \"name\": \"field2\", \"type\": \"text\", \"required\": false}`. The \"id\" field must be unique, \"name\" is the name of the field to be completed, and \"type\" can be **[\"text\", \"number\", \"date\", \"email\"]**. \n\n ***descriptionOnClientForm:*** (boolean) If this field is set to true, the value defined in the \"description\" field will appear on the payment form. \n\n ***description***: (string) You must define this field if *descriptionOnClientForm* is set to true. You can use this field to indicate important information to the payer on the payment form, such as details, instructions, or notes that you consider necessary. If *descriptionOnClientForm* is set to false, you can also fill in this field to have your own details that will not be rendered on the payment form, but that you can see on your dashboard. \n\n ***expiresAt***: (date) is the expiration date until which you can receive payments through this collection source. \n\n ***fixedValue***: (number) a fixed value that the payer must pay. If not defined, the payer is free to enter any amount to pay. \n\n ***maxPayments***: *(number)* is an integer value that represents the maximum number of payments that can be accepted. Once the number of processed payments reaches this value, no further payments can be accepted. If the value is set to zero, the number of payments is unlimited.\n\n ***slug:*** (string) A unique identifier or alias that should be written in lowercase and contain a maximum of 40 characters. It should only contain alphanumeric characters and spaces separated by (-). \n\n***companyProductId:*** (number) is the ID of the company product. It specifies which company product (virtual wallet) the collection source can be associated with. Check the companyProduct endpoint to see the available wallets, which must be of the deposit type.\n\n***active:*** (boolean) If active is true, the collection source is enabled. Otherwise, it is disabled and will not accept payments.\n\n ***name:*** (string) Name of the collection source \n\n ***urlCallback***: (string)  URL to receive notifications when the payment process is completed  \n\n\n\n"
+        required: true
+        x-parameter-index: 2
+      operationId: SourcesOfPayment.updateSourceOfPayment
+  /source-of-payment/{sourceOfPaymentId}:
+    get:
+      x-controller-name: SourcesOfPayment
+      x-operation-name: sourceOfPaymentDetail
+      tags:
+      - SourcesOfPayment
+      description: "## Get source of payment\n Get source of payment detail"
+      responses:
+        '200':
+          description: source of payment model and pagination info
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sourceOfPayment:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 1
+                        description: Source of payment id
+                      name:
+                        type: string
+                        example: Source of payment 1
+                      slug:
+                        type: string
+                        example: sof-1
+                      active:
+                        type: boolean
+                        example: true
+                      fixedValue:
+                        type: number
+                        example: 100000.5
+                        nullable: true
+                      maxPayments:
+                        type: number
+                        example: 3
+                      createdAt:
+                        type: string
+                        example: '2020-09-30T00:00:00.000Z'
+                      expiresAt:
+                        type: string
+                        example: '2090-09-30T00:00:00.000Z'
+                        nullable: true
+                      CompanyProduct:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                            example: 1
+                            description: Company product id
+                          companyId:
+                            type: number
+                            example: 1
+                            description: Company id
+                          company:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                                example: 1
+                                description: Company id
+                              name:
+                                type: string
+                                example: Company 1
+                              slug:
+                                type: string
+                                example: company-1
+                      totalPayIns:
+                        type: number
+                        example: 6
+                      totalPayInsByState:
+                        type: object
+                        properties:
+                          accepted:
+                            type: number
+                            example: 1
+                            nullable: true
+                          rejected:
+                            type: number
+                            example: 1
+                            nullable: true
+                          pending:
+                            type: number
+                            example: 1
+                            nullable: true
+                          cancelled:
+                            type: number
+                            example: 1
+                            nullable: true
+                          abandoned:
+                            type: number
+                            example: 1
+                            nullable: true
+                          initial:
+                            type: number
+                            example: 1
+                            nullable: true
+                        nullable: true
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token. String returned in /login
+        required: true
+      - name: sourceOfPaymentId
+        in: path
+        schema:
+          type: number
+        description: Source of payment id
+        required: true
+      operationId: SourcesOfPayment.sourceOfPaymentDetail

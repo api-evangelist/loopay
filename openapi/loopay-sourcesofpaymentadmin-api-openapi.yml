@@ -1,0 +1,133 @@
+openapi: 3.0.0
+info:
+  title: loopay-api Affiliate SourcesOfPaymentAdmin API
+  version: 3.2.0
+  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  contact:
+    name: Loopay Team
+servers:
+- url: https://api.loopay.com
+tags:
+- name: SourcesOfPaymentAdmin
+paths:
+  /payment-sources/companies:
+    get:
+      x-controller-name: SourcesOfPaymentAdmin
+      x-operation-name: companies
+      tags:
+      - SourcesOfPaymentAdmin
+      description: "## Get companies ID\n Get array IDs companies available where can create a payint across a source of payment"
+      responses:
+        '200':
+          description: Array of CompanyId
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: number
+                  example: 1
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      - name: page
+        in: query
+        schema:
+          type: number
+      - name: recordsPerPage
+        in: query
+        schema:
+          type: number
+      operationId: SourcesOfPaymentAdmin.companies
+  /payment-sources:
+    get:
+      x-controller-name: SourcesOfPaymentAdmin
+      x-operation-name: paymentOfSources
+      tags:
+      - SourcesOfPaymentAdmin
+      description: "## Get payment-sources\n Get array IDs PaymentOfSources belonging to a company available to create a payint"
+      responses:
+        '200':
+          description: Array of ID PaymentOfSources
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: number
+                  example: 1
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+        description: Authorization token
+        required: true
+      - name: companyIds
+        in: query
+        schema:
+          type: number
+        description: company id
+        required: true
+        example: '16'
+      - name: page
+        in: query
+        schema:
+          type: number
+      - name: recordsPerPage
+        in: query
+        schema:
+          type: number
+      operationId: SourcesOfPaymentAdmin.paymentOfSources
+  /payment-sources-pay-in/valid:
+    get:
+      x-controller-name: SourcesOfPaymentAdmin
+      x-operation-name: validatePayInOnSourceOfPayment
+      tags:
+      - SourcesOfPaymentAdmin
+      description: '## Get if sourceOfPayment is valid for a payin
+
+        '
+      responses:
+        '200':
+          description: Boolean
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeError:
+                    type: number
+                  message:
+                    type: string
+      parameters:
+      - name: authorization
+        in: query
+        schema:
+          type: string
+      - name: sourceOfPaymentId
+        in: query
+        schema:
+          type: number
+        description: Source of payment id
+        required: true
+        example: 7
+      - name: amount
+        in: query
+        schema:
+          type: number
+        description: amount
+        required: true
+        example: 100000
+      - name: userId
+        in: query
+        schema:
+          type: number
+        description: userId
+        required: true
+        example: 1
+      operationId: SourcesOfPaymentAdmin.validatePayInOnSourceOfPayment
