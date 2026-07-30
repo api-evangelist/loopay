@@ -1,7 +1,15 @@
 aid: loopay
 name: Loopay
-description: Loopay is a company surfaced as a portfolio company of 500-global and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Loopay is a Latin American B2B fintech infrastructure company headquartered in
+  Bogotá, Colombia and backed by 500 Global. It provides cross-border and local
+  business payments, international collections, mass payouts, multi-currency
+  Banking-as-a-Service accounts, automated bank reconciliation, and treasury
+  management for companies operating across Colombia, Peru, Mexico, and Ecuador.
+  Loopay exposes a token-authenticated REST API (OpenAPI 3.0, 31 operations) that
+  lets platforms create and track payouts, manage sources of payment and
+  pay-ins, group affiliates, and read balances and ledger movements — settling
+  supplier and beneficiary payments in under 24 hours.
 url: https://raw.githubusercontent.com/api-evangelist/loopay/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,17 +17,358 @@ x-backed-by:
 - 500-global
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://loopay.com/wp-content/uploads/2023/09/Loopay-web-imgs-24-150x139.png
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Payments
+- Fintech
+- Banking as a Service
+- Cross-Border Payments
+- Payouts
+- Treasury
+- Latin America
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: loopay:loopay-affiliate-api
+  name: Loopay Affiliate API
+  description: The Affiliate API from Loopay — 4 operation(s) for affiliate.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - Affiliate
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-affiliate-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
+- aid: loopay:loopay-bank-api
+  name: Loopay Bank API
+  description: The Bank API from Loopay — 1 operation(s) for bank.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - Bank
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-bank-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
+- aid: loopay:loopay-company-api
+  name: Loopay Company API
+  description: The Company API from Loopay — 1 operation(s) for company.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - Company
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-company-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
+- aid: loopay:loopay-companyproduct-api
+  name: Loopay CompanyProduct API
+  description: The CompanyProduct API from Loopay — 1 operation(s) for companyproduct.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - CompanyProduct
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-companyproduct-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
+- aid: loopay:loopay-country-api
+  name: Loopay Country API
+  description: The Country API from Loopay — 1 operation(s) for country.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - Country
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-country-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
+- aid: loopay:loopay-currency-api
+  name: Loopay Currency API
+  description: The Currency API from Loopay — 1 operation(s) for currency.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - Currency
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-currency-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
+- aid: loopay:loopay-documenttype-api
+  name: Loopay DocumentType API
+  description: The DocumentType API from Loopay — 1 operation(s) for documenttype.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - DocumentType
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-documenttype-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
+- aid: loopay:loopay-movements-api
+  name: Loopay Movements API
+  description: The Movements API from Loopay — 1 operation(s) for movements.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - Movements
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-movements-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
+- aid: loopay:loopay-paidmethods-api
+  name: Loopay PaidMethods API
+  description: The PaidMethods API from Loopay — 1 operation(s) for paidmethods.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - PaidMethods
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-paidmethods-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
+- aid: loopay:loopay-payin-api
+  name: Loopay PayIn API
+  description: The PayIn API from Loopay — 2 operation(s) for payin.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - PayIn
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-payin-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
+- aid: loopay:loopay-payout-api
+  name: Loopay Payout API
+  description: The Payout API from Loopay — 6 operation(s) for payout.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - Payout
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-payout-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
+- aid: loopay:loopay-physicalpoint-api
+  name: Loopay PhysicalPoint API
+  description: The PhysicalPoint API from Loopay — 1 operation(s) for physicalpoint.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - PhysicalPoint
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-physicalpoint-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
+- aid: loopay:loopay-sourcesofpayment-api
+  name: Loopay SourcesOfPayment API
+  description: The SourcesOfPayment API from Loopay — 5 operation(s) for sourcesofpayment.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - SourcesOfPayment
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-sourcesofpayment-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
+- aid: loopay:loopay-sourcesofpaymentadmin-api
+  name: Loopay SourcesOfPaymentAdmin API
+  description: The SourcesOfPaymentAdmin API from Loopay — 3 operation(s) for sourcesofpaymentadmin.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - SourcesOfPaymentAdmin
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-sourcesofpaymentadmin-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
+- aid: loopay:loopay-user-api
+  name: Loopay User API
+  description: The User API from Loopay — 2 operation(s) for user.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-user-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
 common:
+- type: DeveloperPortal
+  url: https://api.loopay.com/explorer
+- type: Documentation
+  url: https://api.loopay.com/explorer
+- type: APIReference
+  url: https://api.loopay.com/explorer
+- type: Authentication
+  url: authentication/loopay-authentication.yml
+- type: Conventions
+  url: conventions/loopay-conventions.yml
+- type: DataModel
+  url: data-model/loopay-data-model.yml
+- type: Conformance
+  url: conformance/loopay-conformance.yml
+- type: Lifecycle
+  url: lifecycle/loopay-lifecycle.yml
+- type: Sandbox
+  url: sandbox/loopay-sandbox.yml
+- type: MCPServer
+  url: mcp/loopay-mcp.yml
+- type: LLMsTxt
+  url: llms/loopay-llms.txt
+- type: Overlay
+  url: overlays/loopay-openapi-overlay.yaml
+- type: WellKnown
+  url: well-known/loopay-well-known.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/loopay-agentic-access.yml
+- type: DomainSecurity
+  url: security/loopay-domain-security.yml
+- type: Blog
+  url: https://loopay.com/blog-fintech-pagos-latinoamerica/
+- type: Support
+  url: https://loopay.com/contacto/
+- type: SignUp
+  url: https://app.loopay.com/
+- type: Login
+  url: https://app.loopay.com/
+- type: TermsOfService
+  url: https://loopay.com/terminos-y-condiciones/
+- type: SecurityPolicy
+  url: https://loopay.com/politica-de-seguridad/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/somosloopay/
 - type: Website
   url: https://loopay.com
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 14
+  pass: local-v1
