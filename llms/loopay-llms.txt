@@ -1,0 +1,23 @@
+# Loopay
+
+> Loopay is a Latin American B2B fintech infrastructure company (Bogotá, Colombia; 500 Global-backed) offering cross-border and local business payments, international collections, mass payouts, multi-currency Banking-as-a-Service accounts, automated bank reconciliation, and treasury management. Its token-authenticated REST API (OpenAPI 3.0, 31 operations) lets platforms create payouts, manage sources of payment, and read balances/movements across Colombia, Peru, Mexico, and Ecuador.
+
+## APIs
+- [Loopay API Explorer](https://api.loopay.com/explorer): Interactive reference for the Loopay Open API
+- [Loopay OpenAPI (JSON)](https://api.loopay.com/openapi.json): OpenAPI 3.0.0 definition, version 3.2.0
+
+## Specs
+- [OpenAPI (harvested)](openapi/loopay-openapi-original.json): 31 operations across Payout, PayIn, SourcesOfPayment, Affiliate, Company, Movements, and reference-data tags
+- [Authentication](authentication/loopay-authentication.yml): token-based bearer auth via POST /login
+- [Conventions](conventions/loopay-conventions.yml): pagination (page/recordsPerPage), external-identifier reconciliation, no idempotency contract
+- [Data model](data-model/loopay-data-model.yml): CompanyProduct-centric entity graph
+- [Conformance](conformance/loopay-conformance.yml): REST/OpenAPI; no OAuth2/OIDC/RFC9457
+- [MCP (candidate)](mcp/loopay-mcp.yml): candidate tool list derived from operations
+
+## Docs
+- [Loopay website](https://loopay.com): Company and product overview (Spanish)
+- [Servicios](https://loopay.com/servicios/): Product catalog
+- [Blog](https://loopay.com/blog-fintech-pagos-latinoamerica/): Fintech and payments insights
+- [Terms & Conditions](https://loopay.com/terminos-y-condiciones/)
+- [Security Policy](https://loopay.com/politica-de-seguridad/)
+- [App / Login](https://app.loopay.com/): Sign in to the Loopay platform

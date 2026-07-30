@@ -1,0 +1,20 @@
+generated: '2026-07-20'
+method: searched
+source: https://api.loopay.com/openapi.json (info.description)
+test_environment:
+  available: true
+  detail: >-
+    The API integration guide states all documented examples "are run in a secure
+    environment ready for testing." Production access is separated and gated behind
+    contacting a Loopay account manager ("your personal Looper").
+test_vs_live:
+  separation: account-managed
+  detail: >-
+    Test vs production is provisioned per account rather than via published key
+    prefixes or a self-serve mode toggle. No published test key prefixes, test card
+    numbers, magic test identifiers, or fixture/trigger tooling were found.
+published_test_values: []
+note: >-
+  Loopay publishes an interactive API Explorer (https://api.loopay.com/explorer)
+  wired to a testing environment, but does NOT publish standalone test credentials,
+  test cards, or magic values. Nothing is fabricated here.

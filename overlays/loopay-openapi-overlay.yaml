@@ -1,0 +1,26 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Loopay API
+  version: 1.0.0
+extends: openapi/loopay-openapi-original.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: loopay
+      x-apievangelist-category: payments-baas
+      x-apievangelist-auth: token-bearer-via-login
+      x-apievangelist-pagination: page-recordsPerPage
+  - target: $.components
+    update:
+      securitySchemes:
+        bearerToken:
+          type: http
+          scheme: bearer
+          description: >-
+            Bearer token obtained by POSTing credentials to /login (User.login).
+            Documented in the API integration guide but omitted from the published
+            securitySchemes; added here as an API Evangelist enhancement so the auth
+            model is machine-readable. Not a change to Loopay's contract.
+note: >-
+  Generated enhancement overlay. The original OpenAPI is not mutated. The scorer
+  reads the original spec; this overlay improves our derived artifacts only.

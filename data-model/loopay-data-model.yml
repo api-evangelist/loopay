@@ -1,0 +1,73 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/loopay-openapi-original.json
+entities:
+  - name: PayOut
+    schema: PayOut
+    description: An outbound payment (self pay-out) to a beneficiary.
+  - name: SourceOfPaymentPayIn
+    schema: SourcesOfPaymentPayIn
+    description: An inbound collection / source-of-payment pay-in.
+  - name: Movement
+    schema: MovementWithRelations
+    description: A ledger movement associated with a company product.
+  - name: Company
+    description: A customer company on the platform.
+  - name: CompanyProduct
+    description: A product/account held by a company (the balance-bearing entity).
+  - name: Affiliate
+    description: A company affiliated under a parent for grouped payouts and balances.
+  - name: Bank
+    description: Bank base reference data.
+  - name: Country
+  - name: Currency
+  - name: DocumentType
+  - name: PaidMethod
+  - name: PhysicalPoint
+  - name: User
+relationships:
+  - from: PayOut
+    to: CompanyProduct
+    type: belongs_to
+    via: companyProductId
+  - from: PayOut
+    to: Company
+    type: belongs_to
+    via: companyId
+  - from: PayOut
+    to: Bank
+    type: belongs_to
+    via: bankBaseId
+  - from: PayOut
+    to: Currency
+    type: belongs_to
+    via: currencyId
+  - from: PayOut
+    to: DocumentType
+    type: belongs_to
+    via: documentTypeId
+  - from: PayOut
+    to: User
+    type: belongs_to
+    via: userId
+  - from: SourceOfPaymentPayIn
+    to: CompanyProduct
+    type: belongs_to
+    via: companyProductId
+  - from: CreateDirectPaymentInput
+    to: Bank
+    type: belongs_to
+    via: bankId
+  - from: CreateDirectPaymentInput
+    to: Currency
+    type: belongs_to
+    via: currencyId
+  - from: Movement
+    to: CompanyProduct
+    type: belongs_to
+    via: companyProductId
+notes: >-
+  Derived from OpenAPI component schemas and their *Id reference fields. CompanyProduct
+  is the central balance-bearing account entity; PayOut is the primary transactional
+  object. No object-reference / id-prefix documentation is published, so id domains
+  are not captured.

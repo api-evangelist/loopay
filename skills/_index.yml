@@ -1,0 +1,12 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/loopay-openapi-original.json
+skills:
+  - file: loopay-create-payout.md
+    name: Create and track a Loopay payout
+    api: openapi/loopay-openapi-original.json
+    operations: [User.login, Bank.bankBases, Currency.currencies, DocumentType.documentTypeBases, Payout.createSelfPayOut, Payout.selfPayOut]
+  - file: loopay-reconcile-payouts.md
+    name: Reconcile Loopay payouts and movements
+    api: openapi/loopay-openapi-original.json
+    operations: [User.login, Payout.getSelfPayOutsByExternalIdentifierList, Payout.selfPayOuts, Movements.selfPayOuts]

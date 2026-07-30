@@ -1,0 +1,4596 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "loopay-api",
+    "version": "3.2.0",
+    "description": " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing.",
+    "contact": {
+      "name": "Loopay Team"
+    }
+  },
+  "paths": {
+    "/affiliates/balance": {
+      "get": {
+        "x-controller-name": "Affiliate",
+        "x-operation-name": "getCompaniesBalance",
+        "tags": [
+          "Affiliate"
+        ],
+        "description": "## Get balance for multiple companies",
+        "responses": {},
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          },
+          {
+            "name": "productId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Product id",
+            "required": true,
+            "example": 7
+          },
+          {
+            "name": "managedCustomerData",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "data is an array of objects with the data of the afiliates: documentNumber, documentTypeId",
+                  "nullable": false,
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "documentTypeId",
+                          "documentNumber"
+                        ],
+                        "properties": {
+                          "documentTypeId": {
+                            "type": "number",
+                            "description": "Document type id",
+                            "nullable": false
+                          },
+                          "documentNumber": {
+                            "type": "string",
+                            "description": "Document number",
+                            "nullable": false
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "example": [
+                        {
+                          "documentTypeId": 1,
+                          "documentNumber": "123456789"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "Affiliate.getCompaniesBalance"
+      }
+    },
+    "/affiliates/create": {
+      "post": {
+        "x-controller-name": "Affiliate",
+        "x-operation-name": "createManyAffiliates",
+        "tags": [
+          "Affiliate"
+        ],
+        "description": "## Create many affiliates\n\n Create many users, companies, and companyUsers given an array of UsersData",
+        "responses": {
+          "200": {
+            "description": "Affiliate model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "companies": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "slug",
+                          "name"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "John Doe Inc"
+                          },
+                          "slug": {
+                            "type": "string",
+                            "example": "jhon-doe-inc"
+                          },
+                          "CompanyProduct": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "required": [
+                                "id",
+                                "slug"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "slug": {
+                                  "type": "string",
+                                  "example": "jhon-doe-inc"
+                                }
+                              }
+                            }
+                          },
+                          "errors": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "required": [
+                                "reason",
+                                "documentTypeId",
+                                "documentNumber",
+                                "status"
+                              ],
+                              "properties": {
+                                "reason": {
+                                  "type": "string",
+                                  "example": "Document number already exists"
+                                },
+                                "documentTypeId": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "documentNumber": {
+                                  "type": "string",
+                                  "example": "123456789"
+                                },
+                                "status": {
+                                  "type": "string",
+                                  "example": "error"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          },
+          {
+            "name": "productId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Product id",
+            "required": true,
+            "example": 7
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "documentTypeId",
+                    "documentNumber"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "John Doe"
+                    },
+                    "documentTypeId": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "documentNumber": {
+                      "type": "string",
+                      "example": "1234567890"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "## Array of users data\n\n ",
+          "required": true,
+          "x-parameter-index": 2
+        },
+        "operationId": "Affiliate.createManyAffiliates"
+      }
+    },
+    "/affiliates/payouts": {
+      "get": {
+        "x-controller-name": "Affiliate",
+        "x-operation-name": "getPayOutsForAffiliates",
+        "tags": [
+          "Affiliate"
+        ],
+        "description": "## Get all payOuts for affiliates\n\n Gets all payOuts for affiliates created by the currently registered user, belonging to the company of the user",
+        "responses": {
+          "200": {
+            "description": "Array of Affiliate model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Global INC"
+                      },
+                      "documentNumber": {
+                        "type": "number",
+                        "example": 900200001
+                      },
+                      "documentTypeId": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "PayOut": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number",
+                              "example": 5087
+                            },
+                            "uid": {
+                              "type": "string",
+                              "example": "5f9b9b9b9b9b9b9b"
+                            },
+                            "beneficiaryName": {
+                              "type": "string",
+                              "example": "John Doe"
+                            },
+                            "documentTypeId": {
+                              "type": "number",
+                              "example": 1
+                            },
+                            "documentNumber": {
+                              "type": "number",
+                              "example": 19373737
+                            },
+                            "bankBaseId": {
+                              "type": "number",
+                              "example": 23
+                            },
+                            "bankAccountType": {
+                              "type": "string",
+                              "example": "ahorros"
+                            },
+                            "bankAccount": {
+                              "type": "string",
+                              "example": "81234678944"
+                            },
+                            "Amount": {
+                              "type": "number",
+                              "example": 5000000
+                            },
+                            "externalIdentifier": {
+                              "type": "string",
+                              "example": "REF123456789"
+                            },
+                            "tags": {
+                              "type": "Object",
+                              "example": {
+                                "tagIdentifier": [
+                                  "indentifier1",
+                                  "indentifier2",
+                                  "indent 22",
+                                  "indent 4"
+                                ]
+                              }
+                            },
+                            "currencyId": {
+                              "type": "number",
+                              "example": 1
+                            },
+                            "signedBy": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number",
+                                  "example": 122
+                                },
+                                "createdAt": {
+                                  "type": "string",
+                                  "example": "2020-10-28T15:33:19.000Z"
+                                },
+                                "userId": {
+                                  "type": "number",
+                                  "example": 13
+                                }
+                              }
+                            },
+                            "companyProductId": {
+                              "type": "number",
+                              "example": 4451
+                            },
+                            "state": {
+                              "type": "string",
+                              "example": "delivered"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "example": "2020-10-28T15:33:19.000Z"
+                            },
+                            "scheduledAt": {
+                              "type": "string",
+                              "example": "2020-10-28T15:33:19.000Z"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "example": "2020-10-28T15:33:19.000Z"
+                            },
+                            "validatedAt": {
+                              "type": "string",
+                              "example": "2020-10-28T15:33:19.000Z"
+                            },
+                            "trasnferedAt": {
+                              "type": "string",
+                              "example": "2020-10-28T15:33:19.000Z"
+                            },
+                            "reversedAt": {
+                              "type": "string",
+                              "example": "2020-10-28T15:33:19.000Z"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          },
+          {
+            "name": "companiesIds",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma separated list of company ids",
+            "required": true,
+            "example": "16,17,18"
+          }
+        ],
+        "operationId": "Affiliate.getPayOutsForAffiliates"
+      }
+    },
+    "/affiliates": {
+      "get": {
+        "x-controller-name": "Affiliate",
+        "x-operation-name": "getAffiliates",
+        "tags": [
+          "Affiliate"
+        ],
+        "description": "## Get all affiliates\n\n Gets all affiliates created by the currently registered user, belonging to the company of the user",
+        "responses": {
+          "200": {
+            "description": "Array of Affiliate model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "John Doe Inc"
+                      },
+                      "documentTypeId": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "documentNumber": {
+                        "type": "string",
+                        "example": "900200001"
+                      },
+                      "isActive": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "stateCompany": {
+                        "type": "string",
+                        "example": "initial"
+                      },
+                      "stateStudyCompany": {
+                        "type": "string",
+                        "example": "missInfo"
+                      },
+                      "countryId": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2020-10-28T15:33:19.000Z"
+                      },
+                      "companyUser": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "role": {
+                              "type": "string",
+                              "example": "admin"
+                            },
+                            "user": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "example": "John Doe"
+                                },
+                                "email": {
+                                  "type": "string",
+                                  "example": "johnDoe@doeInc.com"
+                                },
+                                "phone": {
+                                  "type": "string",
+                                  "example": "+1234567890"
+                                },
+                                "createdAt": {
+                                  "type": "string",
+                                  "example": "2020-10-28T15:33:19.000Z"
+                                },
+                                "updatedAt": {
+                                  "type": "string",
+                                  "example": "2020-10-28T15:33:19.000Z"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          },
+          {
+            "name": "adminId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "id of the current Affiliate company admin user",
+            "required": true,
+            "example": 13
+          }
+        ],
+        "operationId": "Affiliate.getAffiliates"
+      }
+    },
+    "/banks": {
+      "get": {
+        "x-controller-name": "Bank",
+        "x-operation-name": "bankBases",
+        "tags": [
+          "Bank"
+        ],
+        "description": "## Get banks\n Get all banks available",
+        "responses": {
+          "200": {
+            "description": "Array of BankBase model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Banco de Bogotá"
+                      },
+                      "countryId": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "accountValidator": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "object",
+                            "properties": {
+                              "ahorros": {
+                                "type": "object",
+                                "properties": {
+                                  "$id": {
+                                    "type": "string",
+                                    "example": "bank_ahorros_bancolombia"
+                                  },
+                                  "title": {
+                                    "type": "string",
+                                    "example": "account_fields"
+                                  },
+                                  "description": {
+                                    "type": "string",
+                                    "example": "validator fields for account"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "example": "string"
+                                  },
+                                  "maxLength": {
+                                    "type": "integer",
+                                    "example": 11
+                                  },
+                                  "minLength": {
+                                    "type": "integer",
+                                    "example": 3
+                                  },
+                                  "pattern": {
+                                    "type": "string",
+                                    "example": "^[0-9]+$"
+                                  }
+                                }
+                              },
+                              "corriente": {
+                                "type": "object",
+                                "properties": {
+                                  "$id": {
+                                    "type": "string",
+                                    "example": "bank_corriente_bancolombia"
+                                  },
+                                  "title": {
+                                    "type": "string",
+                                    "example": "account_fields"
+                                  },
+                                  "description": {
+                                    "type": "string",
+                                    "example": "validator fields for account"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "example": "string"
+                                  },
+                                  "maxLength": {
+                                    "type": "integer",
+                                    "example": 11
+                                  },
+                                  "minLength": {
+                                    "type": "integer",
+                                    "example": 3
+                                  },
+                                  "pattern": {
+                                    "type": "string",
+                                    "example": "^[0-9]+$"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "active": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2020-10-01T00:00:00.000Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2020-10-01T00:00:00.000Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "Bank.bankBases"
+      }
+    },
+    "/companies": {
+      "get": {
+        "x-controller-name": "Company",
+        "x-operation-name": "companies",
+        "tags": [
+          "Company"
+        ],
+        "description": "## Get companies\n Get all companies available where the user is associated",
+        "responses": {
+          "200": {
+            "description": "Array of Company model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Monsters Inc"
+                      },
+                      "countryId": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "documentNumber": {
+                        "type": "string",
+                        "example": "123456789"
+                      },
+                      "documentTypeId": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "stateCompany": {
+                        "type": "string",
+                        "example": "active"
+                      },
+                      "stateStudyCompany": {
+                        "type": "string",
+                        "example": "active"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2021-03-01T00:00:00.000Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2021-03-01T00:00:00.000Z"
+                      },
+                      "isActive": {
+                        "type": "boolean",
+                        "example": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          }
+        ],
+        "operationId": "Company.companies"
+      }
+    },
+    "/company-products": {
+      "get": {
+        "x-controller-name": "CompanyProduct",
+        "x-operation-name": "companyProducts",
+        "tags": [
+          "CompanyProduct"
+        ],
+        "description": "## Get company-products\n Get all companiesProducs  belonging to a company where the user is a member",
+        "responses": {
+          "200": {
+            "description": "Array of CompanyProduct model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "companyId": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "balance": {
+                        "type": "number",
+                        "example": 1000
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2021-03-01T00:00:00.000Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2021-03-01T00:00:00.000Z"
+                      },
+                      "active": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "product": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Prefactoring"
+                          },
+                          "description": {
+                            "type": "string",
+                            "example": "Prefactoring default product"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "example": "2021-03-01T00:00:00.000Z"
+                          },
+                          "countryId": {
+                            "type": "number",
+                            "example": 1
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          }
+        ],
+        "operationId": "CompanyProduct.companyProducts"
+      }
+    },
+    "/countries": {
+      "get": {
+        "x-controller-name": "Country",
+        "x-operation-name": "countries",
+        "tags": [
+          "Country"
+        ],
+        "description": "## Get countries\n Get all countries available",
+        "responses": {
+          "200": {
+            "description": "Array of Country model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Colombia"
+                      },
+                      "isoCode": {
+                        "type": "string",
+                        "example": "co"
+                      },
+                      "currencyId": {
+                        "type": "number",
+                        "example": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          }
+        ],
+        "operationId": "Country.countries"
+      }
+    },
+    "/currencies": {
+      "get": {
+        "x-controller-name": "Currency",
+        "x-operation-name": "currencies",
+        "tags": [
+          "Currency"
+        ],
+        "description": "## Get currencies\n\n Get all currencies available",
+        "responses": {
+          "200": {
+            "description": "Array of Currency model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "cc": {
+                        "type": "string",
+                        "example": "USD"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "dollar"
+                      },
+                      "symbol": {
+                        "type": "string",
+                        "example": "$"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          }
+        ],
+        "operationId": "Currency.currencies"
+      }
+    },
+    "/documentTypes": {
+      "get": {
+        "x-controller-name": "DocumentType",
+        "x-operation-name": "documentTypeBases",
+        "tags": [
+          "DocumentType"
+        ],
+        "description": "## Get documents types\n Get all document types",
+        "responses": {
+          "200": {
+            "description": "Array of document types",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "type": {
+                        "type": "string",
+                        "example": "CC"
+                      },
+                      "countryId": {
+                        "type": "integer",
+                        "example": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "DocumentType.documentTypeBases"
+      }
+    },
+    "/login": {
+      "post": {
+        "x-controller-name": "User",
+        "x-operation-name": "login",
+        "tags": [
+          "User"
+        ],
+        "description": "## Login\n Login to the system",
+        "responses": {
+          "200": {
+            "description": "Token to access the system",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk3OWVkMTU1OTdhYjM1Zjc4MjljZTc0NDMwN2I3OTNiN2ViZWIyZjAiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiZHJvcGlmeSBjcmlzIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2xvb3BheS10ZXN0IiwiYXVkIjoibG9vcGF5LXRlc3QiLCJhdXRoX3RpbWUiOjE2Nzk2MzUwNzAsInVzZXJfaWQiOiJITHRheWpvQlJ2YnFaRkE1TWJYbWx6WE1nb3IyIiwic3ViIjoiSEx0YXlqb0JSdmJxWkZBNU1iWG1selhNZ29yMiIsImlhdCI6MTY3OTYzNTA3MCwiZXhwIjoxNjc5NjM4NjcwLCJlbWFpbCI6ImFkbWluQGRyb3BpZnkuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImFkbWluQGRyb3BpZnkuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.eIxuBNgzWdoQmn-NbI6jVrrcY25p0Kbiv7ctLvQ6f7GqOcukJMLTrUX9YCakC7-C1AvxU6YpoU6pA8IKLJqRdnBIPcTAuh32LVdYy7PU51WSaG-YON3NdrsWfD9HW05FnIViQAWG3kqx5qhC7dyGq_qyep1_nwm671jMYNuAX1hYEZObOpmak2IHWKBMZzChI5eAedkjwzefs09pHmwThUpxpY6QPxVDviLx1XyumJWRLc1hMN9t2YqMEeWKWbvR_xUVS0OJFiFUe_TtlfsQSrlo8j1ti4xfbFLyuVyBVW69axzpSGO6QiU8l1pDQCFDDn4vUda-gP1qeO9tQCSj6w"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Email of the user",
+            "required": true,
+            "example": "user1@yahoo.com"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "password"
+            },
+            "description": "Password of the user",
+            "required": true,
+            "example": "12345678"
+          }
+        ],
+        "operationId": "User.login"
+      }
+    },
+    "/movements/{companyProductId}": {
+      "get": {
+        "x-controller-name": "Movements",
+        "x-operation-name": "selfPayOuts",
+        "tags": [
+          "Movements"
+        ],
+        "description": "## Get all movements by companyProductId\n\n Gets all movements by companyProductId",
+        "responses": {
+          "200": {
+            "description": "Array of movements model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "movements": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MovementWithRelations"
+                      }
+                    },
+                    "paginationInfo": {
+                      "type": "object",
+                      "properties": {
+                        "currentPage": {
+                          "type": "number"
+                        },
+                        "recordsPerPage": {
+                          "type": "number"
+                        },
+                        "totalRecords": {
+                          "type": "number"
+                        },
+                        "totalPages": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          },
+          {
+            "name": "companyProductId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Company product id see /company-products for more info (refers as id)",
+            "required": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Page number of the totalPages"
+          },
+          {
+            "name": "recordsPerPage",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "maximum": 1000
+            },
+            "description": "Records to be returned per page (max 1000) (default 1000)",
+            "required": false
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "End date of the movements",
+            "required": false,
+            "example": "2050-03-01T00:00:00.000Z"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Start date of the movements",
+            "required": false,
+            "example": "1992-11-24T00:00:00.000Z"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "PAYOUT",
+                  "CREDIT",
+                  "COLLECTION",
+                  "DEPOSIT"
+                ]
+              }
+            }
+          }
+        ],
+        "operationId": "Movements.selfPayOuts"
+      }
+    },
+    "/paid-methods": {
+      "get": {
+        "x-controller-name": "PaidMethods",
+        "x-operation-name": "paidMethods",
+        "tags": [
+          "PaidMethods"
+        ],
+        "description": "## Get paid methods\n Get all available payment methods for the products I am subscribed to and that are enabled as a collection source",
+        "responses": {
+          "200": {
+            "description": "Array of paid methods, containing id (paidMethodId), description and paymentChannel: electronic (PSE, bank transfer), pos (point of sale), cripto, cash (cash payment)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "transferencia en linea - PSE"
+                      },
+                      "paymentChannel": {
+                        "type": "string",
+                        "example": "electronic"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          },
+          {
+            "name": "companyProductId",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "companyProductId: Company product id. See /company-products endpoint an get the id",
+            "required": true
+          }
+        ],
+        "operationId": "PaidMethods.paidMethods"
+      }
+    },
+    "/payIns/bySourceOfPaymentSlug": {
+      "get": {
+        "x-controller-name": "PayIn",
+        "x-operation-name": "sourceOfPaymentDetailBySlug",
+        "tags": [
+          "PayIn"
+        ],
+        "description": "## Get PayIns \n Get all PayIns by source of payment slug and company product id",
+        "responses": {
+          "200": {
+            "description": "array payins and pagination info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "payIns": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Amount": {
+                            "type": "number"
+                          },
+                          "active": {
+                            "type": "boolean"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "number"
+                          },
+                          "metaData": {
+                            "type": "string"
+                          },
+                          "payInGetWay": {
+                            "type": "string"
+                          },
+                          "product": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "slug": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "AmountCurrency": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "name": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "Company": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "CompanyProduct": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "creatorUser": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "file": {
+                            "type": "object",
+                            "properties": {
+                              "fileName": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "ProductTransaction": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "state": {
+                            "type": "string"
+                          },
+                          "trasnferedAt": {
+                            "type": "string"
+                          },
+                          "userId": {
+                            "type": "number"
+                          },
+                          "validatedAt": {
+                            "type": "string"
+                          },
+                          "SourceOfPayment": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "LendsPayed": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "paginationInfo": {
+                      "type": "object",
+                      "properties": {
+                        "currentPage": {
+                          "type": "number"
+                        },
+                        "recordsPerPage": {
+                          "type": "number"
+                        },
+                        "totalRecords": {
+                          "type": "number"
+                        },
+                        "totalPages": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          },
+          {
+            "name": "sourceOfPaymentSlug",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Source of payment slug",
+            "required": true
+          },
+          {
+            "name": "companyProductId",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Company product id. Required, read  id from /company-products",
+            "required": true
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Returns all fields created after to this creation date "
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "returns all fields created before to this creation date "
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "returns all fields with this states ",
+                "enum": [
+                  "accepted",
+                  "rejected",
+                  "cancelled",
+                  "abandoned",
+                  "initial",
+                  "pending"
+                ]
+              }
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Page number to paginate"
+          },
+          {
+            "name": "recordsPerPage",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Number of records per page"
+          }
+        ],
+        "operationId": "PayIn.sourceOfPaymentDetailBySlug"
+      }
+    },
+    "/payIns/{sourceOfPaymentId}": {
+      "get": {
+        "x-controller-name": "PayIn",
+        "x-operation-name": "sourceOfPaymentDetail",
+        "tags": [
+          "PayIn"
+        ],
+        "description": "## Get PayIns by source of payment \n Get all PayIns by source of payment id and by applied filters",
+        "responses": {
+          "200": {
+            "description": "array payins and pagination info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "payIns": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Amount": {
+                            "type": "number"
+                          },
+                          "active": {
+                            "type": "boolean"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "number"
+                          },
+                          "metaData": {
+                            "type": "string"
+                          },
+                          "payInGetWay": {
+                            "type": "string"
+                          },
+                          "product": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "slug": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "AmountCurrency": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "name": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "Company": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "CompanyProduct": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "creatorUser": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "file": {
+                            "type": "object",
+                            "properties": {
+                              "fileName": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "ProductTransaction": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "state": {
+                            "type": "string"
+                          },
+                          "trasnferedAt": {
+                            "type": "string"
+                          },
+                          "userId": {
+                            "type": "number"
+                          },
+                          "validatedAt": {
+                            "type": "string"
+                          },
+                          "SourceOfPayment": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "LendsPayed": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "paginationInfo": {
+                      "type": "object",
+                      "properties": {
+                        "currentPage": {
+                          "type": "number"
+                        },
+                        "recordsPerPage": {
+                          "type": "number"
+                        },
+                        "totalRecords": {
+                          "type": "number"
+                        },
+                        "totalPages": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          },
+          {
+            "name": "sourceOfPaymentId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Source of payment id required read from /source-of-payment/filtered",
+            "required": true
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Returns all fields created after to this creation date "
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "returns all fields created before to this creation date "
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "returns all fields with this states ",
+                "enum": [
+                  "accepted",
+                  "rejected",
+                  "cancelled",
+                  "abandoned",
+                  "initial",
+                  "pending"
+                ]
+              }
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Page number to paginate"
+          },
+          {
+            "name": "recordsPerPage",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Number of records per page"
+          }
+        ],
+        "operationId": "PayIn.sourceOfPaymentDetail"
+      }
+    },
+    "/payment-sources/companies": {
+      "get": {
+        "x-controller-name": "SourcesOfPaymentAdmin",
+        "x-operation-name": "companies",
+        "tags": [
+          "SourcesOfPaymentAdmin"
+        ],
+        "description": "## Get companies ID\n Get array IDs companies available where can create a payint across a source of payment",
+        "responses": {
+          "200": {
+            "description": "Array of CompanyId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "recordsPerPage",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "SourcesOfPaymentAdmin.companies"
+      }
+    },
+    "/payment-sources": {
+      "get": {
+        "x-controller-name": "SourcesOfPaymentAdmin",
+        "x-operation-name": "paymentOfSources",
+        "tags": [
+          "SourcesOfPaymentAdmin"
+        ],
+        "description": "## Get payment-sources\n Get array IDs PaymentOfSources belonging to a company available to create a payint",
+        "responses": {
+          "200": {
+            "description": "Array of ID PaymentOfSources",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          },
+          {
+            "name": "companyIds",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "company id",
+            "required": true,
+            "example": "16"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "recordsPerPage",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "SourcesOfPaymentAdmin.paymentOfSources"
+      }
+    },
+    "/payment-sources-pay-in/valid": {
+      "get": {
+        "x-controller-name": "SourcesOfPaymentAdmin",
+        "x-operation-name": "validatePayInOnSourceOfPayment",
+        "tags": [
+          "SourcesOfPaymentAdmin"
+        ],
+        "description": "## Get if sourceOfPayment is valid for a payin\n",
+        "responses": {
+          "200": {
+            "description": "Boolean",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "codeError": {
+                      "type": "number"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sourceOfPaymentId",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Source of payment id",
+            "required": true,
+            "example": 7
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "amount",
+            "required": true,
+            "example": 100000
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "userId",
+            "required": true,
+            "example": 1
+          }
+        ],
+        "operationId": "SourcesOfPaymentAdmin.validatePayInOnSourceOfPayment"
+      }
+    },
+    "/payout/create": {
+      "post": {
+        "x-controller-name": "Payout",
+        "x-operation-name": "createSelfPayOut",
+        "tags": [
+          "Payout"
+        ],
+        "description": "## Create a payOut\n\n Create a single payout given a  payout object",
+        "responses": {
+          "200": {
+            "description": "## Create a payOut with bank transfer \n\nCreate one payout given a company id, company product id\n\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayOut"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": " ## Create single cashOut payOut\n\nCreates a single payout to be withdrawn in cash at a physical point \n\nTo consult the available physical points in your region, please consult the endpoint /physical-point/{country}.\n\nexpiresAt [optional: The payout will expire at the indicated date, if the payout is not withdrawn before the expiration date, the payout will be rejected and the money will be returned to the company balance.\n\n* expriresAt must be in the format YYYY-MM-DD\n\n* expiresAt must be 2 h greater than the current date and less than 24 hr from the current date\n\n* expiresAt is optional and only applies to bankAccountType: @cash\n\n* if expiresAt is not set, the payout will expire in 2 hours\n\n### Example input:\n\nTo indicate that a dispersion will be withdrawn through a physical point, the bankbaseId must correspond to the ID of the Cash EC bank that belongs to the country where the dispersion will be made (consult the /banks endpoint, see id key). in the following example the input \"bankBaseId\": 48 corresponds to the id of the ecuador bank cashOut ec to be able to make withdrawals in physical point.\n\nAlert: The bankBaseId must be the id of the cash ec bank of the country where the dispersion will be made. Values in the example are for demonstration purposes only and may be diferent for your country in production. (consult the /banks endpoint in production)\n\nThe response is an object will contain the id of the payout and the externalIdentifier of the payout, which is unique for each payout. \n\n The payout will have a state that will indicate the status of the payout, the state can be one of the following: \n\n* RECEIVED: The payout has been received, this state is the initial state of the payout. Indicates that the payout has been received by the system. \n\n* SCHEDULED: The payout has been scheduled this state is set when the payout is scheduled to be delivered. \n\nMake sure to put the user's full name and surname in the benefciaryName parameters, as well as set the appropriate document type documentTypeId ( endpoint documentTypes see id key)\n\nThe ```bankAccount``` should be set as ```@cash``` and ```\"bankAccountType\": \"ahorros\"```. See the following input example:\n\n~~~{\n  \"Amount\": 200,\n  \"bankBaseId\": 48,\n  \"bankAccountType\": \"ahorros\",\n  \"bankAccount\": \"@cash\",\n  \"beneficiaryName\": \"John Doe\",\n  \"companyId\": 13,\n  \"companyProductId\": 20,\n  \"currencyId\": 2,\n  \"documentTypeId\": 4,\n  \"documentNumber\": 123456789,\n  \"externalIdentifier\": \"physical-ABC1\",\n  \"expiresAt\": \"2025-10-30T18:00:00.000Z\",\n  \"metaData\": {}",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "example": 1,
+                      "description": "PayOut id"
+                    },
+                    "uid": {
+                      "type": "string",
+                      "example": "clod9uqdf00003kects29nf5q",
+                      "description": "PayOut uid"
+                    },
+                    "externalIdentifier": {
+                      "type": "string",
+                      "example": "physical-ABC1",
+                      "description": "PayOut externalIdentifier"
+                    },
+                    "Amount": {
+                      "type": "number",
+                      "example": 200,
+                      "description": "PayOut amount"
+                    },
+                    "bankBaseId": {
+                      "type": "number",
+                      "example": 48,
+                      "description": "bankBaseId id cash ec where the cash will be withdrawn"
+                    },
+                    "bankAccountType": {
+                      "type": "string",
+                      "example": "ahorros",
+                      "description": "PayOut bankAccountType"
+                    },
+                    "bankAccount": {
+                      "type": "string",
+                      "example": "@cash",
+                      "description": "Bank account number"
+                    },
+                    "beneficiaryName": {
+                      "type": "string",
+                      "example": "John Doe",
+                      "description": "Beneficiary name who will be able to withdraw the cash"
+                    },
+                    "documentTypeId": {
+                      "type": "number",
+                      "example": 4,
+                      "description": "Beneficiary documentTypeId who will be able to withdraw the cash"
+                    },
+                    "documentNumber": {
+                      "type": "integer",
+                      "example": 123456789,
+                      "description": "Beneficiary documentNumber who will be able to withdraw the cash"
+                    },
+                    "state": {
+                      "type": "string",
+                      "example": "received",
+                      "description": "PayOut state can be one of the following: received, scheduled, rejected, cancelled"
+                    },
+                    "companyId": {
+                      "type": "number",
+                      "example": 13,
+                      "description": "Company id who created the payout"
+                    },
+                    "companyProductId": {
+                      "type": "number",
+                      "example": 20,
+                      "description": "Company product id who created the payout"
+                    },
+                    "userId": {
+                      "type": "number",
+                      "example": 16,
+                      "description": "User id who created the payout"
+                    },
+                    "metaData": {
+                      "type": "object",
+                      "example": {
+                        "cashOutData": {
+                          "pin": 598361,
+                          "beneficiaryName": "John Prince",
+                          "documentTypeId": 4,
+                          "documentNumber": 103244400,
+                          "createAt": "2023-10-30T19:07:12.586Z",
+                          "expiresAt": "2023-10-30T21:07:12.586Z"
+                        }
+                      },
+                      "description": "PayOut metaData object. For cashOut payouts, the metaData object will contain the following keys: pin, createAt, documentNumber, documentTypeId, expirationDate, beneficiaryName"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          },
+          {
+            "name": "signPayOut",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Set to true to sign (approve) the payout after creation (default: false)",
+            "required": false
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreaateSelfPayOut"
+              }
+            }
+          },
+          "description": "**Create payOut  data description**\n\nCreate a payout from a company ID and companyProduct ID\n\n***companyId:***(number) Is the ID of the company.Check /companies endpoint to see company id.\n\n***companyProductId:*** (number) is the ID of the company product. It specifies which company product (virtual wallet) the collection source can be associated with. Check the companyProduct endpoint to see the available wallets, which must be of the deposit type.\n\n***Amount***: (number): Amount to delivered.\n\n***bankAccount***: (string) Bank account number.\n\n***bankAccountType***: (string) must be `ahorros` for *savings* accounts or `corriente` for checking accounts. Accounts for virtual wallets, such as Nequi or Daviplata, are of type `ahorros`.\n\n***bankBaseId***: (number) ID of the bank to disburse. To obtain the ID of the bank, consult the Bank/banks endpoint.\n\n***beneficiaryName***: (string) Name of the beneficiary to disburse.\n\n***documentTypeId***: (number) The ID of the document type. Please refer to the /documentTypes endpoint to retrieve this information.\n\n***documentNumber***: (number | string) Document identification number.\n\n***externalIdentifier***: (string) is a unique payment reference. It is an identifier that should not be repeated per payOut.\n\n***currencyId***: (number)[optional] Currency ID. Please refer to the /currencies endpoint to retrieve this information.\n\n***metadata***: (object) [optional] Additional information about the payOut.\n\n***expiresAt***: (Date) [optional]  only applies to `bankAccountType: @cash`\n\n***phone***: (string) [optional] phone number of the beneficiary to disburse.  must be write in format like \"+57XXXXXXXXX\"\n\n***email***: (string) [optional] email of the beneficiary to disburse.",
+          "required": true,
+          "x-parameter-index": 1
+        },
+        "operationId": "Payout.createSelfPayOut"
+      }
+    },
+    "/payout/{id}": {
+      "get": {
+        "x-controller-name": "Payout",
+        "x-operation-name": "selfPayOut",
+        "tags": [
+          "Payout"
+        ],
+        "description": "## Get a payOut\n\n Get a single payout given a  payout id",
+        "responses": {
+          "200": {
+            "description": "Payout model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayOutWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          }
+        ],
+        "operationId": "Payout.selfPayOut"
+      }
+    },
+    "/payouts/byExternalIdentifierList": {
+      "post": {
+        "x-controller-name": "Payout",
+        "x-operation-name": "getSelfPayOutsByExternalIdentifierList",
+        "tags": [
+          "Payout"
+        ],
+        "description": "## Get self payOuts by externalIdentifier\n\nGet a list of payOuts by a list of externalIdentifier and companyProductId",
+        "responses": {
+          "200": {
+            "description": "Array of PayOut model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "PayOut id"
+                      },
+                      "externalIdentifier": {
+                        "type": "string",
+                        "example": "XYZ123456789",
+                        "description": "PayOut externalIdentifier"
+                      },
+                      "Amount": {
+                        "type": "number",
+                        "example": 1000,
+                        "description": "PayOut amount"
+                      },
+                      "bankBaseId": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "PayOut bankBaseId"
+                      },
+                      "bankAccountType": {
+                        "type": "string",
+                        "example": "ahorros",
+                        "description": "PayOut bankAccountType"
+                      },
+                      "bankAccount": {
+                        "type": "string",
+                        "example": "123456789",
+                        "description": "Bank account number"
+                      },
+                      "beneficiaryName": {
+                        "type": "string",
+                        "example": "John Doe",
+                        "description": "PayOut beneficiaryName"
+                      },
+                      "documentTypeId": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "Beneficiary documentTypeId"
+                      },
+                      "documentNumber": {
+                        "type": "integer",
+                        "example": 123456789,
+                        "description": "Beneficiary documentNumber"
+                      },
+                      "state": {
+                        "type": "string",
+                        "example": "DELIVERED",
+                        "description": "PayOut state"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "externalIdentifierList": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": "XYZ123456789"
+                    }
+                  },
+                  "companyProductId": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          },
+          "description": "## Get self payOuts by externalIdentifier\n Parameter considerations\n > **externalIdentifierList**: must be an array of externalIdentifier",
+          "required": true,
+          "x-parameter-index": 1
+        },
+        "operationId": "Payout.getSelfPayOutsByExternalIdentifierList"
+      }
+    },
+    "/payouts/create": {
+      "post": {
+        "x-controller-name": "Payout",
+        "x-operation-name": "createSelfPayOutMany",
+        "tags": [
+          "Payout"
+        ],
+        "description": "## Create payOuts\n\nCreate several payouts given a company id, company product id and a data array of payout objects",
+        "responses": {
+          "200": {
+            "description": "## Create payOuts with bank transfers \n\nCreate several payouts given a company id, company product id and a data array of payout objects. \n\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "PayOut id"
+                      },
+                      "externalIdentifier": {
+                        "type": "string",
+                        "example": "XYZ123456789",
+                        "description": "PayOut externalIdentifier is unique field"
+                      },
+                      "Amount": {
+                        "type": "number",
+                        "example": 1000,
+                        "description": "PayOut amount"
+                      },
+                      "bankBaseId": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "PayOut bankBaseId"
+                      },
+                      "bankAccountType": {
+                        "type": "string",
+                        "example": "ahorros",
+                        "description": "PayOut bankAccountType"
+                      },
+                      "bankAccount": {
+                        "type": "string",
+                        "example": "123456789",
+                        "description": "Bank account number"
+                      },
+                      "beneficiaryName": {
+                        "type": "string",
+                        "example": "John Doe",
+                        "description": "PayOut beneficiaryName"
+                      },
+                      "documentTypeId": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "Beneficiary documentTypeId"
+                      },
+                      "documentNumber": {
+                        "type": "integer",
+                        "example": 123456789,
+                        "description": "Beneficiary documentNumber"
+                      },
+                      "state": {
+                        "type": "string",
+                        "example": "RECEIVED",
+                        "description": "PayOut state"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "202": {
+            "description": " ## Create cashOut payOuts\n\nCreates several payouts to be withdrawn in cash at a physical point \n\nTo consult the available physical points in your region, please consult the endpoint /physical-point/{country}.\n\n### Example input:\n\nTo indicate that a dispersion will be withdrawn through a physical point, the bankbaseId must correspond to the ID of the Cash EC bank that belongs to the country where the dispersion will be made (consult the /banks endpoint, see id key). in the following example the input \"bankBaseId\": 48 corresponds to the id of the ecuador bank cashOut ec to be able to make withdrawals in physical point.\n\nThe response will be an array of objects where each object will contain the id of the payout and the externalIdentifier of the payout, which is unique for each payout. \n\n Each payout will have a state that will indicate the status of the payout, the state can be one of the following: \n\n* RECEIVED: The payout has been received, this state is the initial state of the payout. Indicates that the payout has been received by the system. \n\n* SCHEDULED: The payout has been scheduled this state is set when the payout is scheduled to be delivered. \n\nMake sure to put the user's full name and surname in the benefciaryName parameters, as well as set the appropriate document type documentTypeId ( endpoint documentTypes see id key)\n\nThe ```bankAccount``` should be set as ```@cash``` and ```\"bankAccountType\": \"ahorros\"```. See the following input example:\n\n~~~{\n  \"companyId\": 13,\n  \"companyProductId\": 20,\n  \"data\": [\n    {\n      \"Amount\": 1000,\n      \"bankBaseId\": 48,\n      \"bankAccountType\": \"ahorros\",\n      \"bankAccount\": \"@cash\",\n      \"beneficiaryName\": \"John Doe\",\n      \"documentTypeId\": 4,\n      \"documentNumber\": 123456789,\n      \"externalIdentifier\": \"physical-1\"\n    }\n  ]",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "PayOut id"
+                      },
+                      "externalIdentifier": {
+                        "type": "string",
+                        "example": "physical-1",
+                        "description": "PayOut externalIdentifier"
+                      },
+                      "Amount": {
+                        "type": "number",
+                        "example": 1000,
+                        "description": "PayOut amount"
+                      },
+                      "bankBaseId": {
+                        "type": "number",
+                        "example": 48,
+                        "description": "bankBaseId id cash ec where the cash will be withdrawn"
+                      },
+                      "bankAccountType": {
+                        "type": "string",
+                        "example": "ahorros",
+                        "description": "PayOut bankAccountType"
+                      },
+                      "bankAccount": {
+                        "type": "string",
+                        "example": "@cash",
+                        "description": "Bank account number"
+                      },
+                      "beneficiaryName": {
+                        "type": "string",
+                        "example": "John Doe",
+                        "description": "PayOut beneficiaryName"
+                      },
+                      "documentTypeId": {
+                        "type": "number",
+                        "example": 4,
+                        "description": "Beneficiary documentTypeId"
+                      },
+                      "documentNumber": {
+                        "type": "integer",
+                        "example": 123456789,
+                        "description": "Beneficiary documentNumber"
+                      },
+                      "state": {
+                        "type": "string",
+                        "example": "RECEIVED",
+                        "description": "PayOut state"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          },
+          {
+            "name": "signPayOuts",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Set to true to sign (approve) the payouts after creation (default: false)",
+            "required": false
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "companyId": {
+                    "type": "number",
+                    "example": 13
+                  },
+                  "companyProductId": {
+                    "type": "number",
+                    "example": 20
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Amount": {
+                          "type": "number",
+                          "example": 1000
+                        },
+                        "bankAccount": {
+                          "type": "string",
+                          "example": "123456789",
+                          "description": "Bank account number"
+                        },
+                        "bankAccountType": {
+                          "type": "string",
+                          "example": "ahorros"
+                        },
+                        "bankBaseId": {
+                          "type": "number",
+                          "example": 1
+                        },
+                        "beneficiaryName": {
+                          "type": "string",
+                          "example": "John Doe"
+                        },
+                        "documentTypeId": {
+                          "type": "number",
+                          "example": 1
+                        },
+                        "documentNumber": {
+                          "type": "integer",
+                          "example": 123456789,
+                          "maxLength": 10
+                        },
+                        "externalIdentifier": {
+                          "type": "string",
+                          "example": "XYZ123456789"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "application/text": {
+              "schema": {
+                "type": "string",
+                "example": "Amount,bankAccount,bankAccountType,bankBaseId,beneficiaryName,documentTypeId,documentNumber,externalIdentifier\n1000,123456789,ahorros,1,John Doe,1,123456789,XYZ123456789"
+              }
+            }
+          },
+          "description": "**Create payOuts  data description**\n\nCreate multiple payouts from a company ID and companyProduct ID, use a data array containing different payout objects.\n\n***companyProductId:*** (number) is the ID of the company product. It specifies which company product (virtual wallet) the collection source can be associated with. Check the companyProduct endpoint to see the available wallets, which must be of the deposit type.\n\n***data:*** (object) : This is an array of different objects, each object represents a payOut with the following fields:\n\n***Amount***: (number): Amount to delivered.\n\n***bankAccount***: (string) Bank account number.\n\n***bankAccountType***: (string) must be `ahorros` for *savings* accounts or `corriente` for checking accounts. Accounts for virtual wallets, such as Nequi or Daviplata, are of type `ahorros`.\n\n***bankBaseId***: (number) ID of the bank to disburse. To obtain the ID of the bank, consult the Bank/banks endpoint.\n\n***beneficiaryName***: (string) Name of the beneficiary to disburse.\n\n***documentTypeId***: (number) The ID of the document type. Please refer to the /documentTypes endpoint to retrieve this information.\n\n***documentNumber***: (number | string) Document identification number.\n\n***externalIdentifier***: (string) is a unique payment reference. It is an identifier that should not be repeated per payOut.\n\n***phone***: (string) [optional] phone number of the beneficiary to disburse.  must be write in format like \"+57XXXXXXXXX\"\n\n***email***: (string) [optional] email of the beneficiary to disburse.\n\n",
+          "required": true,
+          "x-parameter-index": 1
+        },
+        "operationId": "Payout.createSelfPayOutMany"
+      }
+    },
+    "/payouts/sign": {
+      "post": {
+        "x-controller-name": "Payout",
+        "x-operation-name": "createManySignedPayouts",
+        "tags": [
+          "Payout"
+        ],
+        "description": "## Sign payOuts\n\n Sign several payouts given an array of payout ids",
+        "responses": {
+          "200": {
+            "description": "Count Payout model instance signed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "payoutId": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "Payout id"
+                      },
+                      "id": {
+                        "type": "number",
+                        "description": "Signature id",
+                        "example": 1
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Signature creation date",
+                        "example": "2021-01-01T00:00:00.000Z"
+                      },
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number",
+                            "example": 1,
+                            "description": "User id"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "John Doe",
+                            "description": "User name"
+                          }
+                        }
+                      },
+                      "PayOut": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number",
+                            "example": 1,
+                            "description": "PayOut id"
+                          },
+                          "Amount": {
+                            "type": "number",
+                            "example": 1000,
+                            "description": "PayOut amount"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          },
+          "description": "## Sign several payOut\n Parameter considerations\n > **payoutIds**: must be an array of payout ids",
+          "required": true,
+          "x-parameter-index": 1
+        },
+        "operationId": "Payout.createManySignedPayouts"
+      }
+    },
+    "/payouts": {
+      "get": {
+        "x-controller-name": "Payout",
+        "x-operation-name": "selfPayOuts",
+        "tags": [
+          "Payout"
+        ],
+        "description": "## Get all payOuts\n\n Gets all payOuts created by the currently registered user, belonging to the company of the user",
+        "responses": {
+          "200": {
+            "description": "Array of Payout model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "payOuts": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PayOutWithRelations"
+                      }
+                    },
+                    "paginationInfo": {
+                      "type": "object",
+                      "properties": {
+                        "currentPage": {
+                          "type": "number"
+                        },
+                        "recordsPerPage": {
+                          "type": "number"
+                        },
+                        "totalRecords": {
+                          "type": "number"
+                        },
+                        "totalPages": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "recordsPerPage",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "Payout.selfPayOuts"
+      }
+    },
+    "/physical-point/{country}": {
+      "get": {
+        "x-controller-name": "PhysicalPoint",
+        "x-operation-name": "getPhysicalPointsByCountry",
+        "tags": [
+          "PhysicalPoint"
+        ],
+        "description": "## Get all Physical Points available for withdrawals or consignments by country.",
+        "responses": {
+          "200": {
+            "description": "Array of PhysicalPoint model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "store": {
+                        "type": "string",
+                        "description": "Store name",
+                        "example": "4buy Market"
+                      },
+                      "latitude": {
+                        "type": "string",
+                        "description": "Store latitude",
+                        "example": "-0.22105571920281047"
+                      },
+                      "longitude": {
+                        "type": "string",
+                        "description": "Store longitude",
+                        "example": "7.839.301.005.005.830"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "country",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Country id see /countries for more info (refers as id)",
+            "required": true,
+            "example": 2
+          }
+        ],
+        "operationId": "PhysicalPoint.getPhysicalPointsByCountry"
+      }
+    },
+    "/source-of-payment/create": {
+      "post": {
+        "x-controller-name": "SourcesOfPayment",
+        "x-operation-name": "createSourceOfPayment",
+        "tags": [
+          "SourcesOfPayment"
+        ],
+        "description": "## Create source of payment\n\n Create a new payment source belonging to a companyProductId",
+        "responses": {
+          "200": {
+            "description": "source of payment model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "example": 240,
+                      "description": "Source of payment id"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "test url 2",
+                      "description": "Source of payment name"
+                    },
+                    "active": {
+                      "type": "boolean",
+                      "example": true,
+                      "description": "Source of payment active, is available"
+                    },
+                    "slug": {
+                      "type": "string",
+                      "example": "test-url-2",
+                      "description": "Source of payment slug"
+                    },
+                    "companyProductId": {
+                      "type": "number",
+                      "example": 1,
+                      "description": "Source of payment company product id"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2021-08-30T17:00:00.000Z",
+                      "description": "Source of payment created date"
+                    },
+                    "fixedValue": {
+                      "type": "number",
+                      "example": 0,
+                      "description": "Source of payment fixed value",
+                      "nullable": true
+                    },
+                    "maxPayments": {
+                      "type": "number",
+                      "example": 0,
+                      "description": "Source of maximum payments. If the value is 0, no limit is set, unlimited payments.",
+                      "nullable": true
+                    },
+                    "expiresAt": {
+                      "type": "string",
+                      "example": "2021-08-30T17:00:00.000Z",
+                      "description": "Source of maximum payments. If the value is 0, no limit is set.",
+                      "nullable": true
+                    },
+                    "url": {
+                      "type": "string",
+                      "example": "@troop/d30/test-url-2",
+                      "description": "Base URL of the payment to be use in web: https://app.loopay.com/@troop/d30/test-url-2 | in demo: https://demo.loopay.com/@troop/d30/test-url-2"
+                    },
+                    "hasFastCheckOut": {
+                      "type": "boolean",
+                      "example": false,
+                      "description": "Source of payment has fast check out"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Source of payment 1"
+                  },
+                  "companyProductId": {
+                    "type": "number"
+                  },
+                  "slug": {
+                    "type": "string",
+                    "example": "Source of payment 1"
+                  },
+                  "clientCommentsAvailable": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "active": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "descriptionOnClientForm": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "isPredefinedPayerDetails": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "paidMethods": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "clientDefinesReference": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "customFields": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number",
+                          "example": 1691515792228
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "campo 2"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "text",
+                            "number",
+                            "date",
+                            "email"
+                          ],
+                          "example": "text"
+                        },
+                        "required": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      },
+                      "additionalProperties": false,
+                      "required": [
+                        "id",
+                        "name",
+                        "type",
+                        "required"
+                      ]
+                    },
+                    "maxItems": 5
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "descrption"
+                  },
+                  "expiresAt": {
+                    "type": "string",
+                    "example": "2090-09-30T00:00:00.000Z"
+                  },
+                  "fixedValue": {
+                    "type": "number",
+                    "example": 100000.5
+                  },
+                  "maxPayments": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "payerDetails": {
+                    "type": "object",
+                    "properties": {
+                      "ref": {
+                        "type": "string",
+                        "example": "ref-001"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "johnD@gmail.com"
+                      },
+                      "phone": {
+                        "type": "string",
+                        "example": "+57 310 3297014"
+                      },
+                      "fullName": {
+                        "type": "string",
+                        "example": "John Doe"
+                      },
+                      "documentType": {
+                        "type": "string",
+                        "example": "CC"
+                      },
+                      "documentNumber": {
+                        "type": "string",
+                        "example": "1000000888"
+                      }
+                    }
+                  },
+                  "urlCallback": {
+                    "type": "string",
+                    "example": "https://myurl.com/callback"
+                  },
+                  "hasFastCheckOut": {
+                    "type": "boolean",
+                    "example": false
+                  }
+                }
+              }
+            }
+          },
+          "description": "## Source of payment data description \n\n ***clientDefinesReference*:** (boolean) If set to true, a reference field is enabled on the payment form for the payer to fill out. If the value is false, then the field `payerDetails.ref` should be completed with text. \n\n ***isPredefinedPayerDetails*:** (boolean) If true, payer data must be predefined in the *payerDetails* field. \n\n ***payerDetails*** *: (object) You should predefine this field if *isPredefinedPayerDetails* is true. If *clientDefinesReference* is false, you should predefine the reference (`payerDetails.ref`) in this field. \n\n *payerDetails* is an object that predefines payer data in the form, such as email, phone, fullName, and documentType. The *documentType* property is a string of type *documentType.type*, whose value can be \"cc\", \"nit\", or \"rut\" for instance. Please consult the *documentType* endpoint for more information. \n\n ***customFields*** *: (array of objects) are custom fields that can be added to the payment form, up to a maximum of 5. These fields must be completed by the payer and have the following structure: `{\"id\": 1691554828946, \"name\": \"field2\", \"type\": \"text\", \"required\": false}`. The \"id\" field must be unique, \"name\" is the name of the field to be completed, and \"type\" can be **[\"text\", \"number\", \"date\", \"email\"]**. \n\n ***descriptionOnClientForm:*** (boolean) If this field is set to true, the value defined in the \"description\" field will appear on the payment form. \n\n ***description*** *: (string) You must define this field if *descriptionOnClientForm* is set to true. You can use this field to indicate important information to the payer on the payment form, such as details, instructions, or notes that you consider necessary. If *descriptionOnClientForm* is set to false, you can also fill in this field to have your own details that will not be rendered on the payment form, but that you can see on your dashboard. \n\n ***expiresAt*** *: (date) is the expiration date until which you can receive payments through this collection source. \n\n ***fixedValue*** *: (number) a fixed value that the payer must pay. If not defined, the payer is free to enter any amount to pay. \n\n ***maxPayments*** *: *(number)* is an integer value that represents the maximum number of payments that can be accepted. Once the number of processed payments reaches this value, no further payments can be accepted. If the value is set to zero, the number of payments is unlimited.\n\n ***slug:*** (string) A unique identifier or alias that should be written in lowercase and contain a maximum of 40 characters. It should only contain alphanumeric characters and spaces separated by (-). \n\n***paidMethods:*** (array number) An array of paidMethodsId corresponding to the ID of a paidMethod. This array enables and connects payment methods that can be used to pay a collection source. Consult the paidMethod endpoint to see the available payment methods.\n\n***companyProductId:*** (number) is the ID of the company product. It specifies which company product (virtual wallet) the collection source can be associated with. Check the companyProduct endpoint to see the available wallets, which must be of the deposit type.\n\n***active:*** (boolean) If active is true, the collection source is enabled. Otherwise, it is disabled and will not accept payments.\n\n ***name:*** (string) Name of the collection source \n\n ***urlCallback*** *: (string)  URL to receive notifications when the payment process is completed \n\n***hasFastCheckOut*** *: (boolean) Source of payment has fast check out, if the value is true only allows setting one paidMethod in the array and payerDetails must be defined  \n\n\n\n > **|Note**: The values with asterisk (*) are optional and do not need to be included in the request body, unless otherwise indicated. **|**",
+          "required": true,
+          "x-parameter-index": 1
+        },
+        "operationId": "SourcesOfPayment.createSourceOfPayment"
+      }
+    },
+    "/source-of-payment/create-direct-payment": {
+      "post": {
+        "x-controller-name": "SourcesOfPayment",
+        "x-operation-name": "createDirectPayment",
+        "tags": [
+          "SourcesOfPayment"
+        ],
+        "description": "## Create direct payment and source of payment\n\nCreate a new source of payment direct form backend, without a front interface, belonging to a companyProductId.\n\n***expiresAt*** [optional]: Only avaylable for \"paymentChannel\": \"pos\" cashIn. \n\n* By default it is set to 7 days expiration \n\n* expiresAt value must be greater than 24h from current date \n\n* expiresAt must be less than 7 from current date\n\n** expiration for bank transfers is by default 1 hr online and 24 hr in a physical bank with the bank code generated.***callbackUrl*** : url to return after payment is processed \n\n***userType*** [optional]: only required for transactions in colombia \n\n***metadata*** [optional]: object with additional information \n\n",
+        "responses": {
+          "200": {
+            "description": "source of payment model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "fastPaymentProcessorEngine": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "example": "200"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "success"
+                        },
+                        "body": {
+                          "type": "object",
+                          "properties": {
+                            "pdf": {
+                              "type": "string",
+                              "example": "https://myurl.com/pdf"
+                            },
+                            "pdfUrl": {
+                              "type": "string",
+                              "example": "https://myurl.com/pdf"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "sourceOfPayment": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number",
+                          "example": 240,
+                          "description": "Source of payment id"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "test url 2",
+                          "description": "Source of payment name"
+                        },
+                        "active": {
+                          "type": "boolean",
+                          "example": true,
+                          "description": "Source of payment active, is available"
+                        },
+                        "slug": {
+                          "type": "string",
+                          "example": "test-url-2",
+                          "description": "Source of payment slug"
+                        },
+                        "companyProductId": {
+                          "type": "number",
+                          "example": 1,
+                          "description": "Source of payment company product id"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "example": "2021-08-30T17:00:00.000Z",
+                          "description": "Source of payment created date"
+                        },
+                        "fixedValue": {
+                          "type": "number",
+                          "example": 0,
+                          "description": "Source of payment fixed value",
+                          "nullable": true
+                        },
+                        "maxPayments": {
+                          "type": "number",
+                          "example": 0,
+                          "description": "Source of maximum payments. If the value is 0, no limit is set, unlimited payments.",
+                          "nullable": true
+                        },
+                        "expiresAt": {
+                          "type": "string",
+                          "example": "2021-08-30T17:00:00.000Z",
+                          "description": "Source of maximum payments. If the value is 0, no limit is set.",
+                          "nullable": true
+                        },
+                        "url": {
+                          "type": "string",
+                          "example": "@troop/d30/test-url-2",
+                          "description": "Base URL of the payment to be use in web: https://app.loopay.com/@troop/d30/test-url-2 | in demo: https://demo.loopay.com/@troop/d30/test-url-2"
+                        },
+                        "hasFastCheckOut": {
+                          "type": "boolean",
+                          "example": false,
+                          "description": "Source of payment has fast check out"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "202": {
+            "description": " ## Create-direct-payment with card \n\nCreate a direct source of payment with a card pay method, belonging to a companyProductId.\n\nTo consult the available paidMethods belonging to a companyProductId, see the /paid-methods endpoint.\n\n* cardCVV card CVV applies only to card payments\n\n* cardNumber card number applies only to card payments\n\n* expirationDate card expiration date, \"MM/YY\" applies only to card payments\n\n### Example input:\n\n~~~{\n  \"name\": \"test url 2\",\n  \"slug\": \"test-url-2\",\n  \"paidMethod\": 16,\n  \"companyProductId\": 203,\n  \"documentType\": \"DNI\",\n  \"documentNumber\": \"1000000888\",\n  \"currencyId\": 2,\n  \"amount\": 25,\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"jdoe@gmail.com\",\n  \"phone\": \"+573103297014\",\n  \"description\": \"test url 2\",\n  \"callbackUrl\": \"https://www.loopay.com/\",\n  \"cardCVV\": 355,\n  \"cardNumber\": \"5303710409428783\",\n  \"cardExpirationDate\": \"05/26\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "fastPaymentProcessorEngine": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "example": "200"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "success"
+                        },
+                        "body": {
+                          "type": "object",
+                          "properties": {
+                            "result": {
+                              "type": "string",
+                              "example": "200"
+                            },
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "order": {
+                                  "type": "object",
+                                  "properties": {
+                                    "amount": {
+                                      "type": "string",
+                                      "example": "25.0"
+                                    },
+                                    "date": {
+                                      "type": "string",
+                                      "example": "2024-07-30T20:04:27Z"
+                                    },
+                                    "tax": {
+                                      "type": "string",
+                                      "example": "0.00"
+                                    },
+                                    "total": {
+                                      "type": "string",
+                                      "example": "25.0"
+                                    },
+                                    "number": {
+                                      "type": "string",
+                                      "example": "2472713"
+                                    }
+                                  }
+                                },
+                                "transaction": {
+                                  "type": "object",
+                                  "properties": {
+                                    "date": {
+                                      "type": "string",
+                                      "example": "2024-07-30T20:04:27Z"
+                                    },
+                                    "responseCode": {
+                                      "type": "string",
+                                      "example": "APROBADA"
+                                    },
+                                    "installments": {
+                                      "type": "string",
+                                      "example": "1"
+                                    },
+                                    "accountType": {
+                                      "type": "string",
+                                      "example": "CREDITO"
+                                    },
+                                    "cus": {
+                                      "type": "string",
+                                      "example": "2024-07-30T20:04:27Z_2546896a-8537-4db0-a6ad-58930ba0fed2_577174"
+                                    },
+                                    "invoiceNumber": {
+                                      "type": "string",
+                                      "example": "577174"
+                                    },
+                                    "franchise": {
+                                      "type": "string",
+                                      "example": "MasterCard"
+                                    },
+                                    "response": {
+                                      "type": "string",
+                                      "example": "APPROVED"
+                                    },
+                                    "cardNumber": {
+                                      "type": "string",
+                                      "example": "************8783"
+                                    },
+                                    "error": {
+                                      "type": "string",
+                                      "example": "1"
+                                    },
+                                    "numAprobacion": {
+                                      "type": "string",
+                                      "example": "577174"
+                                    },
+                                    "idTransaccionAutorizador": {
+                                      "type": "string",
+                                      "example": "2546896a-8537-4db0-a6ad-58930ba0fed2"
+                                    }
+                                  }
+                                },
+                                "commerce": {
+                                  "type": "object",
+                                  "properties": {
+                                    "url": {
+                                      "type": "string",
+                                      "example": "https://www.payvalida.com"
+                                    },
+                                    "terminal": {
+                                      "type": "string",
+                                      "example": "loopaysas"
+                                    },
+                                    "name": {
+                                      "type": "string",
+                                      "example": "VALIDDA S.A.S"
+                                    },
+                                    "code": {
+                                      "type": "string",
+                                      "example": "203065"
+                                    },
+                                    "email": {
+                                      "type": "string",
+                                      "example": "jon@gmail.com"
+                                    },
+                                    "net": {
+                                      "type": "string",
+                                      "example": "PAYMENTEZ"
+                                    }
+                                  }
+                                },
+                                "user": {}
+                              }
+                            },
+                            "error": {
+                              "type": "string",
+                              "example": "1"
+                            },
+                            "details": {
+                              "type": "object",
+                              "properties": {
+                                "metadata": {
+                                  "type": "object",
+                                  "properties": {
+                                    "uid": {
+                                      "type": "string",
+                                      "example": "8d9e700f9a75cd7726732d15b8f77ac7"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "sourceOfPayment": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number",
+                          "example": 240,
+                          "description": "Source of payment id"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "test url 2",
+                          "description": "Source of payment name"
+                        },
+                        "active": {
+                          "type": "boolean",
+                          "example": true,
+                          "description": "Source of payment active, is available"
+                        },
+                        "slug": {
+                          "type": "string",
+                          "example": "test-url-2",
+                          "description": "Source of payment slug"
+                        },
+                        "companyProductId": {
+                          "type": "number",
+                          "example": 203,
+                          "description": "Source of payment company product id"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "example": "2021-08-30T17:00:00.000Z",
+                          "description": "Source of payment created date"
+                        },
+                        "fixedValue": {
+                          "type": "number",
+                          "example": 25,
+                          "description": "Source of payment fixed value",
+                          "nullable": true
+                        },
+                        "maxPayments": {
+                          "type": "number",
+                          "example": 1,
+                          "description": "Source of maximum payments. If the value is 0, no limit is set, unlimited payments.",
+                          "nullable": true
+                        },
+                        "expiresAt": {
+                          "type": "string",
+                          "example": "2026-08-30T17:00:00.000Z",
+                          "description": "Source of maximum payments. If the value is 0, no limit is set.",
+                          "nullable": true
+                        },
+                        "url": {
+                          "type": "string",
+                          "example": "@alexaflowers53/econo-fast8g/payvalida-visa-30may-008",
+                          "description": "Base URL of the payment to be use in web: https://app.loopay.com/@troop/d30/test-url-2 | in demo: https://demo.loopay.com/@troop/d30/test-url-2"
+                        },
+                        "productId": {
+                          "type": "number",
+                          "example": 11,
+                          "description": "Product id"
+                        },
+                        "companyId": {
+                          "type": "number",
+                          "example": 444,
+                          "description": "Company id"
+                        },
+                        "paidMethods": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "paidMethod": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number",
+                                    "example": 16
+                                  },
+                                  "nameStrategy": {
+                                    "type": "string",
+                                    "example": "payvalidaCard"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "test url 2"
+                  },
+                  "slug": {
+                    "type": "string",
+                    "example": "test-url-2"
+                  },
+                  "paidMethod": {
+                    "type": "number",
+                    "example": 1,
+                    "description": " see /paid-methods : PSE, 2: Credit card"
+                  },
+                  "companyProductId": {
+                    "type": "number",
+                    "example": 1,
+                    "description": "Company product id, see /company-products"
+                  },
+                  "expiresAt": {
+                    "type": "string",
+                    "example": "2021-08-30T17:00:00.000Z"
+                  },
+                  "documentType": {
+                    "type": "string",
+                    "example": "CC"
+                  },
+                  "documentNumber": {
+                    "type": "string",
+                    "example": "1000000888"
+                  },
+                  "currencyId": {
+                    "type": "number",
+                    "example": 1,
+                    "description": "Currency id, see /currencies"
+                  },
+                  "amount": {
+                    "type": "number",
+                    "example": 10000.5
+                  },
+                  "firstName": {
+                    "type": "string",
+                    "example": "John"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "user1@gmail.com"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "example": "+573103297014"
+                  },
+                  "userType": {
+                    "type": "string",
+                    "example": "1",
+                    "description": "\"0\": Natural person, \"1\": Legal person"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "test url 2"
+                  },
+                  "callbackUrl": {
+                    "type": "string",
+                    "example": "https://myurl.com/callback",
+                    "description": "Url to  return after payment"
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "example": {
+                      "key1": "value1",
+                      "key2": "value2"
+                    },
+                    "description": "Metadata to save in payment, optional"
+                  }
+                }
+              }
+            }
+          },
+          "description": "## Source of payment data description \n\n Source of payment data description",
+          "required": true,
+          "x-parameter-index": 1
+        },
+        "operationId": "SourcesOfPayment.createDirectPayment"
+      }
+    },
+    "/source-of-payment/filtered": {
+      "get": {
+        "x-controller-name": "SourcesOfPayment",
+        "x-operation-name": "bankBases",
+        "tags": [
+          "SourcesOfPayment"
+        ],
+        "description": "## Get source of payment\n Get  all source of payments by company id",
+        "responses": {
+          "200": {
+            "description": "Array of source of payment model and pagination info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sourceOfPayments": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "paginationInfo": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token. String returned in /login",
+            "required": true
+          },
+          {
+            "name": "companyId",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Company id. Id returned in /companies ",
+            "required": true,
+            "example": 7
+          }
+        ],
+        "operationId": "SourcesOfPayment.bankBases"
+      }
+    },
+    "/source-of-payment/update": {
+      "post": {
+        "x-controller-name": "SourcesOfPayment",
+        "x-operation-name": "updateSourceOfPayment",
+        "tags": [
+          "SourcesOfPayment"
+        ],
+        "description": "## Update source of payment\n\n Update source of payment",
+        "responses": {
+          "200": {
+            "description": "id source of payment updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          },
+          {
+            "name": "sourceOfPaymentId",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Source of payment id",
+            "required": true,
+            "example": 7
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Source of payment 1"
+                  },
+                  "countryId": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "companyProductId": {
+                    "type": "number",
+                    "example": 4
+                  },
+                  "deleted": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "styles": {
+                    "type": "object",
+                    "example": {
+                      "primary": "#f0f1fe",
+                      "secondary": "#aaafc4"
+                    }
+                  },
+                  "slug": {
+                    "type": "string",
+                    "example": "Source of payment 1"
+                  },
+                  "clientCommentsAvailable": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "clientComments": {
+                    "type": "string",
+                    "example": "clientComments"
+                  },
+                  "active": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "descriptionOnClientForm": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "isPredefinedPayerDetails": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "clientDefinesReference": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "customFields": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number",
+                          "example": 1691515792228
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "campo 2"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "text",
+                            "number",
+                            "date",
+                            "email"
+                          ],
+                          "example": "text"
+                        },
+                        "required": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      },
+                      "additionalProperties": false,
+                      "required": [
+                        "id",
+                        "name",
+                        "type",
+                        "required"
+                      ]
+                    },
+                    "maxItems": 5
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "descrption"
+                  },
+                  "expiresAt": {
+                    "type": "string",
+                    "example": "2090-09-30T00:00:00.000Z"
+                  },
+                  "fixedValue": {
+                    "type": "number",
+                    "example": 100000.5
+                  },
+                  "maxPayments": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "payerDetails": {
+                    "type": "object",
+                    "properties": {
+                      "ref": {
+                        "type": "string",
+                        "example": "ref-001"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "johnD@gmail.com"
+                      },
+                      "phone": {
+                        "type": "string",
+                        "example": "+57 310 3297014"
+                      },
+                      "fullName": {
+                        "type": "string",
+                        "example": "John Doe"
+                      },
+                      "documentType": {
+                        "type": "string",
+                        "example": "CC"
+                      },
+                      "documentNumber": {
+                        "type": "string",
+                        "example": "1000000888"
+                      }
+                    }
+                  },
+                  "urlCallback": {
+                    "type": "string",
+                    "example": "https://myurl.com/callback"
+                  }
+                }
+              }
+            }
+          },
+          "description": "## Source of payment data description \n\n **clientDefinesReference:** (boolean) If set to true, a reference field is enabled on the payment form for the payer to fill out. If the value is false, then the field `payerDetails.ref` should be completed with text. \n\n **isPredefinedPayerDetails:** (boolean) If true, payer data must be predefined in the *payerDetails* field. \n\n ***payerDetails*** : (object) You should predefine this field if *isPredefinedPayerDetails* is true. If *clientDefinesReference* is false, you should predefine the reference (`payerDetails.ref`) in this field. \n\n *payerDetails* is an object that predefines payer data in the form, such as email, phone, fullName, and documentType. The *documentType* property is a string of type *documentType.type*, whose value can be \"cc\", \"nit\", or \"rut\" for instance. Please consult the *documentType* endpoint for more information. \n\n ***customFields*** : (array of objects) are custom fields that can be added to the payment form, up to a maximum of 5. These fields must be completed by the payer and have the following structure: `{\"id\": 1691554828946, \"name\": \"field2\", \"type\": \"text\", \"required\": false}`. The \"id\" field must be unique, \"name\" is the name of the field to be completed, and \"type\" can be **[\"text\", \"number\", \"date\", \"email\"]**. \n\n ***descriptionOnClientForm:*** (boolean) If this field is set to true, the value defined in the \"description\" field will appear on the payment form. \n\n ***description***: (string) You must define this field if *descriptionOnClientForm* is set to true. You can use this field to indicate important information to the payer on the payment form, such as details, instructions, or notes that you consider necessary. If *descriptionOnClientForm* is set to false, you can also fill in this field to have your own details that will not be rendered on the payment form, but that you can see on your dashboard. \n\n ***expiresAt***: (date) is the expiration date until which you can receive payments through this collection source. \n\n ***fixedValue***: (number) a fixed value that the payer must pay. If not defined, the payer is free to enter any amount to pay. \n\n ***maxPayments***: *(number)* is an integer value that represents the maximum number of payments that can be accepted. Once the number of processed payments reaches this value, no further payments can be accepted. If the value is set to zero, the number of payments is unlimited.\n\n ***slug:*** (string) A unique identifier or alias that should be written in lowercase and contain a maximum of 40 characters. It should only contain alphanumeric characters and spaces separated by (-). \n\n***companyProductId:*** (number) is the ID of the company product. It specifies which company product (virtual wallet) the collection source can be associated with. Check the companyProduct endpoint to see the available wallets, which must be of the deposit type.\n\n***active:*** (boolean) If active is true, the collection source is enabled. Otherwise, it is disabled and will not accept payments.\n\n ***name:*** (string) Name of the collection source \n\n ***urlCallback***: (string)  URL to receive notifications when the payment process is completed  \n\n\n\n",
+          "required": true,
+          "x-parameter-index": 2
+        },
+        "operationId": "SourcesOfPayment.updateSourceOfPayment"
+      }
+    },
+    "/source-of-payment/{sourceOfPaymentId}": {
+      "get": {
+        "x-controller-name": "SourcesOfPayment",
+        "x-operation-name": "sourceOfPaymentDetail",
+        "tags": [
+          "SourcesOfPayment"
+        ],
+        "description": "## Get source of payment\n Get source of payment detail",
+        "responses": {
+          "200": {
+            "description": "source of payment model and pagination info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sourceOfPayment": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number",
+                          "example": 1,
+                          "description": "Source of payment id"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Source of payment 1"
+                        },
+                        "slug": {
+                          "type": "string",
+                          "example": "sof-1"
+                        },
+                        "active": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "fixedValue": {
+                          "type": "number",
+                          "example": 100000.5,
+                          "nullable": true
+                        },
+                        "maxPayments": {
+                          "type": "number",
+                          "example": 3
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "example": "2020-09-30T00:00:00.000Z"
+                        },
+                        "expiresAt": {
+                          "type": "string",
+                          "example": "2090-09-30T00:00:00.000Z",
+                          "nullable": true
+                        },
+                        "CompanyProduct": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number",
+                              "example": 1,
+                              "description": "Company product id"
+                            },
+                            "companyId": {
+                              "type": "number",
+                              "example": 1,
+                              "description": "Company id"
+                            },
+                            "company": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number",
+                                  "example": 1,
+                                  "description": "Company id"
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "example": "Company 1"
+                                },
+                                "slug": {
+                                  "type": "string",
+                                  "example": "company-1"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "totalPayIns": {
+                          "type": "number",
+                          "example": 6
+                        },
+                        "totalPayInsByState": {
+                          "type": "object",
+                          "properties": {
+                            "accepted": {
+                              "type": "number",
+                              "example": 1,
+                              "nullable": true
+                            },
+                            "rejected": {
+                              "type": "number",
+                              "example": 1,
+                              "nullable": true
+                            },
+                            "pending": {
+                              "type": "number",
+                              "example": 1,
+                              "nullable": true
+                            },
+                            "cancelled": {
+                              "type": "number",
+                              "example": 1,
+                              "nullable": true
+                            },
+                            "abandoned": {
+                              "type": "number",
+                              "example": 1,
+                              "nullable": true
+                            },
+                            "initial": {
+                              "type": "number",
+                              "example": 1,
+                              "nullable": true
+                            }
+                          },
+                          "nullable": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token. String returned in /login",
+            "required": true
+          },
+          {
+            "name": "sourceOfPaymentId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Source of payment id",
+            "required": true
+          }
+        ],
+        "operationId": "SourcesOfPayment.sourceOfPaymentDetail"
+      }
+    },
+    "/users": {
+      "get": {
+        "x-controller-name": "User",
+        "x-operation-name": "users",
+        "tags": [
+          "User"
+        ],
+        "description": "## Get users\n Get all users available by companies logged in user",
+        "responses": {
+          "200": {
+            "description": "Array of User model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "authUid": {
+                        "type": "string",
+                        "example": "asdf46547ASFDAFDFWW"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2021-03-01T00:00:00.000Z"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "user@.example.com"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "John Doe"
+                      },
+                      "policy": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2021-03-01T00:00:00.000Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authorization token",
+            "required": true
+          }
+        ],
+        "operationId": "User.users"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.loopay.com"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "SourcesOfPaymentPayIn": {
+        "title": "SourcesOfPaymentPayIn",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          },
+          "fixedValue": {
+            "type": "number"
+          },
+          "updateAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "styles": {
+            "type": "object"
+          },
+          "paidMethods": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "payIns": {
+            "type": "object"
+          },
+          "companyProductId": {
+            "type": "number"
+          },
+          "CompanyProduct": {
+            "type": "object"
+          },
+          "payerDetails": {
+            "$ref": "#/components/schemas/"
+          },
+          "customFields": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "clientDefinesReference": {
+            "type": "boolean"
+          },
+          "clientCommentsAvailable": {
+            "type": "boolean"
+          },
+          "isPredefinedPayerDetails": {
+            "type": "boolean"
+          },
+          "descriptionOnClientForm": {
+            "type": "boolean"
+          },
+          "maxPayments": {
+            "type": "number"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "hasFastCheckOut": {
+            "type": "boolean"
+          },
+          "urlCallback": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "deleted",
+          "active",
+          "description",
+          "fixedValue",
+          "clientDefinesReference",
+          "clientCommentsAvailable",
+          "isPredefinedPayerDetails",
+          "descriptionOnClientForm",
+          "slug"
+        ],
+        "additionalProperties": false
+      },
+      "CreateDirectPaymentInput": {
+        "title": "CreateDirectPaymentInput",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "paidMethod": {
+            "type": "number"
+          },
+          "expiresAt": {
+            "type": "string"
+          },
+          "documentType": {
+            "type": "string"
+          },
+          "documentNumber": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "companyProductId": {
+            "type": "number"
+          },
+          "email": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "bankId": {
+            "type": "string"
+          },
+          "userType": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "accountNumber": {
+            "type": "string"
+          },
+          "callbackUrl": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object"
+          },
+          "currencyId": {
+            "type": "number"
+          },
+          "cardCVV": {
+            "type": "number"
+          },
+          "cardNumber": {
+            "type": "string"
+          },
+          "cardExpirationDate": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "slug",
+          "paidMethod",
+          "documentType",
+          "documentNumber",
+          "amount",
+          "companyProductId",
+          "email",
+          "firstName",
+          "lastName",
+          "userType",
+          "description",
+          "callbackUrl",
+          "phone",
+          "currencyId"
+        ],
+        "additionalProperties": false
+      },
+      "UpdateSourceOfPaymentInput": {
+        "title": "UpdateSourceOfPaymentInput",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "countryId": {
+            "type": "number"
+          },
+          "clientDefinesReference": {
+            "type": "boolean"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          },
+          "descriptionOnClientForm": {
+            "type": "boolean"
+          },
+          "fixedValue": {
+            "type": "number"
+          },
+          "styles": {
+            "type": "object"
+          },
+          "companyProductId": {
+            "type": "number"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "maxPayments": {
+            "type": "number"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "payerDetails": {
+            "type": "object"
+          },
+          "isPredefinedPayerDetails": {
+            "type": "boolean"
+          },
+          "customFields": {
+            "type": "object"
+          },
+          "clientComments": {
+            "type": "string"
+          },
+          "clientCommentsAvailable": {
+            "type": "boolean"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "urlCallback": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PayOut": {
+        "title": "PayOut",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "Amount": {
+            "type": "number"
+          },
+          "AmountUsd": {
+            "type": "number"
+          },
+          "bankAccount": {
+            "type": "string"
+          },
+          "bankAccountType": {
+            "type": "string"
+          },
+          "bankBaseId": {
+            "type": "number"
+          },
+          "beneficiaryName": {
+            "type": "string"
+          },
+          "companyId": {
+            "type": "number"
+          },
+          "companyProductId": {
+            "type": "number"
+          },
+          "currencyId": {
+            "type": "number"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "documentNumber": {},
+          "documentTypeId": {
+            "type": "number"
+          },
+          "externalIdentifier": {
+            "type": "string"
+          },
+          "metaData": {
+            "type": "object"
+          },
+          "reversedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startedProcessAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "state": {
+            "type": "string"
+          },
+          "trasnferedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "number"
+          },
+          "validatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "uid": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Amount",
+          "bankAccount",
+          "bankAccountType",
+          "bankBaseId",
+          "beneficiaryName",
+          "companyProductId",
+          "currencyId",
+          "documentNumber",
+          "documentTypeId",
+          "externalIdentifier",
+          "userId"
+        ],
+        "additionalProperties": false
+      },
+      "CreaateSelfPayOut": {
+        "title": "CreaateSelfPayOut",
+        "type": "object",
+        "description": "(tsType: CreateSelfPayOutInput, schemaOptions: { title: 'CreaateSelfPayOut' })",
+        "properties": {
+          "Amount": {
+            "type": "number"
+          },
+          "bankAccount": {
+            "type": "string"
+          },
+          "bankAccountType": {
+            "type": "string"
+          },
+          "bankBaseId": {
+            "type": "number"
+          },
+          "beneficiaryName": {
+            "type": "string"
+          },
+          "companyId": {
+            "type": "number"
+          },
+          "companyProductId": {
+            "type": "number"
+          },
+          "currencyId": {
+            "type": "number"
+          },
+          "documentNumber": {},
+          "documentTypeId": {
+            "type": "number"
+          },
+          "externalIdentifier": {
+            "type": "string"
+          },
+          "metaData": {
+            "type": "object"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Amount",
+          "bankAccount",
+          "bankAccountType",
+          "bankBaseId",
+          "beneficiaryName",
+          "companyId",
+          "companyProductId",
+          "documentNumber",
+          "documentTypeId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "CreateSelfPayOutInput"
+      },
+      "CreateSelfPayOutInput": {
+        "title": "CreateSelfPayOutInput",
+        "type": "object",
+        "properties": {
+          "Amount": {
+            "type": "number"
+          },
+          "bankAccount": {
+            "type": "string"
+          },
+          "bankAccountType": {
+            "type": "string"
+          },
+          "bankBaseId": {
+            "type": "number"
+          },
+          "beneficiaryName": {
+            "type": "string"
+          },
+          "companyId": {
+            "type": "number"
+          },
+          "companyProductId": {
+            "type": "number"
+          },
+          "currencyId": {
+            "type": "number"
+          },
+          "documentNumber": {},
+          "documentTypeId": {
+            "type": "number"
+          },
+          "externalIdentifier": {
+            "type": "string"
+          },
+          "metaData": {
+            "type": "object"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Amount",
+          "bankAccount",
+          "bankAccountType",
+          "bankBaseId",
+          "beneficiaryName",
+          "companyId",
+          "companyProductId",
+          "documentNumber",
+          "documentTypeId"
+        ],
+        "additionalProperties": false
+      },
+      "SelfPayOutMany": {
+        "title": "SelfPayOutMany",
+        "type": "object",
+        "properties": {
+          "Amount": {
+            "type": "string"
+          },
+          "bankAccount": {
+            "type": "string"
+          },
+          "bankAccountType": {
+            "type": "string"
+          },
+          "bankBaseId": {
+            "type": "number"
+          },
+          "beneficiaryName": {
+            "type": "string"
+          },
+          "documentNumber": {},
+          "documentTypeId": {
+            "type": "number"
+          },
+          "externalIdentifier": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Amount",
+          "bankAccount",
+          "bankAccountType",
+          "bankBaseId",
+          "beneficiaryName",
+          "documentNumber",
+          "documentTypeId",
+          "externalIdentifier"
+        ],
+        "additionalProperties": false
+      },
+      "CreateSelfPayOutManyInput": {
+        "title": "CreateSelfPayOutManyInput",
+        "type": "object",
+        "properties": {
+          "currencyId": {
+            "type": "number"
+          },
+          "scheduledAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "tags": {
+            "type": "object"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "companyId": {
+            "type": "number"
+          },
+          "companyProductId": {
+            "type": "number"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SelfPayOutMany"
+            }
+          }
+        },
+        "required": [
+          "companyId",
+          "companyProductId",
+          "data"
+        ],
+        "additionalProperties": false
+      },
+      "PayOutWithRelations": {
+        "title": "PayOutWithRelations",
+        "type": "object",
+        "description": "(tsType: PayOutWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "Amount": {
+            "type": "number"
+          },
+          "AmountUsd": {
+            "type": "number"
+          },
+          "bankAccount": {
+            "type": "string"
+          },
+          "bankAccountType": {
+            "type": "string"
+          },
+          "bankBaseId": {
+            "type": "number"
+          },
+          "beneficiaryName": {
+            "type": "string"
+          },
+          "companyId": {
+            "type": "number"
+          },
+          "companyProductId": {
+            "type": "number"
+          },
+          "currencyId": {
+            "type": "number"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "documentNumber": {},
+          "documentTypeId": {
+            "type": "number"
+          },
+          "externalIdentifier": {
+            "type": "string"
+          },
+          "metaData": {
+            "type": "object"
+          },
+          "reversedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startedProcessAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "state": {
+            "type": "string"
+          },
+          "trasnferedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "number"
+          },
+          "validatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "uid": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Amount",
+          "bankAccount",
+          "bankAccountType",
+          "bankBaseId",
+          "beneficiaryName",
+          "companyProductId",
+          "currencyId",
+          "documentNumber",
+          "documentTypeId",
+          "externalIdentifier",
+          "userId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "PayOutWithRelations"
+      },
+      "SelfPayOutsByExternalIdentifierInput": {
+        "title": "SelfPayOutsByExternalIdentifierInput",
+        "type": "object",
+        "properties": {
+          "companyProductId": {
+            "type": "number"
+          },
+          "externalIdentifierList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "companyProductId",
+          "externalIdentifierList"
+        ],
+        "additionalProperties": false
+      },
+      "MovementWithRelations": {
+        "title": "MovementWithRelations",
+        "type": "object",
+        "description": "(tsType: MovementWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "uid": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "ref": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "origin": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "user": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "type",
+          "state",
+          "ref",
+          "amount",
+          "origin",
+          "destination",
+          "user"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "MovementWithRelations"
+      }
+    }
+  }
+}

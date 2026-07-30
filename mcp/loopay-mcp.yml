@@ -1,0 +1,103 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/loopay-openapi-original.json
+note: No official hosted/remote Loopay MCP server was found (searched docs, npm @modelcontextprotocol,
+  MCP registries). Tool list DERIVED one-per-operation from the OpenAPI as a candidate.
+server:
+  name: loopay
+  transport: stdio
+tools:
+- name: Affiliate.getAffiliates
+  description: GET /affiliates
+  source_operation: openapi/loopay-openapi-original.json#Affiliate.getAffiliates
+- name: Affiliate.getCompaniesBalance
+  description: GET /affiliates/balance
+  source_operation: openapi/loopay-openapi-original.json#Affiliate.getCompaniesBalance
+- name: Affiliate.createManyAffiliates
+  description: POST /affiliates/create
+  source_operation: openapi/loopay-openapi-original.json#Affiliate.createManyAffiliates
+- name: Affiliate.getPayOutsForAffiliates
+  description: GET /affiliates/payouts
+  source_operation: openapi/loopay-openapi-original.json#Affiliate.getPayOutsForAffiliates
+- name: Bank.bankBases
+  description: GET /banks
+  source_operation: openapi/loopay-openapi-original.json#Bank.bankBases
+- name: Company.companies
+  description: GET /companies
+  source_operation: openapi/loopay-openapi-original.json#Company.companies
+- name: CompanyProduct.companyProducts
+  description: GET /company-products
+  source_operation: openapi/loopay-openapi-original.json#CompanyProduct.companyProducts
+- name: Country.countries
+  description: GET /countries
+  source_operation: openapi/loopay-openapi-original.json#Country.countries
+- name: Currency.currencies
+  description: GET /currencies
+  source_operation: openapi/loopay-openapi-original.json#Currency.currencies
+- name: DocumentType.documentTypeBases
+  description: GET /documentTypes
+  source_operation: openapi/loopay-openapi-original.json#DocumentType.documentTypeBases
+- name: User.login
+  description: POST /login
+  source_operation: openapi/loopay-openapi-original.json#User.login
+- name: Movements.selfPayOuts
+  description: GET /movements/{companyProductId}
+  source_operation: openapi/loopay-openapi-original.json#Movements.selfPayOuts
+- name: PaidMethods.paidMethods
+  description: GET /paid-methods
+  source_operation: openapi/loopay-openapi-original.json#PaidMethods.paidMethods
+- name: PayIn.sourceOfPaymentDetailBySlug
+  description: GET /payIns/bySourceOfPaymentSlug
+  source_operation: openapi/loopay-openapi-original.json#PayIn.sourceOfPaymentDetailBySlug
+- name: PayIn.sourceOfPaymentDetail
+  description: GET /payIns/{sourceOfPaymentId}
+  source_operation: openapi/loopay-openapi-original.json#PayIn.sourceOfPaymentDetail
+- name: SourcesOfPaymentAdmin.paymentOfSources
+  description: GET /payment-sources
+  source_operation: openapi/loopay-openapi-original.json#SourcesOfPaymentAdmin.paymentOfSources
+- name: SourcesOfPaymentAdmin.validatePayInOnSourceOfPayment
+  description: GET /payment-sources-pay-in/valid
+  source_operation: openapi/loopay-openapi-original.json#SourcesOfPaymentAdmin.validatePayInOnSourceOfPayment
+- name: SourcesOfPaymentAdmin.companies
+  description: GET /payment-sources/companies
+  source_operation: openapi/loopay-openapi-original.json#SourcesOfPaymentAdmin.companies
+- name: Payout.createSelfPayOut
+  description: POST /payout/create
+  source_operation: openapi/loopay-openapi-original.json#Payout.createSelfPayOut
+- name: Payout.selfPayOut
+  description: GET /payout/{id}
+  source_operation: openapi/loopay-openapi-original.json#Payout.selfPayOut
+- name: Payout.selfPayOuts
+  description: GET /payouts
+  source_operation: openapi/loopay-openapi-original.json#Payout.selfPayOuts
+- name: Payout.getSelfPayOutsByExternalIdentifierList
+  description: POST /payouts/byExternalIdentifierList
+  source_operation: openapi/loopay-openapi-original.json#Payout.getSelfPayOutsByExternalIdentifierList
+- name: Payout.createSelfPayOutMany
+  description: POST /payouts/create
+  source_operation: openapi/loopay-openapi-original.json#Payout.createSelfPayOutMany
+- name: Payout.createManySignedPayouts
+  description: POST /payouts/sign
+  source_operation: openapi/loopay-openapi-original.json#Payout.createManySignedPayouts
+- name: PhysicalPoint.getPhysicalPointsByCountry
+  description: GET /physical-point/{country}
+  source_operation: openapi/loopay-openapi-original.json#PhysicalPoint.getPhysicalPointsByCountry
+- name: SourcesOfPayment.createSourceOfPayment
+  description: POST /source-of-payment/create
+  source_operation: openapi/loopay-openapi-original.json#SourcesOfPayment.createSourceOfPayment
+- name: SourcesOfPayment.createDirectPayment
+  description: POST /source-of-payment/create-direct-payment
+  source_operation: openapi/loopay-openapi-original.json#SourcesOfPayment.createDirectPayment
+- name: SourcesOfPayment.bankBases
+  description: GET /source-of-payment/filtered
+  source_operation: openapi/loopay-openapi-original.json#SourcesOfPayment.bankBases
+- name: SourcesOfPayment.updateSourceOfPayment
+  description: POST /source-of-payment/update
+  source_operation: openapi/loopay-openapi-original.json#SourcesOfPayment.updateSourceOfPayment
+- name: SourcesOfPayment.sourceOfPaymentDetail
+  description: GET /source-of-payment/{sourceOfPaymentId}
+  source_operation: openapi/loopay-openapi-original.json#SourcesOfPayment.sourceOfPaymentDetail
+- name: User.users
+  description: GET /users
+  source_operation: openapi/loopay-openapi-original.json#User.users

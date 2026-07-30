@@ -1,0 +1,21 @@
+generated: '2026-07-20'
+method: searched
+source: https://api.loopay.com/openapi.json (info.description auth guide) + https://api.loopay.com/explorer
+docs: https://api.loopay.com/explorer/#/User/User.login
+summary:
+  types: [token]
+  api_key_in: [header]
+  oauth2_flows: []
+  notes: >-
+    Loopay uses a token-based authentication system. A bearer token is minted by
+    POSTing credentials to /login (operationId User.login); the token is then sent
+    on subsequent requests. The OpenAPI ships an empty components.securitySchemes
+    block, so the scheme is documented in prose (info.description) rather than
+    declared machine-readably — a gap worth filing with the provider.
+schemes:
+  - name: bearerToken
+    type: http
+    scheme: bearer
+    documented_only: true
+    obtained_via: POST /login (User.login)
+    sources: [openapi/loopay-openapi-original.json, https://api.loopay.com/openapi.json]

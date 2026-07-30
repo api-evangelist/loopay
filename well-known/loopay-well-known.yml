@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: searched
+hosts:
+  - host: https://loopay.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+  - host: https://api.loopay.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+note: >-
+  Probed the /.well-known/ discovery surface on both the marketing host (loopay.com)
+  and the API host (api.loopay.com). No well-known documents are published (all 404).
+  Absence is valid, recorded data.

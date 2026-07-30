@@ -1,0 +1,21 @@
+generated: '2026-07-20'
+method: searched
+source: https://api.loopay.com/openapi.json + https://loopay.com
+versioning:
+  scheme: spec-version
+  current: 3.2.0
+  detail: >-
+    OpenAPI info.version is 3.2.0; the API base host is unversioned
+    (https://api.loopay.com). No public versioning/deprecation policy page was found.
+deprecation:
+  policy_url: null
+  sunset_header: null
+sla:
+  url: null
+status_page: null
+deprecated_operations: []
+note: >-
+  No status page, SLA, deprecation policy, or dated changelog is published on the
+  Loopay site or API host as of the enrichment date. Production access is gated:
+  "For production, please contact your personal Looper." Therefore NO StatusPage,
+  Deprecation, or ChangeLog pointers are emitted (nothing to point at).

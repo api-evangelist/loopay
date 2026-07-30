@@ -1,0 +1,42 @@
+{
+  "provider": "loopay",
+  "sources": [
+    "loopay-affiliate-api-openapi.yml",
+    "loopay-bank-api-openapi.yml",
+    "loopay-company-api-openapi.yml",
+    "loopay-companyproduct-api-openapi.yml",
+    "loopay-country-api-openapi.yml",
+    "loopay-currency-api-openapi.yml",
+    "loopay-documenttype-api-openapi.yml",
+    "loopay-movements-api-openapi.yml",
+    "loopay-paidmethods-api-openapi.yml",
+    "loopay-payin-api-openapi.yml",
+    "loopay-payout-api-openapi.yml",
+    "loopay-physicalpoint-api-openapi.yml",
+    "loopay-sourcesofpayment-api-openapi.yml",
+    "loopay-sourcesofpaymentadmin-api-openapi.yml",
+    "loopay-user-api-openapi.yml"
+  ],
+  "outputs": [
+    "loopay-affiliate-api-openapi.yml",
+    "loopay-bank-api-openapi.yml",
+    "loopay-company-api-openapi.yml",
+    "loopay-companyproduct-api-openapi.yml",
+    "loopay-country-api-openapi.yml",
+    "loopay-currency-api-openapi.yml",
+    "loopay-documenttype-api-openapi.yml",
+    "loopay-movements-api-openapi.yml",
+    "loopay-paidmethods-api-openapi.yml",
+    "loopay-payin-api-openapi.yml",
+    "loopay-payout-api-openapi.yml",
+    "loopay-physicalpoint-api-openapi.yml",
+    "loopay-sourcesofpayment-api-openapi.yml",
+    "loopay-sourcesofpaymentadmin-api-openapi.yml",
+    "loopay-user-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

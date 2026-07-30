@@ -1,0 +1,42 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/loopay-openapi-original.json
+docs: https://api.loopay.com/explorer
+authentication:
+  style: token
+  detail: Bearer token minted via POST /login (User.login); see authentication/loopay-authentication.yml
+idempotency:
+  supported: false
+  detail: >-
+    No Idempotency-Key header or idempotency parameter is documented in the OpenAPI
+    or the integration guide. Payout creation endpoints (Payout.createSelfPayOut,
+    Payout.createSelfPayOutMany) do accept a caller-supplied external identifier
+    (SelfPayOutsByExternalIdentifierInput / Payout.getSelfPayOutsByExternalIdentifierList)
+    which enables client-side dedup/reconciliation, but this is not a formal
+    idempotency contract.
+external_identifier:
+  field: externalIdentifier
+  detail: >-
+    Caller-assigned reference carried on payouts; lookups via
+    POST /payouts/byExternalIdentifierList (Payout.getSelfPayOutsByExternalIdentifierList).
+pagination:
+  style: page-number
+  params: [page, recordsPerPage]
+  detail: Offset/page-based pagination using page and recordsPerPage query parameters.
+date_filtering:
+  params: [startDate, endDate]
+  detail: Movement/payout listing endpoints accept startDate and endDate query params.
+versioning:
+  scheme: none-in-path
+  spec_version: 3.2.0
+  detail: Single unversioned base host (https://api.loopay.com); spec carries info.version 3.2.0.
+error_envelope:
+  documented: false
+  detail: >-
+    Only 200/202 success responses are documented in the OpenAPI; no error schema,
+    problem+json media type, or documented 4xx/5xx envelope. See errors/ (none derivable).
+rate_limit_signaling:
+  documented: false
+cross_links:
+  authentication: authentication/loopay-authentication.yml
+  data_model: data-model/loopay-data-model.yml
