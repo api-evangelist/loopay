@@ -1,0 +1,113 @@
+{
+  "item": [
+    {
+      "id": "7dbc9f46-5ec2-468a-8abc-c5e37284f990",
+      "name": "DocumentType",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "edb78ea5-e545-4bdf-a955-6ff5ec193d95",
+          "name": "Document Type.document Type Bases",
+          "request": {
+            "name": "Document Type.document Type Bases",
+            "description": {
+              "content": "## Get documents types\n Get all document types",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documentTypes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "21963156-ef6b-4a8c-8869-230ee9f5d62d",
+              "name": "Array of document types",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documentTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"type\": \"CC\",\n    \"countryId\": 1\n  },\n  {\n    \"id\": 1,\n    \"type\": \"CC\",\n    \"countryId\": 1\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.loopay.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0ba48dcc-5ff3-408a-ae6c-082b0ae2cbee",
+    "name": "loopay-api Affiliate DocumentType API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing.\n\nContact Support:\n Name: Loopay Team",
+      "type": "text/plain"
+    }
+  }
+}

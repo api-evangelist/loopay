@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "loopay-api Affiliate API",
+    "version": "3.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Affiliate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Affiliate.getCompaniesBalance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/affiliates/balance",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              },
+              {
+                "name": "productId",
+                "value": "7",
+                "type": "query",
+                "description": "Product id"
+              },
+              {
+                "name": "managedCustomerData",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "## Get balance for multiple companies"
+        },
+        {
+          "info": {
+            "name": "Affiliate.createManyAffiliates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loopay.com/affiliates/create",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              },
+              {
+                "name": "productId",
+                "value": "7",
+                "type": "query",
+                "description": "Product id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "## Create many affiliates\n\n Create many users, companies, and companyUsers given an array of UsersData"
+        },
+        {
+          "info": {
+            "name": "Affiliate.getPayOutsForAffiliates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/affiliates/payouts",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              },
+              {
+                "name": "companiesIds",
+                "value": "16,17,18",
+                "type": "query",
+                "description": "Comma separated list of company ids"
+              }
+            ]
+          },
+          "docs": "## Get all payOuts for affiliates\n\n Gets all payOuts for affiliates created by the currently registered user, belonging to the company of the user"
+        },
+        {
+          "info": {
+            "name": "Affiliate.getAffiliates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/affiliates",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              },
+              {
+                "name": "adminId",
+                "value": "13",
+                "type": "query",
+                "description": "id of the current Affiliate company admin user"
+              }
+            ]
+          },
+          "docs": "## Get all affiliates\n\n Gets all affiliates created by the currently registered user, belonging to the company of the user"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

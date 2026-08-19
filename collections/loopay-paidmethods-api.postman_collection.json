@@ -1,0 +1,124 @@
+{
+  "item": [
+    {
+      "id": "68136280-f9f6-407b-85eb-63600aca69c1",
+      "name": "PaidMethods",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9e04f9e1-0825-42f8-9628-e24c77e79b96",
+          "name": "Paid Methods.paid Methods",
+          "request": {
+            "name": "Paid Methods.paid Methods",
+            "description": {
+              "content": "## Get paid methods\n Get all available payment methods for the products I am subscribed to and that are enabled as a collection source",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "paid-methods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                },
+                {
+                  "disabled": false,
+                  "key": "companyProductId",
+                  "value": "<number>",
+                  "description": "(Required) companyProductId: Company product id. See /company-products endpoint an get the id"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b9c2802-9916-44c1-b71a-3c9b82faa584",
+              "name": "Array of paid methods, containing id (paidMethodId), description and paymentChannel: electronic (PSE, bank transfer), pos (point of sale), cripto, cash (cash payment)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paid-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "companyProductId",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"description\": \"transferencia en linea - PSE\",\n    \"paymentChannel\": \"electronic\"\n  },\n  {\n    \"id\": 1,\n    \"description\": \"transferencia en linea - PSE\",\n    \"paymentChannel\": \"electronic\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.loopay.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4556717a-7910-44dc-86d1-c096f89b9faa",
+    "name": "loopay-api Affiliate PaidMethods API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing.\n\nContact Support:\n Name: Loopay Team",
+      "type": "text/plain"
+    }
+  }
+}

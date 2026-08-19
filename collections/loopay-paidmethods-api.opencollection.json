@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "loopay-api Affiliate PaidMethods API",
+    "version": "3.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PaidMethods",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PaidMethods.paidMethods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/paid-methods",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              },
+              {
+                "name": "companyProductId",
+                "value": "",
+                "type": "query",
+                "description": "companyProductId: Company product id. See /company-products endpoint an get the id"
+              }
+            ]
+          },
+          "docs": "## Get paid methods\n Get all available payment methods for the products I am subscribed to and that are enabled as a collection source"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

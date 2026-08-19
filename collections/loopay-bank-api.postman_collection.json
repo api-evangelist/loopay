@@ -1,0 +1,113 @@
+{
+  "item": [
+    {
+      "id": "3a268747-4b1a-4447-b6f6-bc0abbf9911c",
+      "name": "Bank",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3d2546be-0fc5-49b3-8385-ceff3ecd9238",
+          "name": "Bank.bank Bases",
+          "request": {
+            "name": "Bank.bank Bases",
+            "description": {
+              "content": "## Get banks\n Get all banks available",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "banks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f8c25052-7068-41b3-b0b0-23ef7a14e3ea",
+              "name": "Array of BankBase model instances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "banks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Banco de Bogotá\",\n    \"countryId\": 1,\n    \"accountValidator\": {\n      \"type\": {\n        \"ahorros\": {\n          \"$id\": \"bank_ahorros_bancolombia\",\n          \"title\": \"account_fields\",\n          \"description\": \"validator fields for account\",\n          \"type\": \"string\",\n          \"maxLength\": 11,\n          \"minLength\": 3,\n          \"pattern\": \"^[0-9]+$\"\n        },\n        \"corriente\": {\n          \"$id\": \"bank_corriente_bancolombia\",\n          \"title\": \"account_fields\",\n          \"description\": \"validator fields for account\",\n          \"type\": \"string\",\n          \"maxLength\": 11,\n          \"minLength\": 3,\n          \"pattern\": \"^[0-9]+$\"\n        }\n      }\n    },\n    \"active\": true,\n    \"createdAt\": \"2020-10-01T00:00:00.000Z\",\n    \"updatedAt\": \"2020-10-01T00:00:00.000Z\"\n  },\n  {\n    \"id\": 1,\n    \"name\": \"Banco de Bogotá\",\n    \"countryId\": 1,\n    \"accountValidator\": {\n      \"type\": {\n        \"ahorros\": {\n          \"$id\": \"bank_ahorros_bancolombia\",\n          \"title\": \"account_fields\",\n          \"description\": \"validator fields for account\",\n          \"type\": \"string\",\n          \"maxLength\": 11,\n          \"minLength\": 3,\n          \"pattern\": \"^[0-9]+$\"\n        },\n        \"corriente\": {\n          \"$id\": \"bank_corriente_bancolombia\",\n          \"title\": \"account_fields\",\n          \"description\": \"validator fields for account\",\n          \"type\": \"string\",\n          \"maxLength\": 11,\n          \"minLength\": 3,\n          \"pattern\": \"^[0-9]+$\"\n        }\n      }\n    },\n    \"active\": true,\n    \"createdAt\": \"2020-10-01T00:00:00.000Z\",\n    \"updatedAt\": \"2020-10-01T00:00:00.000Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.loopay.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0518c983-8d0f-43f9-bc24-5db7020fe7db",
+    "name": "loopay-api Affiliate Bank API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing.\n\nContact Support:\n Name: Loopay Team",
+      "type": "text/plain"
+    }
+  }
+}

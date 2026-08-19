@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "loopay-api Affiliate User API",
+    "version": "3.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "User.login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loopay.com/login",
+            "params": [
+              {
+                "name": "email",
+                "value": "user1@yahoo.com",
+                "type": "query",
+                "description": "Email of the user"
+              },
+              {
+                "name": "password",
+                "value": "12345678",
+                "type": "query",
+                "description": "Password of the user"
+              }
+            ]
+          },
+          "docs": "## Login\n Login to the system"
+        },
+        {
+          "info": {
+            "name": "User.users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/users",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              }
+            ]
+          },
+          "docs": "## Get users\n Get all users available by companies logged in user"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

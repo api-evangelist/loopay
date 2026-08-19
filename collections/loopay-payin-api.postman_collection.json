@@ -1,0 +1,352 @@
+{
+  "item": [
+    {
+      "id": "d42f297d-e09e-43b9-b622-314656f27a74",
+      "name": "PayIn",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "868c1783-27d6-4ee7-8762-cc26f3f85473",
+          "name": "Pay In.source Of Payment Detail By Slug",
+          "request": {
+            "name": "Pay In.source Of Payment Detail By Slug",
+            "description": {
+              "content": "## Get PayIns \n Get all PayIns by source of payment slug and company product id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payIns",
+                "bySourceOfPaymentSlug"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                },
+                {
+                  "disabled": false,
+                  "key": "sourceOfPaymentSlug",
+                  "value": "<string>",
+                  "description": "(Required) Source of payment slug"
+                },
+                {
+                  "disabled": false,
+                  "key": "companyProductId",
+                  "value": "<number>",
+                  "description": "(Required) Company product id. Required, read  id from /company-products"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Returns all fields created after to this creation date "
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "returns all fields created before to this creation date "
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<number>",
+                  "description": "Page number to paginate"
+                },
+                {
+                  "disabled": false,
+                  "key": "recordsPerPage",
+                  "value": "<number>",
+                  "description": "Number of records per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "807c7a73-58f9-4ca0-8983-c74c087edab3",
+              "name": "array payins and pagination info",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payIns",
+                    "bySourceOfPaymentSlug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sourceOfPaymentSlug",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "companyProductId",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "recordsPerPage",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payIns\": [\n    {\n      \"Amount\": 4478.878306976729,\n      \"active\": false,\n      \"createdAt\": \"string\",\n      \"id\": 357.4526266750044,\n      \"metaData\": \"string\",\n      \"payInGetWay\": \"string\",\n      \"product\": {\n        \"id\": 2280.6275364136973,\n        \"slug\": \"string\"\n      },\n      \"type\": \"string\",\n      \"AmountCurrency\": {\n        \"id\": 3495.1280017223753,\n        \"name\": \"string\"\n      },\n      \"Company\": {\n        \"id\": 6570.592467325789\n      },\n      \"CompanyProduct\": {\n        \"id\": 3435.205384289577\n      },\n      \"creatorUser\": {\n        \"id\": 2251.8469124746666\n      },\n      \"file\": {\n        \"fileName\": \"string\",\n        \"id\": 4419.352457733925\n      },\n      \"ProductTransaction\": {\n        \"id\": 7337.347363579938\n      },\n      \"state\": \"string\",\n      \"trasnferedAt\": \"string\",\n      \"userId\": 7877.991981006219,\n      \"validatedAt\": \"string\",\n      \"SourceOfPayment\": {\n        \"id\": 5646.951431173154\n      },\n      \"LendsPayed\": {\n        \"id\": 9567.31970003922\n      }\n    },\n    {\n      \"Amount\": 3114.646141671441,\n      \"active\": true,\n      \"createdAt\": \"string\",\n      \"id\": 5172.0373987912935,\n      \"metaData\": \"string\",\n      \"payInGetWay\": \"string\",\n      \"product\": {\n        \"id\": 8653.43554024278,\n        \"slug\": \"string\"\n      },\n      \"type\": \"string\",\n      \"AmountCurrency\": {\n        \"id\": 4830.916507604651,\n        \"name\": \"string\"\n      },\n      \"Company\": {\n        \"id\": 9574.44234284649\n      },\n      \"CompanyProduct\": {\n        \"id\": 8983.876015759965\n      },\n      \"creatorUser\": {\n        \"id\": 1160.706373313578\n      },\n      \"file\": {\n        \"fileName\": \"string\",\n        \"id\": 4739.9108999998925\n      },\n      \"ProductTransaction\": {\n        \"id\": 7566.657123592399\n      },\n      \"state\": \"string\",\n      \"trasnferedAt\": \"string\",\n      \"userId\": 88.01848702119753,\n      \"validatedAt\": \"string\",\n      \"SourceOfPayment\": {\n        \"id\": 4138.19431201235\n      },\n      \"LendsPayed\": {\n        \"id\": 4333.605801221296\n      }\n    }\n  ],\n  \"paginationInfo\": {\n    \"currentPage\": 2661.4057025484326,\n    \"recordsPerPage\": 9030.285644696009,\n    \"totalRecords\": 4951.898978606614,\n    \"totalPages\": 7253.502919769885\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8576f54-adc6-4d2b-92e0-f3379b8d90d6",
+          "name": "Pay In.source Of Payment Detail",
+          "request": {
+            "name": "Pay In.source Of Payment Detail",
+            "description": {
+              "content": "## Get PayIns by source of payment \n Get all PayIns by source of payment id and by applied filters",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payIns",
+                ":sourceOfPaymentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Returns all fields created after to this creation date "
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "returns all fields created before to this creation date "
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<number>",
+                  "description": "Page number to paginate"
+                },
+                {
+                  "disabled": false,
+                  "key": "recordsPerPage",
+                  "value": "<number>",
+                  "description": "Number of records per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "sourceOfPaymentId",
+                  "description": "(Required) Source of payment id required read from /source-of-payment/filtered"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86db8729-aba2-48c8-ab87-5abe3d1ec645",
+              "name": "array payins and pagination info",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payIns",
+                    ":sourceOfPaymentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "recordsPerPage",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "sourceOfPaymentId",
+                      "description": "(Required) Source of payment id required read from /source-of-payment/filtered"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payIns\": [\n    {\n      \"Amount\": 4478.878306976729,\n      \"active\": false,\n      \"createdAt\": \"string\",\n      \"id\": 357.4526266750044,\n      \"metaData\": \"string\",\n      \"payInGetWay\": \"string\",\n      \"product\": {\n        \"id\": 2280.6275364136973,\n        \"slug\": \"string\"\n      },\n      \"type\": \"string\",\n      \"AmountCurrency\": {\n        \"id\": 3495.1280017223753,\n        \"name\": \"string\"\n      },\n      \"Company\": {\n        \"id\": 6570.592467325789\n      },\n      \"CompanyProduct\": {\n        \"id\": 3435.205384289577\n      },\n      \"creatorUser\": {\n        \"id\": 2251.8469124746666\n      },\n      \"file\": {\n        \"fileName\": \"string\",\n        \"id\": 4419.352457733925\n      },\n      \"ProductTransaction\": {\n        \"id\": 7337.347363579938\n      },\n      \"state\": \"string\",\n      \"trasnferedAt\": \"string\",\n      \"userId\": 7877.991981006219,\n      \"validatedAt\": \"string\",\n      \"SourceOfPayment\": {\n        \"id\": 5646.951431173154\n      },\n      \"LendsPayed\": {\n        \"id\": 9567.31970003922\n      }\n    },\n    {\n      \"Amount\": 3114.646141671441,\n      \"active\": true,\n      \"createdAt\": \"string\",\n      \"id\": 5172.0373987912935,\n      \"metaData\": \"string\",\n      \"payInGetWay\": \"string\",\n      \"product\": {\n        \"id\": 8653.43554024278,\n        \"slug\": \"string\"\n      },\n      \"type\": \"string\",\n      \"AmountCurrency\": {\n        \"id\": 4830.916507604651,\n        \"name\": \"string\"\n      },\n      \"Company\": {\n        \"id\": 9574.44234284649\n      },\n      \"CompanyProduct\": {\n        \"id\": 8983.876015759965\n      },\n      \"creatorUser\": {\n        \"id\": 1160.706373313578\n      },\n      \"file\": {\n        \"fileName\": \"string\",\n        \"id\": 4739.9108999998925\n      },\n      \"ProductTransaction\": {\n        \"id\": 7566.657123592399\n      },\n      \"state\": \"string\",\n      \"trasnferedAt\": \"string\",\n      \"userId\": 88.01848702119753,\n      \"validatedAt\": \"string\",\n      \"SourceOfPayment\": {\n        \"id\": 4138.19431201235\n      },\n      \"LendsPayed\": {\n        \"id\": 4333.605801221296\n      }\n    }\n  ],\n  \"paginationInfo\": {\n    \"currentPage\": 2661.4057025484326,\n    \"recordsPerPage\": 9030.285644696009,\n    \"totalRecords\": 4951.898978606614,\n    \"totalPages\": 7253.502919769885\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.loopay.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "01c3335f-cd5c-4d5d-9a04-7fb69e3e9db3",
+    "name": "loopay-api Affiliate PayIn API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing.\n\nContact Support:\n Name: Loopay Team",
+      "type": "text/plain"
+    }
+  }
+}

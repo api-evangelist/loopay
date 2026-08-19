@@ -1,0 +1,120 @@
+{
+  "item": [
+    {
+      "id": "962a54c4-4ccf-4b1f-8938-e2565c4c6016",
+      "name": "PhysicalPoint",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "98ff6188-4ccb-4a0f-950f-d53178df8169",
+          "name": "Physical Point.get Physical Points By Country",
+          "request": {
+            "name": "Physical Point.get Physical Points By Country",
+            "description": {
+              "content": "## Get all Physical Points available for withdrawals or consignments by country.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "physical-point",
+                ":country"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "country",
+                  "description": "(Required) Country id see /countries for more info (refers as id)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e259ac0-dfb0-4b23-9716-341efa6a91b3",
+              "name": "Array of PhysicalPoint model instances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physical-point",
+                    ":country"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "country",
+                      "description": "(Required) Country id see /countries for more info (refers as id)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"store\": \"4buy Market\",\n    \"latitude\": \"-0.22105571920281047\",\n    \"longitude\": \"7.839.301.005.005.830\"\n  },\n  {\n    \"store\": \"4buy Market\",\n    \"latitude\": \"-0.22105571920281047\",\n    \"longitude\": \"7.839.301.005.005.830\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.loopay.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d82337a5-2fa3-4dba-9245-b425a419f308",
+    "name": "loopay-api Affiliate PhysicalPoint API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing.\n\nContact Support:\n Name: Loopay Team",
+      "type": "text/plain"
+    }
+  }
+}

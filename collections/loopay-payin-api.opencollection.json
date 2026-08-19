@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "loopay-api Affiliate PayIn API",
+    "version": "3.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PayIn",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PayIn.sourceOfPaymentDetailBySlug",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/payIns/bySourceOfPaymentSlug",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              },
+              {
+                "name": "sourceOfPaymentSlug",
+                "value": "",
+                "type": "query",
+                "description": "Source of payment slug"
+              },
+              {
+                "name": "companyProductId",
+                "value": "",
+                "type": "query",
+                "description": "Company product id. Required, read  id from /company-products"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Returns all fields created after to this creation date "
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "returns all fields created before to this creation date "
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to paginate"
+              },
+              {
+                "name": "recordsPerPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page"
+              }
+            ]
+          },
+          "docs": "## Get PayIns \n Get all PayIns by source of payment slug and company product id"
+        },
+        {
+          "info": {
+            "name": "PayIn.sourceOfPaymentDetail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/payIns/:sourceOfPaymentId",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              },
+              {
+                "name": "sourceOfPaymentId",
+                "value": "",
+                "type": "path",
+                "description": "Source of payment id required read from /source-of-payment/filtered"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Returns all fields created after to this creation date "
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "returns all fields created before to this creation date "
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to paginate"
+              },
+              {
+                "name": "recordsPerPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page"
+              }
+            ]
+          },
+          "docs": "## Get PayIns by source of payment \n Get all PayIns by source of payment id and by applied filters"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

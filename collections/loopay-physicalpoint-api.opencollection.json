@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "loopay-api Affiliate PhysicalPoint API",
+    "version": "3.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PhysicalPoint",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PhysicalPoint.getPhysicalPointsByCountry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/physical-point/:country",
+            "params": [
+              {
+                "name": "country",
+                "value": "2",
+                "type": "path",
+                "description": "Country id see /countries for more info (refers as id)"
+              }
+            ]
+          },
+          "docs": "## Get all Physical Points available for withdrawals or consignments by country."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

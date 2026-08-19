@@ -101,3 +101,9 @@ tools:
 - name: User.users
   description: GET /users
   source_operation: openapi/loopay-openapi-original.json#User.users
+deployment:
+  mode: none
+  verified: derived
+  tools: 31
+  checked: '2026-08-12'
+  source: catalog MCP census

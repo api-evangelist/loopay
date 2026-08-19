@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "loopay-api Affiliate SourcesOfPayment API",
+    "version": "3.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SourcesOfPayment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SourcesOfPayment.createSourceOfPayment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loopay.com/source-of-payment/create",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "## Create source of payment\n\n Create a new payment source belonging to a companyProductId"
+        },
+        {
+          "info": {
+            "name": "SourcesOfPayment.createDirectPayment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loopay.com/source-of-payment/create-direct-payment",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "## Create direct payment and source of payment\n\nCreate a new source of payment direct form backend, without a front interface, belonging to a companyProductId.\n\n***expiresAt*** [optional]: Only avaylable for \"paymentChannel\": \"pos\" cashIn. \n\n* By default it is set to 7 days expiration \n\n* expiresAt value must be greater than 24h from current date \n\n* expiresAt must be less than 7 from current date\n\n** expiration for bank transfers is by default 1 hr online and 24 hr in a physical bank with the b"
+        },
+        {
+          "info": {
+            "name": "SourcesOfPayment.bankBases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/source-of-payment/filtered",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token. String returned in /login"
+              },
+              {
+                "name": "companyId",
+                "value": "7",
+                "type": "query",
+                "description": "Company id. Id returned in /companies "
+              }
+            ]
+          },
+          "docs": "## Get source of payment\n Get  all source of payments by company id"
+        },
+        {
+          "info": {
+            "name": "SourcesOfPayment.updateSourceOfPayment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loopay.com/source-of-payment/update",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              },
+              {
+                "name": "sourceOfPaymentId",
+                "value": "7",
+                "type": "query",
+                "description": "Source of payment id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "## Update source of payment\n\n Update source of payment"
+        },
+        {
+          "info": {
+            "name": "SourcesOfPayment.sourceOfPaymentDetail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/source-of-payment/:sourceOfPaymentId",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token. String returned in /login"
+              },
+              {
+                "name": "sourceOfPaymentId",
+                "value": "",
+                "type": "path",
+                "description": "Source of payment id"
+              }
+            ]
+          },
+          "docs": "## Get source of payment\n Get source of payment detail"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,778 @@
+{
+  "item": [
+    {
+      "id": "2b185501-8558-45d8-ad24-1a19b2819856",
+      "name": "Payout",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "59a52283-64bb-4b86-8329-1f736e0e7ef7",
+          "name": "Payout.create Self Pay Out",
+          "request": {
+            "name": "Payout.create Self Pay Out",
+            "description": {
+              "content": "## Create a payOut\n\n Create a single payout given a  payout object",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payout",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                },
+                {
+                  "disabled": false,
+                  "key": "signPayOut",
+                  "value": "<boolean>",
+                  "description": "Set to true to sign (approve) the payout after creation (default: false)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Amount\": \"<number>\",\n  \"bankAccount\": \"<string>\",\n  \"bankAccountType\": \"<string>\",\n  \"bankBaseId\": \"<number>\",\n  \"beneficiaryName\": \"<string>\",\n  \"companyId\": \"<number>\",\n  \"companyProductId\": \"<number>\",\n  \"documentNumber\": \"\",\n  \"documentTypeId\": \"<number>\",\n  \"currencyId\": \"<number>\",\n  \"externalIdentifier\": \"<string>\",\n  \"metaData\": \"<object>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e831fb8-b9fe-4ff3-8a2f-ab5b070aaaa0",
+              "name": "## Create a payOut with bank transfer \n\nCreate one payout given a company id, company product id\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payout",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signPayOut",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Amount\": \"<number>\",\n  \"bankAccount\": \"<string>\",\n  \"bankAccountType\": \"<string>\",\n  \"bankBaseId\": \"<number>\",\n  \"beneficiaryName\": \"<string>\",\n  \"companyId\": \"<number>\",\n  \"companyProductId\": \"<number>\",\n  \"documentNumber\": \"\",\n  \"documentTypeId\": \"<number>\",\n  \"currencyId\": \"<number>\",\n  \"externalIdentifier\": \"<string>\",\n  \"metaData\": \"<object>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Amount\": 3947.457598239591,\n  \"bankAccount\": \"string\",\n  \"bankAccountType\": \"string\",\n  \"bankBaseId\": 4564.3303023915405,\n  \"beneficiaryName\": \"string\",\n  \"companyProductId\": 9950.888559154548,\n  \"currencyId\": 6630.513863526223,\n  \"documentNumber\": \"\",\n  \"documentTypeId\": 7530.619036400508,\n  \"externalIdentifier\": \"string\",\n  \"userId\": 985.0228621613222,\n  \"id\": 4193.124920500341,\n  \"active\": false,\n  \"AmountUsd\": 5902.160895294797,\n  \"companyId\": 2288.957564555413,\n  \"deleted\": false,\n  \"metaData\": {},\n  \"reversedAt\": \"1980-03-15T05:06:59.150Z\",\n  \"startedProcessAt\": \"1963-11-10T07:50:35.139Z\",\n  \"state\": \"string\",\n  \"trasnferedAt\": \"1962-09-06T20:15:34.995Z\",\n  \"validatedAt\": \"1990-11-01T00:50:07.789Z\",\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65eb24ab-e1c0-47eb-ade8-7a960c4a7572",
+              "name": " ## Create single cashOut payOut\n\nCreates a single payout to be withdrawn in cash at a physical point \n\nTo consult the available physical points in your region, please consult the endpoint /physical-point/{country}.\n\nexpiresAt [optional: The payout will expire at the indicated date, if the payout is not withdrawn before the expiration date, the payout will be rejected and the money will be returned to the company balance.\n\n* expriresAt must be in the format YYYY-MM-DD\n\n* expiresAt must be 2 h greater than the current date and less than 24 hr from the current date\n\n* expiresAt is optional and only applies to bankAccountType: @cash\n\n* if expiresAt is not set, the payout will expire in 2 hours\n\n### Example input:\n\nTo indicate that a dispersion will be withdrawn through a physical point, the bankbaseId must correspond to the ID of the Cash EC bank that belongs to the country where the dispersion will be made (consult the /banks endpoint, see id key). in the following example the input \"bankBaseId\": 48 corresponds to the id of the ecuador bank cashOut ec to be able to make withdrawals in physical point.\n\nAlert: The bankBaseId must be the id of the cash ec bank of the country where the dispersion will be made. Values in the example are for demonstration purposes only and may be diferent for your country in production. (consult the /banks endpoint in production)\n\nThe response is an object will contain the id of the payout and the externalIdentifier of the payout, which is unique for each payout. \n\n The payout will have a state that will indicate the status of the payout, the state can be one of the following: \n\n* RECEIVED: The payout has been received, this state is the initial state of the payout. Indicates that the payout has been received by the system. \n\n* SCHEDULED: The payout has been scheduled this state is set when the payout is scheduled to be delivered. \n\nMake sure to put the user's full name and surname in the benefciaryName parameters, as well as set the appropriate document type documentTypeId ( endpoint documentTypes see id key)\n\nThe ```bankAccount``` should be set as ```@cash``` and ```\"bankAccountType\": \"ahorros\"```. See the following input example:\n\n~~~{\n  \"Amount\": 200,\n  \"bankBaseId\": 48,\n  \"bankAccountType\": \"ahorros\",\n  \"bankAccount\": \"@cash\",\n  \"beneficiaryName\": \"John Doe\",\n  \"companyId\": 13,\n  \"companyProductId\": 20,\n  \"currencyId\": 2,\n  \"documentTypeId\": 4,\n  \"documentNumber\": 123456789,\n  \"externalIdentifier\": \"physical-ABC1\",\n  \"expiresAt\": \"2025-10-30T18:00:00.000Z\",\n  \"metaData\": {}",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payout",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signPayOut",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Amount\": \"<number>\",\n  \"bankAccount\": \"<string>\",\n  \"bankAccountType\": \"<string>\",\n  \"bankBaseId\": \"<number>\",\n  \"beneficiaryName\": \"<string>\",\n  \"companyId\": \"<number>\",\n  \"companyProductId\": \"<number>\",\n  \"documentNumber\": \"\",\n  \"documentTypeId\": \"<number>\",\n  \"currencyId\": \"<number>\",\n  \"externalIdentifier\": \"<string>\",\n  \"metaData\": \"<object>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"uid\": \"clod9uqdf00003kects29nf5q\",\n  \"externalIdentifier\": \"physical-ABC1\",\n  \"Amount\": 200,\n  \"bankBaseId\": 48,\n  \"bankAccountType\": \"ahorros\",\n  \"bankAccount\": \"@cash\",\n  \"beneficiaryName\": \"John Doe\",\n  \"documentTypeId\": 4,\n  \"documentNumber\": 123456789,\n  \"state\": \"received\",\n  \"companyId\": 13,\n  \"companyProductId\": 20,\n  \"userId\": 16,\n  \"metaData\": {\n    \"cashOutData\": {\n      \"pin\": 598361,\n      \"beneficiaryName\": \"John Prince\",\n      \"documentTypeId\": 4,\n      \"documentNumber\": 103244400,\n      \"createAt\": \"2023-10-30T19:07:12.586Z\",\n      \"expiresAt\": \"2023-10-30T21:07:12.586Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f22df53-36a2-4e38-b9fd-ff7f1d02a789",
+          "name": "Payout.self Pay Out",
+          "request": {
+            "name": "Payout.self Pay Out",
+            "description": {
+              "content": "## Get a payOut\n\n Get a single payout given a  payout id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payout",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b39d278b-946f-462b-b9cd-49b3651e6aab",
+              "name": "Payout model instance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payout",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Amount\": 2918.697349456599,\n  \"bankAccount\": \"string\",\n  \"bankAccountType\": \"string\",\n  \"bankBaseId\": 780.0333427603213,\n  \"beneficiaryName\": \"string\",\n  \"companyProductId\": 3124.225533696511,\n  \"currencyId\": 9915.077794654931,\n  \"documentNumber\": \"\",\n  \"documentTypeId\": 3447.605815119019,\n  \"externalIdentifier\": \"string\",\n  \"userId\": 967.7940074463298,\n  \"id\": 449.1984612900901,\n  \"active\": false,\n  \"AmountUsd\": 8391.121303087457,\n  \"companyId\": 7215.162636822154,\n  \"deleted\": true,\n  \"metaData\": {},\n  \"reversedAt\": \"1969-12-01T00:52:01.392Z\",\n  \"startedProcessAt\": \"1986-04-02T03:31:20.162Z\",\n  \"state\": \"string\",\n  \"trasnferedAt\": \"1975-07-14T05:25:00.175Z\",\n  \"validatedAt\": \"2012-05-28T11:51:33.457Z\",\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d45f6c21-3012-47b9-9988-4bb266cff2e4",
+          "name": "Payout.get Self Pay Outs By External Identifier List",
+          "request": {
+            "name": "Payout.get Self Pay Outs By External Identifier List",
+            "description": {
+              "content": "## Get self payOuts by externalIdentifier\n\nGet a list of payOuts by a list of externalIdentifier and companyProductId",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payouts",
+                "byExternalIdentifierList"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalIdentifierList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyProductId\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "db274b45-f2ea-4a69-9db8-cac187dbb7ba",
+              "name": "Array of PayOut model instances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts",
+                    "byExternalIdentifierList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalIdentifierList\": [\n    \"XYZ123456789\",\n    \"XYZ123456789\"\n  ],\n  \"companyProductId\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"externalIdentifier\": \"XYZ123456789\",\n    \"Amount\": 1000,\n    \"bankBaseId\": 1,\n    \"bankAccountType\": \"ahorros\",\n    \"bankAccount\": \"123456789\",\n    \"beneficiaryName\": \"John Doe\",\n    \"documentTypeId\": 1,\n    \"documentNumber\": 123456789,\n    \"state\": \"DELIVERED\"\n  },\n  {\n    \"id\": 1,\n    \"externalIdentifier\": \"XYZ123456789\",\n    \"Amount\": 1000,\n    \"bankBaseId\": 1,\n    \"bankAccountType\": \"ahorros\",\n    \"bankAccount\": \"123456789\",\n    \"beneficiaryName\": \"John Doe\",\n    \"documentTypeId\": 1,\n    \"documentNumber\": 123456789,\n    \"state\": \"DELIVERED\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "683f0dc2-cfb4-4f58-8146-a6d542a86525",
+          "name": "Payout.create Self Pay Out Many",
+          "request": {
+            "name": "Payout.create Self Pay Out Many",
+            "description": {
+              "content": "## Create payOuts\n\nCreate several payouts given a company id, company product id and a data array of payout objects",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payouts",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                },
+                {
+                  "disabled": false,
+                  "key": "signPayOuts",
+                  "value": "<boolean>",
+                  "description": "Set to true to sign (approve) the payouts after creation (default: false)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"companyId\": \"<number>\",\n  \"companyProductId\": \"<number>\",\n  \"data\": [\n    {\n      \"Amount\": \"<number>\",\n      \"bankAccount\": \"<string>\",\n      \"bankAccountType\": \"<string>\",\n      \"bankBaseId\": \"<number>\",\n      \"beneficiaryName\": \"<string>\",\n      \"documentTypeId\": \"<number>\",\n      \"documentNumber\": \"<integer>\",\n      \"externalIdentifier\": \"<string>\"\n    },\n    {\n      \"Amount\": \"<number>\",\n      \"bankAccount\": \"<string>\",\n      \"bankAccountType\": \"<string>\",\n      \"bankBaseId\": \"<number>\",\n      \"beneficiaryName\": \"<string>\",\n      \"documentTypeId\": \"<number>\",\n      \"documentNumber\": \"<integer>\",\n      \"externalIdentifier\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0ebbd2d9-5b9c-4394-95e3-639cc68e82e6",
+              "name": "## Create payOuts with bank transfers \n\nCreate several payouts given a company id, company product id and a data array of payout objects. \n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signPayOuts",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companyId\": 13,\n  \"companyProductId\": 20,\n  \"data\": [\n    {\n      \"Amount\": 1000,\n      \"bankAccount\": \"123456789\",\n      \"bankAccountType\": \"ahorros\",\n      \"bankBaseId\": 1,\n      \"beneficiaryName\": \"John Doe\",\n      \"documentTypeId\": 1,\n      \"documentNumber\": 123456789,\n      \"externalIdentifier\": \"XYZ123456789\"\n    },\n    {\n      \"Amount\": 1000,\n      \"bankAccount\": \"123456789\",\n      \"bankAccountType\": \"ahorros\",\n      \"bankBaseId\": 1,\n      \"beneficiaryName\": \"John Doe\",\n      \"documentTypeId\": 1,\n      \"documentNumber\": 123456789,\n      \"externalIdentifier\": \"XYZ123456789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"externalIdentifier\": \"XYZ123456789\",\n    \"Amount\": 1000,\n    \"bankBaseId\": 1,\n    \"bankAccountType\": \"ahorros\",\n    \"bankAccount\": \"123456789\",\n    \"beneficiaryName\": \"John Doe\",\n    \"documentTypeId\": 1,\n    \"documentNumber\": 123456789,\n    \"state\": \"RECEIVED\"\n  },\n  {\n    \"id\": 1,\n    \"externalIdentifier\": \"XYZ123456789\",\n    \"Amount\": 1000,\n    \"bankBaseId\": 1,\n    \"bankAccountType\": \"ahorros\",\n    \"bankAccount\": \"123456789\",\n    \"beneficiaryName\": \"John Doe\",\n    \"documentTypeId\": 1,\n    \"documentNumber\": 123456789,\n    \"state\": \"RECEIVED\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9dde4bb1-4e10-44a0-a65e-e18f619994e3",
+              "name": " ## Create cashOut payOuts\n\nCreates several payouts to be withdrawn in cash at a physical point \n\nTo consult the available physical points in your region, please consult the endpoint /physical-point/{country}.\n\n### Example input:\n\nTo indicate that a dispersion will be withdrawn through a physical point, the bankbaseId must correspond to the ID of the Cash EC bank that belongs to the country where the dispersion will be made (consult the /banks endpoint, see id key). in the following example the input \"bankBaseId\": 48 corresponds to the id of the ecuador bank cashOut ec to be able to make withdrawals in physical point.\n\nThe response will be an array of objects where each object will contain the id of the payout and the externalIdentifier of the payout, which is unique for each payout. \n\n Each payout will have a state that will indicate the status of the payout, the state can be one of the following: \n\n* RECEIVED: The payout has been received, this state is the initial state of the payout. Indicates that the payout has been received by the system. \n\n* SCHEDULED: The payout has been scheduled this state is set when the payout is scheduled to be delivered. \n\nMake sure to put the user's full name and surname in the benefciaryName parameters, as well as set the appropriate document type documentTypeId ( endpoint documentTypes see id key)\n\nThe ```bankAccount``` should be set as ```@cash``` and ```\"bankAccountType\": \"ahorros\"```. See the following input example:\n\n~~~{\n  \"companyId\": 13,\n  \"companyProductId\": 20,\n  \"data\": [\n    {\n      \"Amount\": 1000,\n      \"bankBaseId\": 48,\n      \"bankAccountType\": \"ahorros\",\n      \"bankAccount\": \"@cash\",\n      \"beneficiaryName\": \"John Doe\",\n      \"documentTypeId\": 4,\n      \"documentNumber\": 123456789,\n      \"externalIdentifier\": \"physical-1\"\n    }\n  ]",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signPayOuts",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companyId\": 13,\n  \"companyProductId\": 20,\n  \"data\": [\n    {\n      \"Amount\": 1000,\n      \"bankAccount\": \"123456789\",\n      \"bankAccountType\": \"ahorros\",\n      \"bankBaseId\": 1,\n      \"beneficiaryName\": \"John Doe\",\n      \"documentTypeId\": 1,\n      \"documentNumber\": 123456789,\n      \"externalIdentifier\": \"XYZ123456789\"\n    },\n    {\n      \"Amount\": 1000,\n      \"bankAccount\": \"123456789\",\n      \"bankAccountType\": \"ahorros\",\n      \"bankBaseId\": 1,\n      \"beneficiaryName\": \"John Doe\",\n      \"documentTypeId\": 1,\n      \"documentNumber\": 123456789,\n      \"externalIdentifier\": \"XYZ123456789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"externalIdentifier\": \"physical-1\",\n    \"Amount\": 1000,\n    \"bankBaseId\": 48,\n    \"bankAccountType\": \"ahorros\",\n    \"bankAccount\": \"@cash\",\n    \"beneficiaryName\": \"John Doe\",\n    \"documentTypeId\": 4,\n    \"documentNumber\": 123456789,\n    \"state\": \"RECEIVED\"\n  },\n  {\n    \"id\": 1,\n    \"externalIdentifier\": \"physical-1\",\n    \"Amount\": 1000,\n    \"bankBaseId\": 48,\n    \"bankAccountType\": \"ahorros\",\n    \"bankAccount\": \"@cash\",\n    \"beneficiaryName\": \"John Doe\",\n    \"documentTypeId\": 4,\n    \"documentNumber\": 123456789,\n    \"state\": \"RECEIVED\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0d57ac3-dd86-4374-9c55-3c956dbcb9f9",
+          "name": "Payout.create Many Signed Payouts",
+          "request": {
+            "name": "Payout.create Many Signed Payouts",
+            "description": {
+              "content": "## Sign payOuts\n\n Sign several payouts given an array of payout ids",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payouts",
+                "sign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"<number>\",\n  \"<number>\"\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d308c34a-5889-4b54-8f84-4f9384ba958c",
+              "name": "Count Payout model instance signed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts",
+                    "sign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  1,\n  1\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"payoutId\": 1,\n    \"id\": 1,\n    \"createdAt\": \"2021-01-01T00:00:00.000Z\",\n    \"user\": {\n      \"id\": 1,\n      \"name\": \"John Doe\"\n    },\n    \"PayOut\": {\n      \"id\": 1,\n      \"Amount\": 1000\n    }\n  },\n  {\n    \"payoutId\": 1,\n    \"id\": 1,\n    \"createdAt\": \"2021-01-01T00:00:00.000Z\",\n    \"user\": {\n      \"id\": 1,\n      \"name\": \"John Doe\"\n    },\n    \"PayOut\": {\n      \"id\": 1,\n      \"Amount\": 1000\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3e0fd9c-3b5f-4e86-b9e7-0747b547a1a1",
+          "name": "Payout.self Pay Outs",
+          "request": {
+            "name": "Payout.self Pay Outs",
+            "description": {
+              "content": "## Get all payOuts\n\n Gets all payOuts created by the currently registered user, belonging to the company of the user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payouts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "recordsPerPage",
+                  "value": "<number>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7b7d467-08ea-424c-84c2-cf7ca2324a76",
+              "name": "Array of Payout model instances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "recordsPerPage",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payOuts\": [\n    {\n      \"Amount\": 6822.452204582242,\n      \"bankAccount\": \"string\",\n      \"bankAccountType\": \"string\",\n      \"bankBaseId\": 4134.439884179183,\n      \"beneficiaryName\": \"string\",\n      \"companyProductId\": 9011.118747546436,\n      \"currencyId\": 4716.446203769833,\n      \"documentNumber\": \"\",\n      \"documentTypeId\": 2230.236231788606,\n      \"externalIdentifier\": \"string\",\n      \"userId\": 360.02772070643397,\n      \"id\": 4095.7144322895333,\n      \"active\": false,\n      \"AmountUsd\": 4318.563539035007,\n      \"companyId\": 5117.705879802712,\n      \"deleted\": false,\n      \"metaData\": {},\n      \"reversedAt\": \"1969-05-07T11:30:06.698Z\",\n      \"startedProcessAt\": \"1996-06-13T06:07:48.365Z\",\n      \"state\": \"string\",\n      \"trasnferedAt\": \"1972-11-22T12:56:44.195Z\",\n      \"validatedAt\": \"1962-08-24T18:22:02.033Z\",\n      \"uid\": \"string\"\n    },\n    {\n      \"Amount\": 4559.202279074647,\n      \"bankAccount\": \"string\",\n      \"bankAccountType\": \"string\",\n      \"bankBaseId\": 5091.85160576099,\n      \"beneficiaryName\": \"string\",\n      \"companyProductId\": 8029.770691406373,\n      \"currencyId\": 6127.44294496037,\n      \"documentNumber\": \"\",\n      \"documentTypeId\": 8664.006829279388,\n      \"externalIdentifier\": \"string\",\n      \"userId\": 1709.4395048009603,\n      \"id\": 8699.265273480196,\n      \"active\": false,\n      \"AmountUsd\": 1476.4915540229374,\n      \"companyId\": 1706.7117399922672,\n      \"deleted\": false,\n      \"metaData\": {},\n      \"reversedAt\": \"1968-09-05T04:02:30.668Z\",\n      \"startedProcessAt\": \"2018-10-19T19:11:27.945Z\",\n      \"state\": \"string\",\n      \"trasnferedAt\": \"1972-08-25T15:15:46.754Z\",\n      \"validatedAt\": \"2026-01-19T19:25:52.904Z\",\n      \"uid\": \"string\"\n    }\n  ],\n  \"paginationInfo\": {\n    \"currentPage\": 6097.421178676899,\n    \"recordsPerPage\": 9885.940470909882,\n    \"totalRecords\": 2069.4868498073415,\n    \"totalPages\": 706.6081184234807\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.loopay.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "150ca5bc-df83-4599-b213-944ebcd6c29a",
+    "name": "loopay-api Affiliate Payout API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing.\n\nContact Support:\n Name: Loopay Team",
+      "type": "text/plain"
+    }
+  }
+}

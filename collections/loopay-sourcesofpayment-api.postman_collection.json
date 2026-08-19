@@ -1,0 +1,600 @@
+{
+  "item": [
+    {
+      "id": "120ff080-2582-4f94-9b29-88ba66cb69bf",
+      "name": "SourcesOfPayment",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ca900c56-c76f-4ed2-8821-f982265b213e",
+          "name": "Sources Of Payment.create Source Of Payment",
+          "request": {
+            "name": "Sources Of Payment.create Source Of Payment",
+            "description": {
+              "content": "## Create source of payment\n\n Create a new payment source belonging to a companyProductId",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-of-payment",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"companyProductId\": \"<number>\",\n  \"slug\": \"<string>\",\n  \"clientCommentsAvailable\": \"<boolean>\",\n  \"active\": \"<boolean>\",\n  \"descriptionOnClientForm\": \"<boolean>\",\n  \"isPredefinedPayerDetails\": \"<boolean>\",\n  \"paidMethods\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"clientDefinesReference\": \"<boolean>\",\n  \"customFields\": [\n    {\n      \"id\": \"<number>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<number>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"required\": \"<boolean>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"expiresAt\": \"<string>\",\n  \"fixedValue\": \"<number>\",\n  \"maxPayments\": \"<number>\",\n  \"payerDetails\": {\n    \"ref\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"fullName\": \"<string>\",\n    \"documentType\": \"<string>\",\n    \"documentNumber\": \"<string>\"\n  },\n  \"urlCallback\": \"<string>\",\n  \"hasFastCheckOut\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "41c27057-298e-4506-a2a6-58b1dfc38363",
+              "name": "source of payment model instance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-of-payment",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Source of payment 1\",\n  \"companyProductId\": \"<number>\",\n  \"slug\": \"Source of payment 1\",\n  \"clientCommentsAvailable\": false,\n  \"active\": true,\n  \"descriptionOnClientForm\": false,\n  \"isPredefinedPayerDetails\": false,\n  \"paidMethods\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"clientDefinesReference\": false,\n  \"customFields\": [\n    {\n      \"id\": 1691515792228,\n      \"name\": \"campo 2\",\n      \"type\": \"text\",\n      \"required\": false\n    },\n    {\n      \"id\": 1691515792228,\n      \"name\": \"campo 2\",\n      \"type\": \"text\",\n      \"required\": false\n    }\n  ],\n  \"description\": \"descrption\",\n  \"expiresAt\": \"2090-09-30T00:00:00.000Z\",\n  \"fixedValue\": 100000.5,\n  \"maxPayments\": 10,\n  \"payerDetails\": {\n    \"ref\": \"ref-001\",\n    \"email\": \"johnD@gmail.com\",\n    \"phone\": \"+57 310 3297014\",\n    \"fullName\": \"John Doe\",\n    \"documentType\": \"CC\",\n    \"documentNumber\": \"1000000888\"\n  },\n  \"urlCallback\": \"https://myurl.com/callback\",\n  \"hasFastCheckOut\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 240,\n  \"name\": \"test url 2\",\n  \"active\": true,\n  \"slug\": \"test-url-2\",\n  \"companyProductId\": 1,\n  \"createdAt\": \"2021-08-30T17:00:00.000Z\",\n  \"fixedValue\": 0,\n  \"maxPayments\": 0,\n  \"expiresAt\": \"2021-08-30T17:00:00.000Z\",\n  \"url\": \"@troop/d30/test-url-2\",\n  \"hasFastCheckOut\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "340f0472-c8c6-42c7-b593-f219d4218c41",
+          "name": "Sources Of Payment.create Direct Payment",
+          "request": {
+            "name": "Sources Of Payment.create Direct Payment",
+            "description": {
+              "content": "## Create direct payment and source of payment\n\nCreate a new source of payment direct form backend, without a front interface, belonging to a companyProductId.\n\n***expiresAt*** [optional]: Only avaylable for \"paymentChannel\": \"pos\" cashIn. \n\n* By default it is set to 7 days expiration \n\n* expiresAt value must be greater than 24h from current date \n\n* expiresAt must be less than 7 from current date\n\n** expiration for bank transfers is by default 1 hr online and 24 hr in a physical bank with the bank code generated.***callbackUrl*** : url to return after payment is processed \n\n***userType*** [optional]: only required for transactions in colombia \n\n***metadata*** [optional]: object with additional information \n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-of-payment",
+                "create-direct-payment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"paidMethod\": \"<number>\",\n  \"companyProductId\": \"<number>\",\n  \"expiresAt\": \"<string>\",\n  \"documentType\": \"<string>\",\n  \"documentNumber\": \"<string>\",\n  \"currencyId\": \"<number>\",\n  \"amount\": \"<number>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"callbackUrl\": \"<string>\",\n  \"metadata\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ed8075f0-8d7e-4d59-b2f9-809535cc2c47",
+              "name": "source of payment model instance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-of-payment",
+                    "create-direct-payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"test url 2\",\n  \"slug\": \"test-url-2\",\n  \"paidMethod\": 1,\n  \"companyProductId\": 1,\n  \"expiresAt\": \"2021-08-30T17:00:00.000Z\",\n  \"documentType\": \"CC\",\n  \"documentNumber\": \"1000000888\",\n  \"currencyId\": 1,\n  \"amount\": 10000.5,\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"user1@gmail.com\",\n  \"phone\": \"+573103297014\",\n  \"userType\": \"1\",\n  \"description\": \"test url 2\",\n  \"callbackUrl\": \"https://myurl.com/callback\",\n  \"metadata\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fastPaymentProcessorEngine\": {\n    \"code\": \"200\",\n    \"message\": \"success\",\n    \"body\": {\n      \"pdf\": \"https://myurl.com/pdf\",\n      \"pdfUrl\": \"https://myurl.com/pdf\"\n    }\n  },\n  \"sourceOfPayment\": {\n    \"id\": 240,\n    \"name\": \"test url 2\",\n    \"active\": true,\n    \"slug\": \"test-url-2\",\n    \"companyProductId\": 1,\n    \"createdAt\": \"2021-08-30T17:00:00.000Z\",\n    \"fixedValue\": 0,\n    \"maxPayments\": 0,\n    \"expiresAt\": \"2021-08-30T17:00:00.000Z\",\n    \"url\": \"@troop/d30/test-url-2\",\n    \"hasFastCheckOut\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e467d011-271c-4fa8-9f10-ab87772497a4",
+              "name": " ## Create-direct-payment with card \n\nCreate a direct source of payment with a card pay method, belonging to a companyProductId.\n\nTo consult the available paidMethods belonging to a companyProductId, see the /paid-methods endpoint.\n\n* cardCVV card CVV applies only to card payments\n\n* cardNumber card number applies only to card payments\n\n* expirationDate card expiration date, \"MM/YY\" applies only to card payments\n\n### Example input:\n\n~~~{\n  \"name\": \"test url 2\",\n  \"slug\": \"test-url-2\",\n  \"paidMethod\": 16,\n  \"companyProductId\": 203,\n  \"documentType\": \"DNI\",\n  \"documentNumber\": \"1000000888\",\n  \"currencyId\": 2,\n  \"amount\": 25,\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"jdoe@gmail.com\",\n  \"phone\": \"+573103297014\",\n  \"description\": \"test url 2\",\n  \"callbackUrl\": \"https://www.loopay.com/\",\n  \"cardCVV\": 355,\n  \"cardNumber\": \"5303710409428783\",\n  \"cardExpirationDate\": \"05/26\"",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-of-payment",
+                    "create-direct-payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"test url 2\",\n  \"slug\": \"test-url-2\",\n  \"paidMethod\": 1,\n  \"companyProductId\": 1,\n  \"expiresAt\": \"2021-08-30T17:00:00.000Z\",\n  \"documentType\": \"CC\",\n  \"documentNumber\": \"1000000888\",\n  \"currencyId\": 1,\n  \"amount\": 10000.5,\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"user1@gmail.com\",\n  \"phone\": \"+573103297014\",\n  \"userType\": \"1\",\n  \"description\": \"test url 2\",\n  \"callbackUrl\": \"https://myurl.com/callback\",\n  \"metadata\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fastPaymentProcessorEngine\": {\n    \"code\": \"200\",\n    \"message\": \"success\",\n    \"body\": {\n      \"result\": \"200\",\n      \"data\": {\n        \"order\": {\n          \"amount\": \"25.0\",\n          \"date\": \"2024-07-30T20:04:27Z\",\n          \"tax\": \"0.00\",\n          \"total\": \"25.0\",\n          \"number\": \"2472713\"\n        },\n        \"transaction\": {\n          \"date\": \"2024-07-30T20:04:27Z\",\n          \"responseCode\": \"APROBADA\",\n          \"installments\": \"1\",\n          \"accountType\": \"CREDITO\",\n          \"cus\": \"2024-07-30T20:04:27Z_2546896a-8537-4db0-a6ad-58930ba0fed2_577174\",\n          \"invoiceNumber\": \"577174\",\n          \"franchise\": \"MasterCard\",\n          \"response\": \"APPROVED\",\n          \"cardNumber\": \"************8783\",\n          \"error\": \"1\",\n          \"numAprobacion\": \"577174\",\n          \"idTransaccionAutorizador\": \"2546896a-8537-4db0-a6ad-58930ba0fed2\"\n        },\n        \"commerce\": {\n          \"url\": \"https://www.payvalida.com\",\n          \"terminal\": \"loopaysas\",\n          \"name\": \"VALIDDA S.A.S\",\n          \"code\": \"203065\",\n          \"email\": \"jon@gmail.com\",\n          \"net\": \"PAYMENTEZ\"\n        },\n        \"user\": \"\"\n      },\n      \"error\": \"1\",\n      \"details\": {\n        \"metadata\": {\n          \"uid\": \"8d9e700f9a75cd7726732d15b8f77ac7\"\n        }\n      }\n    }\n  },\n  \"sourceOfPayment\": {\n    \"id\": 240,\n    \"name\": \"test url 2\",\n    \"active\": true,\n    \"slug\": \"test-url-2\",\n    \"companyProductId\": 203,\n    \"createdAt\": \"2021-08-30T17:00:00.000Z\",\n    \"fixedValue\": 25,\n    \"maxPayments\": 1,\n    \"expiresAt\": \"2026-08-30T17:00:00.000Z\",\n    \"url\": \"@alexaflowers53/econo-fast8g/payvalida-visa-30may-008\",\n    \"productId\": 11,\n    \"companyId\": 444,\n    \"paidMethods\": [\n      {\n        \"paidMethod\": {\n          \"id\": 16,\n          \"nameStrategy\": \"payvalidaCard\"\n        }\n      },\n      {\n        \"paidMethod\": {\n          \"id\": 16,\n          \"nameStrategy\": \"payvalidaCard\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f51b6d5a-6e3a-429c-a436-5aaaecd13a7d",
+          "name": "Sources Of Payment.bank Bases",
+          "request": {
+            "name": "Sources Of Payment.bank Bases",
+            "description": {
+              "content": "## Get source of payment\n Get  all source of payments by company id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-of-payment",
+                "filtered"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token. String returned in /login"
+                },
+                {
+                  "disabled": false,
+                  "key": "companyId",
+                  "value": "<number>",
+                  "description": "(Required) Company id. Id returned in /companies "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "27ef9cea-0480-41fb-8cc4-6d348eea1f45",
+              "name": "Array of source of payment model and pagination info",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-of-payment",
+                    "filtered"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "companyId",
+                      "value": "7"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paginationInfo\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75311256-7740-44ca-92aa-389de298b841",
+          "name": "Sources Of Payment.update Source Of Payment",
+          "request": {
+            "name": "Sources Of Payment.update Source Of Payment",
+            "description": {
+              "content": "## Update source of payment\n\n Update source of payment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-of-payment",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                },
+                {
+                  "disabled": false,
+                  "key": "sourceOfPaymentId",
+                  "value": "<number>",
+                  "description": "(Required) Source of payment id"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"countryId\": \"<number>\",\n  \"companyProductId\": \"<number>\",\n  \"deleted\": \"<boolean>\",\n  \"styles\": \"<object>\",\n  \"slug\": \"<string>\",\n  \"clientCommentsAvailable\": \"<boolean>\",\n  \"clientComments\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"descriptionOnClientForm\": \"<boolean>\",\n  \"isPredefinedPayerDetails\": \"<boolean>\",\n  \"clientDefinesReference\": \"<boolean>\",\n  \"customFields\": [\n    {\n      \"id\": \"<number>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<number>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"required\": \"<boolean>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"expiresAt\": \"<string>\",\n  \"fixedValue\": \"<number>\",\n  \"maxPayments\": \"<number>\",\n  \"payerDetails\": {\n    \"ref\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"fullName\": \"<string>\",\n    \"documentType\": \"<string>\",\n    \"documentNumber\": \"<string>\"\n  },\n  \"urlCallback\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "81f36074-c9f3-42eb-80b6-43ddfe02a863",
+              "name": "id source of payment updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-of-payment",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sourceOfPaymentId",
+                      "value": "7"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Source of payment 1\",\n  \"countryId\": 10,\n  \"companyProductId\": 4,\n  \"deleted\": false,\n  \"styles\": {\n    \"primary\": \"#f0f1fe\",\n    \"secondary\": \"#aaafc4\"\n  },\n  \"slug\": \"Source of payment 1\",\n  \"clientCommentsAvailable\": false,\n  \"clientComments\": \"clientComments\",\n  \"active\": true,\n  \"descriptionOnClientForm\": false,\n  \"isPredefinedPayerDetails\": false,\n  \"clientDefinesReference\": false,\n  \"customFields\": [\n    {\n      \"id\": 1691515792228,\n      \"name\": \"campo 2\",\n      \"type\": \"text\",\n      \"required\": false\n    },\n    {\n      \"id\": 1691515792228,\n      \"name\": \"campo 2\",\n      \"type\": \"text\",\n      \"required\": false\n    }\n  ],\n  \"description\": \"descrption\",\n  \"expiresAt\": \"2090-09-30T00:00:00.000Z\",\n  \"fixedValue\": 100000.5,\n  \"maxPayments\": 10,\n  \"payerDetails\": {\n    \"ref\": \"ref-001\",\n    \"email\": \"johnD@gmail.com\",\n    \"phone\": \"+57 310 3297014\",\n    \"fullName\": \"John Doe\",\n    \"documentType\": \"CC\",\n    \"documentNumber\": \"1000000888\"\n  },\n  \"urlCallback\": \"https://myurl.com/callback\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 3456.7095375906842\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0dd96813-834e-47bf-bcdd-abfb585f0143",
+          "name": "Sources Of Payment.source Of Payment Detail",
+          "request": {
+            "name": "Sources Of Payment.source Of Payment Detail",
+            "description": {
+              "content": "## Get source of payment\n Get source of payment detail",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-of-payment",
+                ":sourceOfPaymentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token. String returned in /login"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "sourceOfPaymentId",
+                  "description": "(Required) Source of payment id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0669d65-f6e1-4976-b18e-1f8023fb5223",
+              "name": "source of payment model and pagination info",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-of-payment",
+                    ":sourceOfPaymentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "sourceOfPaymentId",
+                      "description": "(Required) Source of payment id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sourceOfPayment\": {\n    \"id\": 1,\n    \"name\": \"Source of payment 1\",\n    \"slug\": \"sof-1\",\n    \"active\": true,\n    \"fixedValue\": 100000.5,\n    \"maxPayments\": 3,\n    \"createdAt\": \"2020-09-30T00:00:00.000Z\",\n    \"expiresAt\": \"2090-09-30T00:00:00.000Z\",\n    \"CompanyProduct\": {\n      \"id\": 1,\n      \"companyId\": 1,\n      \"company\": {\n        \"id\": 1,\n        \"name\": \"Company 1\",\n        \"slug\": \"company-1\"\n      }\n    },\n    \"totalPayIns\": 6,\n    \"totalPayInsByState\": {\n      \"accepted\": 1,\n      \"rejected\": 1,\n      \"pending\": 1,\n      \"cancelled\": 1,\n      \"abandoned\": 1,\n      \"initial\": 1\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.loopay.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e4029b14-9e45-40db-a322-e526b1f9d2d7",
+    "name": "loopay-api Affiliate SourcesOfPayment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing.\n\nContact Support:\n Name: Loopay Team",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "loopay-api Affiliate SourcesOfPaymentAdmin API",
+    "version": "3.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SourcesOfPaymentAdmin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SourcesOfPaymentAdmin.companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/payment-sources/companies",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "recordsPerPage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "## Get companies ID\n Get array IDs companies available where can create a payint across a source of payment"
+        },
+        {
+          "info": {
+            "name": "SourcesOfPaymentAdmin.paymentOfSources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/payment-sources",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              },
+              {
+                "name": "companyIds",
+                "value": "16",
+                "type": "query",
+                "description": "company id"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "recordsPerPage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "## Get payment-sources\n Get array IDs PaymentOfSources belonging to a company available to create a payint"
+        },
+        {
+          "info": {
+            "name": "SourcesOfPaymentAdmin.validatePayInOnSourceOfPayment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/payment-sources-pay-in/valid",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceOfPaymentId",
+                "value": "7",
+                "type": "query",
+                "description": "Source of payment id"
+              },
+              {
+                "name": "amount",
+                "value": "100000",
+                "type": "query",
+                "description": "amount"
+              },
+              {
+                "name": "userId",
+                "value": "1",
+                "type": "query",
+                "description": "userId"
+              }
+            ]
+          },
+          "docs": "## Get if sourceOfPayment is valid for a payin\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

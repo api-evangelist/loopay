@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "loopay-api Affiliate Movements API",
+    "version": "3.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Movements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Movements.selfPayOuts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/movements/:companyProductId",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              },
+              {
+                "name": "companyProductId",
+                "value": "",
+                "type": "path",
+                "description": "Company product id see /company-products for more info (refers as id)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the totalPages"
+              },
+              {
+                "name": "recordsPerPage",
+                "value": "",
+                "type": "query",
+                "description": "Records to be returned per page (max 1000) (default 1000)"
+              },
+              {
+                "name": "endDate",
+                "value": "2050-03-01T00:00:00.000Z",
+                "type": "query",
+                "description": "End date of the movements"
+              },
+              {
+                "name": "startDate",
+                "value": "1992-11-24T00:00:00.000Z",
+                "type": "query",
+                "description": "Start date of the movements"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "## Get all movements by companyProductId\n\n Gets all movements by companyProductId"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

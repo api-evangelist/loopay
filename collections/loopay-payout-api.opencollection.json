@@ -1,0 +1,175 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "loopay-api Affiliate Payout API",
+    "version": "3.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payout",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Payout.createSelfPayOut",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loopay.com/payout/create",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              },
+              {
+                "name": "signPayOut",
+                "value": "",
+                "type": "query",
+                "description": "Set to true to sign (approve) the payout after creation (default: false)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "## Create a payOut\n\n Create a single payout given a  payout object"
+        },
+        {
+          "info": {
+            "name": "Payout.selfPayOut",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/payout/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              }
+            ]
+          },
+          "docs": "## Get a payOut\n\n Get a single payout given a  payout id"
+        },
+        {
+          "info": {
+            "name": "Payout.getSelfPayOutsByExternalIdentifierList",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loopay.com/payouts/byExternalIdentifierList",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "## Get self payOuts by externalIdentifier\n\nGet a list of payOuts by a list of externalIdentifier and companyProductId"
+        },
+        {
+          "info": {
+            "name": "Payout.createSelfPayOutMany",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loopay.com/payouts/create",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              },
+              {
+                "name": "signPayOuts",
+                "value": "",
+                "type": "query",
+                "description": "Set to true to sign (approve) the payouts after creation (default: false)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "## Create payOuts\n\nCreate several payouts given a company id, company product id and a data array of payout objects"
+        },
+        {
+          "info": {
+            "name": "Payout.createManySignedPayouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loopay.com/payouts/sign",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "## Sign payOuts\n\n Sign several payouts given an array of payout ids"
+        },
+        {
+          "info": {
+            "name": "Payout.selfPayOuts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/payouts",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query",
+                "description": "Authorization token"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "recordsPerPage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "## Get all payOuts\n\n Gets all payOuts created by the currently registered user, belonging to the company of the user"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,383 @@
+{
+  "item": [
+    {
+      "id": "96e05081-170c-4d66-8366-0d6e6abf1c3e",
+      "name": "Affiliate",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a4b0a8f6-3d51-4fd9-abb5-0ba190105ea7",
+          "name": "Affiliate.get Companies Balance",
+          "request": {
+            "name": "Affiliate.get Companies Balance",
+            "description": {
+              "content": "## Get balance for multiple companies",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "affiliates",
+                "balance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                },
+                {
+                  "disabled": false,
+                  "key": "productId",
+                  "value": "<string>",
+                  "description": "(Required) Product id"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "managedCustomerData",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2652b30-c3a3-4d7e-9bc2-90a6b245dc35",
+          "name": "Affiliate.create Many Affiliates",
+          "request": {
+            "name": "Affiliate.create Many Affiliates",
+            "description": {
+              "content": "## Create many affiliates\n\n Create many users, companies, and companyUsers given an array of UsersData",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "affiliates",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                },
+                {
+                  "disabled": false,
+                  "key": "productId",
+                  "value": "<string>",
+                  "description": "(Required) Product id"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"name\": \"<string>\",\n    \"documentTypeId\": \"<integer>\",\n    \"documentNumber\": \"<string>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"documentTypeId\": \"<integer>\",\n    \"documentNumber\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d12fe9de-f463-4cbf-932d-c70f06df695b",
+              "name": "Affiliate model instance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "affiliates",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": \"John Doe\",\n    \"documentTypeId\": 1,\n    \"documentNumber\": \"1234567890\"\n  },\n  {\n    \"name\": \"John Doe\",\n    \"documentTypeId\": 1,\n    \"documentNumber\": \"1234567890\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"companies\": [\n    {\n      \"id\": 1,\n      \"slug\": \"jhon-doe-inc\",\n      \"name\": \"John Doe Inc\",\n      \"CompanyProduct\": [\n        {\n          \"id\": 1,\n          \"slug\": \"jhon-doe-inc\"\n        },\n        {\n          \"id\": 1,\n          \"slug\": \"jhon-doe-inc\"\n        }\n      ],\n      \"errors\": [\n        {\n          \"reason\": \"Document number already exists\",\n          \"documentTypeId\": 1,\n          \"documentNumber\": \"123456789\",\n          \"status\": \"error\"\n        },\n        {\n          \"reason\": \"Document number already exists\",\n          \"documentTypeId\": 1,\n          \"documentNumber\": \"123456789\",\n          \"status\": \"error\"\n        }\n      ]\n    },\n    {\n      \"id\": 1,\n      \"slug\": \"jhon-doe-inc\",\n      \"name\": \"John Doe Inc\",\n      \"CompanyProduct\": [\n        {\n          \"id\": 1,\n          \"slug\": \"jhon-doe-inc\"\n        },\n        {\n          \"id\": 1,\n          \"slug\": \"jhon-doe-inc\"\n        }\n      ],\n      \"errors\": [\n        {\n          \"reason\": \"Document number already exists\",\n          \"documentTypeId\": 1,\n          \"documentNumber\": \"123456789\",\n          \"status\": \"error\"\n        },\n        {\n          \"reason\": \"Document number already exists\",\n          \"documentTypeId\": 1,\n          \"documentNumber\": \"123456789\",\n          \"status\": \"error\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2e4224c-2dde-4dfb-85a4-87fbb232fd00",
+          "name": "Affiliate.get Pay Outs For Affiliates",
+          "request": {
+            "name": "Affiliate.get Pay Outs For Affiliates",
+            "description": {
+              "content": "## Get all payOuts for affiliates\n\n Gets all payOuts for affiliates created by the currently registered user, belonging to the company of the user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "affiliates",
+                "payouts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                },
+                {
+                  "disabled": false,
+                  "key": "companiesIds",
+                  "value": "<string>",
+                  "description": "(Required) Comma separated list of company ids"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4e42394-f74e-4cad-9f81-d0bd9de67c49",
+              "name": "Array of Affiliate model instances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "affiliates",
+                    "payouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "companiesIds",
+                      "value": "16,17,18"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Global INC\",\n    \"documentNumber\": 900200001,\n    \"documentTypeId\": 1,\n    \"PayOut\": [\n      {\n        \"id\": 5087,\n        \"uid\": \"5f9b9b9b9b9b9b9b\",\n        \"beneficiaryName\": \"John Doe\",\n        \"documentTypeId\": 1,\n        \"documentNumber\": 19373737,\n        \"bankBaseId\": 23,\n        \"bankAccountType\": \"ahorros\",\n        \"bankAccount\": \"81234678944\",\n        \"Amount\": 5000000,\n        \"externalIdentifier\": \"REF123456789\",\n        \"tags\": {\n          \"tagIdentifier\": [\n            \"indentifier1\",\n            \"indentifier2\",\n            \"indent 22\",\n            \"indent 4\"\n          ]\n        },\n        \"currencyId\": 1,\n        \"signedBy\": {\n          \"id\": 122,\n          \"createdAt\": \"2020-10-28T15:33:19.000Z\",\n          \"userId\": 13\n        },\n        \"companyProductId\": 4451,\n        \"state\": \"delivered\",\n        \"createdAt\": \"2020-10-28T15:33:19.000Z\",\n        \"scheduledAt\": \"2020-10-28T15:33:19.000Z\",\n        \"updatedAt\": \"2020-10-28T15:33:19.000Z\",\n        \"validatedAt\": \"2020-10-28T15:33:19.000Z\",\n        \"trasnferedAt\": \"2020-10-28T15:33:19.000Z\",\n        \"reversedAt\": \"2020-10-28T15:33:19.000Z\"\n      },\n      {\n        \"id\": 5087,\n        \"uid\": \"5f9b9b9b9b9b9b9b\",\n        \"beneficiaryName\": \"John Doe\",\n        \"documentTypeId\": 1,\n        \"documentNumber\": 19373737,\n        \"bankBaseId\": 23,\n        \"bankAccountType\": \"ahorros\",\n        \"bankAccount\": \"81234678944\",\n        \"Amount\": 5000000,\n        \"externalIdentifier\": \"REF123456789\",\n        \"tags\": {\n          \"tagIdentifier\": [\n            \"indentifier1\",\n            \"indentifier2\",\n            \"indent 22\",\n            \"indent 4\"\n          ]\n        },\n        \"currencyId\": 1,\n        \"signedBy\": {\n          \"id\": 122,\n          \"createdAt\": \"2020-10-28T15:33:19.000Z\",\n          \"userId\": 13\n        },\n        \"companyProductId\": 4451,\n        \"state\": \"delivered\",\n        \"createdAt\": \"2020-10-28T15:33:19.000Z\",\n        \"scheduledAt\": \"2020-10-28T15:33:19.000Z\",\n        \"updatedAt\": \"2020-10-28T15:33:19.000Z\",\n        \"validatedAt\": \"2020-10-28T15:33:19.000Z\",\n        \"trasnferedAt\": \"2020-10-28T15:33:19.000Z\",\n        \"reversedAt\": \"2020-10-28T15:33:19.000Z\"\n      }\n    ]\n  },\n  {\n    \"id\": 1,\n    \"name\": \"Global INC\",\n    \"documentNumber\": 900200001,\n    \"documentTypeId\": 1,\n    \"PayOut\": [\n      {\n        \"id\": 5087,\n        \"uid\": \"5f9b9b9b9b9b9b9b\",\n        \"beneficiaryName\": \"John Doe\",\n        \"documentTypeId\": 1,\n        \"documentNumber\": 19373737,\n        \"bankBaseId\": 23,\n        \"bankAccountType\": \"ahorros\",\n        \"bankAccount\": \"81234678944\",\n        \"Amount\": 5000000,\n        \"externalIdentifier\": \"REF123456789\",\n        \"tags\": {\n          \"tagIdentifier\": [\n            \"indentifier1\",\n            \"indentifier2\",\n            \"indent 22\",\n            \"indent 4\"\n          ]\n        },\n        \"currencyId\": 1,\n        \"signedBy\": {\n          \"id\": 122,\n          \"createdAt\": \"2020-10-28T15:33:19.000Z\",\n          \"userId\": 13\n        },\n        \"companyProductId\": 4451,\n        \"state\": \"delivered\",\n        \"createdAt\": \"2020-10-28T15:33:19.000Z\",\n        \"scheduledAt\": \"2020-10-28T15:33:19.000Z\",\n        \"updatedAt\": \"2020-10-28T15:33:19.000Z\",\n        \"validatedAt\": \"2020-10-28T15:33:19.000Z\",\n        \"trasnferedAt\": \"2020-10-28T15:33:19.000Z\",\n        \"reversedAt\": \"2020-10-28T15:33:19.000Z\"\n      },\n      {\n        \"id\": 5087,\n        \"uid\": \"5f9b9b9b9b9b9b9b\",\n        \"beneficiaryName\": \"John Doe\",\n        \"documentTypeId\": 1,\n        \"documentNumber\": 19373737,\n        \"bankBaseId\": 23,\n        \"bankAccountType\": \"ahorros\",\n        \"bankAccount\": \"81234678944\",\n        \"Amount\": 5000000,\n        \"externalIdentifier\": \"REF123456789\",\n        \"tags\": {\n          \"tagIdentifier\": [\n            \"indentifier1\",\n            \"indentifier2\",\n            \"indent 22\",\n            \"indent 4\"\n          ]\n        },\n        \"currencyId\": 1,\n        \"signedBy\": {\n          \"id\": 122,\n          \"createdAt\": \"2020-10-28T15:33:19.000Z\",\n          \"userId\": 13\n        },\n        \"companyProductId\": 4451,\n        \"state\": \"delivered\",\n        \"createdAt\": \"2020-10-28T15:33:19.000Z\",\n        \"scheduledAt\": \"2020-10-28T15:33:19.000Z\",\n        \"updatedAt\": \"2020-10-28T15:33:19.000Z\",\n        \"validatedAt\": \"2020-10-28T15:33:19.000Z\",\n        \"trasnferedAt\": \"2020-10-28T15:33:19.000Z\",\n        \"reversedAt\": \"2020-10-28T15:33:19.000Z\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04b57735-78ba-4c80-9c78-0a69debef16e",
+          "name": "Affiliate.get Affiliates",
+          "request": {
+            "name": "Affiliate.get Affiliates",
+            "description": {
+              "content": "## Get all affiliates\n\n Gets all affiliates created by the currently registered user, belonging to the company of the user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "affiliates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                },
+                {
+                  "disabled": false,
+                  "key": "adminId",
+                  "value": "<string>",
+                  "description": "(Required) id of the current Affiliate company admin user"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "05e022cb-77aa-444c-b9dd-329c7605334e",
+              "name": "Array of Affiliate model instances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "affiliates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "adminId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"John Doe Inc\",\n    \"documentTypeId\": 1,\n    \"documentNumber\": \"900200001\",\n    \"isActive\": true,\n    \"stateCompany\": \"initial\",\n    \"stateStudyCompany\": \"missInfo\",\n    \"countryId\": 1,\n    \"createdAt\": \"2020-10-28T15:33:19.000Z\",\n    \"companyUser\": [\n      {\n        \"id\": 1,\n        \"role\": \"admin\",\n        \"user\": {\n          \"id\": 1,\n          \"name\": \"John Doe\",\n          \"email\": \"johnDoe@doeInc.com\",\n          \"phone\": \"+1234567890\",\n          \"createdAt\": \"2020-10-28T15:33:19.000Z\",\n          \"updatedAt\": \"2020-10-28T15:33:19.000Z\"\n        }\n      },\n      {\n        \"id\": 1,\n        \"role\": \"admin\",\n        \"user\": {\n          \"id\": 1,\n          \"name\": \"John Doe\",\n          \"email\": \"johnDoe@doeInc.com\",\n          \"phone\": \"+1234567890\",\n          \"createdAt\": \"2020-10-28T15:33:19.000Z\",\n          \"updatedAt\": \"2020-10-28T15:33:19.000Z\"\n        }\n      }\n    ]\n  },\n  {\n    \"id\": 1,\n    \"name\": \"John Doe Inc\",\n    \"documentTypeId\": 1,\n    \"documentNumber\": \"900200001\",\n    \"isActive\": true,\n    \"stateCompany\": \"initial\",\n    \"stateStudyCompany\": \"missInfo\",\n    \"countryId\": 1,\n    \"createdAt\": \"2020-10-28T15:33:19.000Z\",\n    \"companyUser\": [\n      {\n        \"id\": 1,\n        \"role\": \"admin\",\n        \"user\": {\n          \"id\": 1,\n          \"name\": \"John Doe\",\n          \"email\": \"johnDoe@doeInc.com\",\n          \"phone\": \"+1234567890\",\n          \"createdAt\": \"2020-10-28T15:33:19.000Z\",\n          \"updatedAt\": \"2020-10-28T15:33:19.000Z\"\n        }\n      },\n      {\n        \"id\": 1,\n        \"role\": \"admin\",\n        \"user\": {\n          \"id\": 1,\n          \"name\": \"John Doe\",\n          \"email\": \"johnDoe@doeInc.com\",\n          \"phone\": \"+1234567890\",\n          \"createdAt\": \"2020-10-28T15:33:19.000Z\",\n          \"updatedAt\": \"2020-10-28T15:33:19.000Z\"\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.loopay.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9232d6c4-bef8-4e0a-9ec6-e5a5574feab8",
+    "name": "loopay-api Affiliate API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing.\n\nContact Support:\n Name: Loopay Team",
+      "type": "text/plain"
+    }
+  }
+}

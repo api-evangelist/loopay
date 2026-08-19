@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "loopay-api Affiliate Bank API",
+    "version": "3.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bank",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bank.bankBases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/banks",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "## Get banks\n Get all banks available"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

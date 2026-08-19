@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "loopay-api Affiliate DocumentType API",
+    "version": "3.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DocumentType",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "DocumentType.documentTypeBases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loopay.com/documentTypes",
+            "params": [
+              {
+                "name": "authorization",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "## Get documents types\n Get all document types"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

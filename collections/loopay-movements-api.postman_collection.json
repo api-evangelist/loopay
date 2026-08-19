@@ -1,0 +1,190 @@
+{
+  "item": [
+    {
+      "id": "f6d6c2a4-a11e-4689-a5f9-cf1aa1ab7ade",
+      "name": "Movements",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5506c72d-7aaa-4809-9f75-8481b3473bc3",
+          "name": "Movements.self Pay Outs",
+          "request": {
+            "name": "Movements.self Pay Outs",
+            "description": {
+              "content": "## Get all movements by companyProductId\n\n Gets all movements by companyProductId",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "movements",
+                ":companyProductId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<number>",
+                  "description": "Page number of the totalPages"
+                },
+                {
+                  "disabled": false,
+                  "key": "recordsPerPage",
+                  "value": "<number>",
+                  "description": "Records to be returned per page (max 1000) (default 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<dateTime>",
+                  "description": "End date of the movements"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<dateTime>",
+                  "description": "Start date of the movements"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "companyProductId",
+                  "description": "(Required) Company product id see /company-products for more info (refers as id)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eab9352c-3693-4e85-b8cf-e3924c66d008",
+              "name": "Array of movements model instances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "movements",
+                    ":companyProductId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "recordsPerPage",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2050-03-01T00:00:00.000Z"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "1992-11-24T00:00:00.000Z"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "companyProductId",
+                      "description": "(Required) Company product id see /company-products for more info (refers as id)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"movements\": [\n    {\n      \"type\": \"string\",\n      \"state\": \"string\",\n      \"ref\": \"string\",\n      \"amount\": 9528.784029180095,\n      \"origin\": \"string\",\n      \"destination\": \"string\",\n      \"user\": \"string\",\n      \"id\": 3768.937449319897,\n      \"uid\": \"string\",\n      \"createdAt\": \"2019-10-10T13:47:04.256Z\"\n    },\n    {\n      \"type\": \"string\",\n      \"state\": \"string\",\n      \"ref\": \"string\",\n      \"amount\": 2795.0628430878232,\n      \"origin\": \"string\",\n      \"destination\": \"string\",\n      \"user\": \"string\",\n      \"id\": 571.1749971380486,\n      \"uid\": \"string\",\n      \"createdAt\": \"1992-04-01T20:41:22.121Z\"\n    }\n  ],\n  \"paginationInfo\": {\n    \"currentPage\": 4983.172559875867,\n    \"recordsPerPage\": 5925.148697348993,\n    \"totalRecords\": 7372.351904939537,\n    \"totalPages\": 132.0824309150459\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.loopay.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6f86d962-77c6-4b79-b402-14d234f20a1d",
+    "name": "loopay-api Affiliate Movements API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing.\n\nContact Support:\n Name: Loopay Team",
+      "type": "text/plain"
+    }
+  }
+}

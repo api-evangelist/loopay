@@ -1,0 +1,357 @@
+{
+  "item": [
+    {
+      "id": "d8582a40-d56d-4c1b-ad0b-8299320f8d33",
+      "name": "SourcesOfPaymentAdmin",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "369f2eee-41ff-4e22-b1f9-f847544c7db6",
+          "name": "Sources Of Payment Admin.companies",
+          "request": {
+            "name": "Sources Of Payment Admin.companies",
+            "description": {
+              "content": "## Get companies ID\n Get array IDs companies available where can create a payint across a source of payment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment-sources",
+                "companies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "recordsPerPage",
+                  "value": "<number>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5cb66886-78ce-4a46-a053-9179b73d7c95",
+              "name": "Array of CompanyId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-sources",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "recordsPerPage",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  1,\n  1\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d9683e63-b617-421a-bacf-00a6afa01d45",
+          "name": "Sources Of Payment Admin.payment Of Sources",
+          "request": {
+            "name": "Sources Of Payment Admin.payment Of Sources",
+            "description": {
+              "content": "## Get payment-sources\n Get array IDs PaymentOfSources belonging to a company available to create a payint",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment-sources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>",
+                  "description": "(Required) Authorization token"
+                },
+                {
+                  "disabled": false,
+                  "key": "companyIds",
+                  "value": "<number>",
+                  "description": "(Required) company id"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "recordsPerPage",
+                  "value": "<number>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5173a66c-e7bf-4376-84f2-b51ae011b471",
+              "name": "Array of ID PaymentOfSources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "companyIds",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "recordsPerPage",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  1,\n  1\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13a7466b-5876-47a0-aae4-a3cc8c6ca683",
+          "name": "Sources Of Payment Admin.validate Pay In On Source Of Payment",
+          "request": {
+            "name": "Sources Of Payment Admin.validate Pay In On Source Of Payment",
+            "description": {
+              "content": "## Get if sourceOfPayment is valid for a payin\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment-sources-pay-in",
+                "valid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authorization",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sourceOfPaymentId",
+                  "value": "<number>",
+                  "description": "(Required) Source of payment id"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<number>",
+                  "description": "(Required) amount"
+                },
+                {
+                  "disabled": false,
+                  "key": "userId",
+                  "value": "<number>",
+                  "description": "(Required) userId"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2b27c3b-5d14-4852-9213-cd063e9822e7",
+              "name": "Boolean",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-sources-pay-in",
+                    "valid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authorization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sourceOfPaymentId",
+                      "value": "7"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "100000"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"codeError\": 2411.445496413881,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.loopay.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5d88fb34-7575-492d-90ea-1b5da6e2f997",
+    "name": "loopay-api Affiliate SourcesOfPaymentAdmin API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing.\n\nContact Support:\n Name: Loopay Team",
+      "type": "text/plain"
+    }
+  }
+}
