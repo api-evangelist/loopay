@@ -30,7 +30,7 @@ accessModel:
   generated: '2026-07-22'
   method: derived
 image: https://loopay.com/wp-content/uploads/2023/09/Loopay-web-imgs-24-150x139.png
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-07-20'
 tags:
