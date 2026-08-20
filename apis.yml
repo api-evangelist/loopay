@@ -54,6 +54,8 @@ apis:
   humanURL: https://api.loopay.com/explorer
   baseURL: https://api.loopay.com
   tags:
+  - Affiliates
+  tags_raw:
   - Affiliate
   properties:
   - type: OpenAPI
@@ -162,6 +164,8 @@ apis:
   humanURL: https://api.loopay.com/explorer
   baseURL: https://api.loopay.com
   tags:
+  - Document type
+  tags_raw:
   - DocumentType
   properties:
   - type: OpenAPI
@@ -216,6 +220,8 @@ apis:
   humanURL: https://api.loopay.com/explorer
   baseURL: https://api.loopay.com
   tags:
+  - Pay-In
+  tags_raw:
   - PayIn
   properties:
   - type: OpenAPI
