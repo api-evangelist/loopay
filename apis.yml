@@ -337,6 +337,9 @@ apis:
   - type: DataModel
     url: data-model/loopay-data-model.yml
 common:
+- type: CapabilityMap
+  url: capabilities/loopay-capability-edges.yml
+  name: Loopay Business Capability Map
 - type: DeveloperPortal
   url: https://api.loopay.com/explorer
 - type: Documentation
