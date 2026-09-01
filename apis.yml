@@ -176,7 +176,7 @@ apis:
   humanURL: https://api.loopay.com/explorer
   baseURL: https://api.loopay.com
   tags:
-  - DocumentType
+  - Document type
   tags_raw:
   - DocumentType
   properties:
@@ -232,7 +232,7 @@ apis:
   humanURL: https://api.loopay.com/explorer
   baseURL: https://api.loopay.com
   tags:
-  - PayIn
+  - Pay-In
   tags_raw:
   - PayIn
   properties:
