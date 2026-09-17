@@ -172,26 +172,6 @@ apis:
     url: conventions/loopay-conventions.yml
   - type: DataModel
     url: data-model/loopay-data-model.yml
-- aid: loopay:loopay-documenttype-api
-  name: Loopay DocumentType API
-  description: The DocumentType API from Loopay — 1 operation(s) for documenttype.
-  humanURL: https://api.loopay.com/explorer
-  baseURL: https://api.loopay.com
-  tags:
-  - Document type
-  tags_raw:
-  - DocumentType
-  properties:
-  - type: OpenAPI
-    url: openapi/loopay-documenttype-api-openapi.yml
-  - type: APIReference
-    url: https://api.loopay.com/explorer
-  - type: Authentication
-    url: authentication/loopay-authentication.yml
-  - type: Conventions
-    url: conventions/loopay-conventions.yml
-  - type: DataModel
-    url: data-model/loopay-data-model.yml
 - aid: loopay:loopay-movements-api
   name: Loopay Movements API
   description: The Movements API from Loopay — 1 operation(s) for movements.
@@ -330,6 +310,24 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/loopay-user-api-openapi.yml
+  - type: APIReference
+    url: https://api.loopay.com/explorer
+  - type: Authentication
+    url: authentication/loopay-authentication.yml
+  - type: Conventions
+    url: conventions/loopay-conventions.yml
+  - type: DataModel
+    url: data-model/loopay-data-model.yml
+- aid: loopay:loopay-document-type-api
+  name: Loopay Document type API
+  description: The Document type API from Loopay — 1 operation(s) for document type.
+  humanURL: https://api.loopay.com/explorer
+  baseURL: https://api.loopay.com
+  tags:
+  - Document type
+  properties:
+  - type: OpenAPI
+    url: openapi/loopay-document-type-api-openapi.yml
   - type: APIReference
     url: https://api.loopay.com/explorer
   - type: Authentication
