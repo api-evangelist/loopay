@@ -1,22 +1,26 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: loopay-api Affiliate DocumentType API
+  title: loopay-api Document Type API
   version: 3.2.0
-  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  description: '## Loopay open API
+
+    You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let''s dive right in!'
   contact:
     name: Loopay Team
 servers:
 - url: https://api.loopay.com
 tags:
-- name: DocumentType
+- name: Document type
 paths:
   /documentTypes:
     get:
       x-controller-name: DocumentType
       x-operation-name: documentTypeBases
       tags:
-      - DocumentType
-      description: "## Get documents types\n Get all document types"
+      - Document type
+      description: '## Get documents types
+
+        Get all document types'
       responses:
         '200':
           description: Array of document types
@@ -42,3 +46,5 @@ paths:
         schema:
           type: string
       operationId: DocumentType.documentTypeBases
+      summary: Document type document type bases
+      x-summary-source: derived

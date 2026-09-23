@@ -1,8 +1,10 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: loopay-api Affiliate Payout API
+  title: loopay-api Payout API
   version: 3.2.0
-  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  description: '## Loopay open API
+
+    You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let''s dive right in!'
   contact:
     name: Loopay Team
 servers:
@@ -16,7 +18,10 @@ paths:
       x-operation-name: createSelfPayOut
       tags:
       - Payout
-      description: "## Create a payOut\n\n Create a single payout given a  payout object"
+      description: '## Create a payOut
+
+
+        Create a single payout given a payout object'
       responses:
         '200':
           description: "## Create a payOut with bank transfer \n\nCreate one payout given a company id, company product id\n\n"
@@ -168,13 +173,18 @@ paths:
         required: true
         x-parameter-index: 1
       operationId: Payout.createSelfPayOut
+      summary: Payout create self pay out
+      x-summary-source: derived
   /payout/{id}:
     get:
       x-controller-name: Payout
       x-operation-name: selfPayOut
       tags:
       - Payout
-      description: "## Get a payOut\n\n Get a single payout given a  payout id"
+      description: '## Get a payOut
+
+
+        Get a single payout given a payout id'
       responses:
         '200':
           description: Payout model instance
@@ -195,6 +205,8 @@ paths:
         description: Authorization token
         required: true
       operationId: Payout.selfPayOut
+      summary: Payout self pay out
+      x-summary-source: derived
   /payouts/byExternalIdentifierList:
     post:
       x-controller-name: Payout
@@ -280,6 +292,8 @@ paths:
         required: true
         x-parameter-index: 1
       operationId: Payout.getSelfPayOutsByExternalIdentifierList
+      summary: Payout get self pay outs by external identifier list
+      x-summary-source: derived
   /payouts/create:
     post:
       x-controller-name: Payout
@@ -497,13 +511,18 @@ paths:
         required: true
         x-parameter-index: 1
       operationId: Payout.createSelfPayOutMany
+      summary: Payout create self pay out many
+      x-summary-source: derived
   /payouts/sign:
     post:
       x-controller-name: Payout
       x-operation-name: createManySignedPayouts
       tags:
       - Payout
-      description: "## Sign payOuts\n\n Sign several payouts given an array of payout ids"
+      description: '## Sign payOuts
+
+
+        Sign several payouts given an array of payout ids'
       responses:
         '200':
           description: Count Payout model instance signed
@@ -568,13 +587,18 @@ paths:
         required: true
         x-parameter-index: 1
       operationId: Payout.createManySignedPayouts
+      summary: Payout create many signed payouts
+      x-summary-source: derived
   /payouts:
     get:
       x-controller-name: Payout
       x-operation-name: selfPayOuts
       tags:
       - Payout
-      description: "## Get all payOuts\n\n Gets all payOuts created by the currently registered user, belonging to the company of the user"
+      description: '## Get all payOuts
+
+
+        Gets all payOuts created by the currently registered user, belonging to the company of the user'
       responses:
         '200':
           description: Array of Payout model instances
@@ -614,6 +638,8 @@ paths:
         schema:
           type: number
       operationId: Payout.selfPayOuts
+      summary: Payout self pay outs
+      x-summary-source: derived
 components:
   schemas:
     CreaateSelfPayOut:

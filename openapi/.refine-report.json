@@ -1,21 +1,7 @@
 {
   "provider": "loopay",
   "sources": [
-    "loopay-affiliate-api-openapi.yml",
-    "loopay-bank-api-openapi.yml",
-    "loopay-company-api-openapi.yml",
-    "loopay-companyproduct-api-openapi.yml",
-    "loopay-country-api-openapi.yml",
-    "loopay-currency-api-openapi.yml",
-    "loopay-documenttype-api-openapi.yml",
-    "loopay-movements-api-openapi.yml",
-    "loopay-paidmethods-api-openapi.yml",
-    "loopay-payin-api-openapi.yml",
-    "loopay-payout-api-openapi.yml",
-    "loopay-physicalpoint-api-openapi.yml",
-    "loopay-sourcesofpayment-api-openapi.yml",
-    "loopay-sourcesofpaymentadmin-api-openapi.yml",
-    "loopay-user-api-openapi.yml"
+    "_original/loopay-openapi-original.json"
   ],
   "outputs": [
     "loopay-affiliate-api-openapi.yml",
@@ -34,9 +20,47 @@
     "loopay-sourcesofpaymentadmin-api-openapi.yml",
     "loopay-user-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "loopay-openapi-original.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "loopay-openapi-original.json: declared missing tag: Affiliate",
+    "loopay-openapi-original.json: declared missing tag: Bank",
+    "loopay-openapi-original.json: declared missing tag: Company",
+    "loopay-openapi-original.json: declared missing tag: CompanyProduct",
+    "loopay-openapi-original.json: declared missing tag: Country",
+    "loopay-openapi-original.json: declared missing tag: Currency",
+    "loopay-openapi-original.json: declared missing tag: DocumentType",
+    "loopay-openapi-original.json: declared missing tag: Movements",
+    "loopay-openapi-original.json: declared missing tag: PaidMethods",
+    "loopay-openapi-original.json: declared missing tag: PayIn",
+    "loopay-openapi-original.json: declared missing tag: Payout",
+    "loopay-openapi-original.json: declared missing tag: PhysicalPoint",
+    "loopay-openapi-original.json: declared missing tag: SourcesOfPayment",
+    "loopay-openapi-original.json: declared missing tag: SourcesOfPaymentAdmin",
+    "loopay-openapi-original.json: declared missing tag: User",
+    "superseded outputs removed: loopay-document-type-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 15 total)"
+  ],
+  "skipped": [
+    "loopay-affiliate-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loopay-bank-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loopay-company-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loopay-companyproduct-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loopay-country-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loopay-currency-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loopay-document-type-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loopay-movements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loopay-paidmethods-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loopay-payin-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loopay-payout-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loopay-physicalpoint-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loopay-sourcesofpayment-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loopay-sourcesofpaymentadmin-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loopay-user-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

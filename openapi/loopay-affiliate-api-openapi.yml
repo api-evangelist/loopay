@@ -1,8 +1,10 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: loopay-api Affiliate API
   version: 3.2.0
-  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  description: '## Loopay open API
+
+    You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let''s dive right in!'
   contact:
     name: Loopay Team
 servers:
@@ -39,7 +41,6 @@ paths:
             schema:
               type: object
               description: 'data is an array of objects with the data of the afiliates: documentNumber, documentTypeId'
-              nullable: false
               properties:
                 data:
                   type: array
@@ -52,11 +53,9 @@ paths:
                       documentTypeId:
                         type: number
                         description: Document type id
-                        nullable: false
                       documentNumber:
                         type: string
                         description: Document number
-                        nullable: false
                     additionalProperties: false
                   uniqueItems: true
                   minItems: 1
@@ -67,13 +66,18 @@ paths:
               - data
               additionalProperties: false
       operationId: Affiliate.getCompaniesBalance
+      summary: Affiliate get companies balance
+      x-summary-source: derived
   /affiliates/create:
     post:
       x-controller-name: Affiliate
       x-operation-name: createManyAffiliates
       tags:
       - Affiliate
-      description: "## Create many affiliates\n\n Create many users, companies, and companyUsers given an array of UsersData"
+      description: '## Create many affiliates
+
+
+        Create many users, companies, and companyUsers given an array of UsersData'
       responses:
         '200':
           description: Affiliate model instance
@@ -175,13 +179,18 @@ paths:
         required: true
         x-parameter-index: 2
       operationId: Affiliate.createManyAffiliates
+      summary: Affiliate create many affiliates
+      x-summary-source: derived
   /affiliates/payouts:
     get:
       x-controller-name: Affiliate
       x-operation-name: getPayOutsForAffiliates
       tags:
       - Affiliate
-      description: "## Get all payOuts for affiliates\n\n Gets all payOuts for affiliates created by the currently registered user, belonging to the company of the user"
+      description: '## Get all payOuts for affiliates
+
+
+        Gets all payOuts for affiliates created by the currently registered user, belonging to the company of the user'
       responses:
         '200':
           description: Array of Affiliate model instances
@@ -301,13 +310,18 @@ paths:
         required: true
         example: 16,17,18
       operationId: Affiliate.getPayOutsForAffiliates
+      summary: Affiliate get pay outs for affiliates
+      x-summary-source: derived
   /affiliates:
     get:
       x-controller-name: Affiliate
       x-operation-name: getAffiliates
       tags:
       - Affiliate
-      description: "## Get all affiliates\n\n Gets all affiliates created by the currently registered user, belonging to the company of the user"
+      description: '## Get all affiliates
+
+
+        Gets all affiliates created by the currently registered user, belonging to the company of the user'
       responses:
         '200':
           description: Array of Affiliate model instances
@@ -392,3 +406,5 @@ paths:
         required: true
         example: 13
       operationId: Affiliate.getAffiliates
+      summary: Affiliate get affiliates
+      x-summary-source: derived

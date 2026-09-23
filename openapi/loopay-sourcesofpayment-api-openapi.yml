@@ -1,8 +1,10 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: loopay-api Affiliate SourcesOfPayment API
+  title: loopay-api Sources Of Payment API
   version: 3.2.0
-  description: " ## Loopay open API \n You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let's dive right in! \n\n ## Integration guide\n For production, please contact your personal Looper.\n\n ## Authetication guide\n Loopay uses a token-based authentication system, which means that you will need to generate a token to be able to use the API. \n\n ### How to generate a token\n To generate a token, you will need to send a POST  request to the following endpoint: \n\n `/login`  [See  User/post ](/explorer/#/User/User.login)  \n\n  ⚠ **Disclaimer**: All examples listed below are run in a secure environment ready for testing."
+  description: '## Loopay open API
+
+    You will find a complete guide and information to start working with Loopay integrations as soon as possible, as well as support if you get lost, so let''s dive right in!'
   contact:
     name: Loopay Team
 servers:
@@ -16,7 +18,10 @@ paths:
       x-operation-name: createSourceOfPayment
       tags:
       - SourcesOfPayment
-      description: "## Create source of payment\n\n Create a new payment source belonging to a companyProductId"
+      description: '## Create source of payment
+
+
+        Create a new payment source belonging to a companyProductId'
       responses:
         '200':
           description: source of payment model instance
@@ -50,20 +55,23 @@ paths:
                     example: '2021-08-30T17:00:00.000Z'
                     description: Source of payment created date
                   fixedValue:
-                    type: number
+                    type:
+                    - number
+                    - 'null'
                     example: 0
                     description: Source of payment fixed value
-                    nullable: true
                   maxPayments:
-                    type: number
+                    type:
+                    - number
+                    - 'null'
                     example: 0
                     description: Source of maximum payments. If the value is 0, no limit is set, unlimited payments.
-                    nullable: true
                   expiresAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     example: '2021-08-30T17:00:00.000Z'
                     description: Source of maximum payments. If the value is 0, no limit is set.
-                    nullable: true
                   url:
                     type: string
                     example: '@troop/d30/test-url-2'
@@ -184,13 +192,39 @@ paths:
         required: true
         x-parameter-index: 1
       operationId: SourcesOfPayment.createSourceOfPayment
+      summary: Sources of payment create source of payment
+      x-summary-source: derived
   /source-of-payment/create-direct-payment:
     post:
       x-controller-name: SourcesOfPayment
       x-operation-name: createDirectPayment
       tags:
       - SourcesOfPayment
-      description: "## Create direct payment and source of payment\n\nCreate a new source of payment direct form backend, without a front interface, belonging to a companyProductId.\n\n***expiresAt*** [optional]: Only avaylable for \"paymentChannel\": \"pos\" cashIn. \n\n* By default it is set to 7 days expiration \n\n* expiresAt value must be greater than 24h from current date \n\n* expiresAt must be less than 7 from current date\n\n** expiration for bank transfers is by default 1 hr online and 24 hr in a physical bank with the bank code generated.***callbackUrl*** : url to return after payment is processed \n\n***userType*** [optional]: only required for transactions in colombia \n\n***metadata*** [optional]: object with additional information \n\n"
+      description: '## Create direct payment and source of payment
+
+
+        Create a new source of payment direct form backend, without a front interface, belonging to a companyProductId.
+
+
+        ***expiresAt*** [optional]: Only avaylable for "paymentChannel": "pos" cashIn.
+
+
+        * By default it is set to 7 days expiration
+
+
+        * expiresAt value must be greater than 24h from current date
+
+
+        * expiresAt must be less than 7 from current date
+
+
+        ** expiration for bank transfers is by default 1 hr online and 24 hr in a physical bank with the bank code generated.***callbackUrl*** : url to return after payment is processed
+
+
+        ***userType*** [optional]: only required for transactions in colombia
+
+
+        ***metadata*** [optional]: object with additional information'
       responses:
         '200':
           description: source of payment model instance
@@ -245,20 +279,23 @@ paths:
                         example: '2021-08-30T17:00:00.000Z'
                         description: Source of payment created date
                       fixedValue:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         example: 0
                         description: Source of payment fixed value
-                        nullable: true
                       maxPayments:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         example: 0
                         description: Source of maximum payments. If the value is 0, no limit is set, unlimited payments.
-                        nullable: true
                       expiresAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         example: '2021-08-30T17:00:00.000Z'
                         description: Source of maximum payments. If the value is 0, no limit is set.
-                        nullable: true
                       url:
                         type: string
                         example: '@troop/d30/test-url-2'
@@ -411,20 +448,23 @@ paths:
                         example: '2021-08-30T17:00:00.000Z'
                         description: Source of payment created date
                       fixedValue:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         example: 25
                         description: Source of payment fixed value
-                        nullable: true
                       maxPayments:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         example: 1
                         description: Source of maximum payments. If the value is 0, no limit is set, unlimited payments.
-                        nullable: true
                       expiresAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         example: '2026-08-30T17:00:00.000Z'
                         description: Source of maximum payments. If the value is 0, no limit is set.
-                        nullable: true
                       url:
                         type: string
                         example: '@alexaflowers53/econo-fast8g/payvalida-visa-30may-008'
@@ -527,13 +567,17 @@ paths:
         required: true
         x-parameter-index: 1
       operationId: SourcesOfPayment.createDirectPayment
+      summary: Sources of payment create direct payment
+      x-summary-source: derived
   /source-of-payment/filtered:
     get:
       x-controller-name: SourcesOfPayment
       x-operation-name: bankBases
       tags:
       - SourcesOfPayment
-      description: "## Get source of payment\n Get  all source of payments by company id"
+      description: '## Get source of payment
+
+        Get all source of payments by company id'
       responses:
         '200':
           description: Array of source of payment model and pagination info
@@ -563,13 +607,18 @@ paths:
         required: true
         example: 7
       operationId: SourcesOfPayment.bankBases
+      summary: Sources of payment bank bases
+      x-summary-source: derived
   /source-of-payment/update:
     post:
       x-controller-name: SourcesOfPayment
       x-operation-name: updateSourceOfPayment
       tags:
       - SourcesOfPayment
-      description: "## Update source of payment\n\n Update source of payment"
+      description: '## Update source of payment
+
+
+        Update source of payment'
       responses:
         '200':
           description: id source of payment updated
@@ -707,13 +756,17 @@ paths:
         required: true
         x-parameter-index: 2
       operationId: SourcesOfPayment.updateSourceOfPayment
+      summary: Sources of payment update source of payment
+      x-summary-source: derived
   /source-of-payment/{sourceOfPaymentId}:
     get:
       x-controller-name: SourcesOfPayment
       x-operation-name: sourceOfPaymentDetail
       tags:
       - SourcesOfPayment
-      description: "## Get source of payment\n Get source of payment detail"
+      description: '## Get source of payment
+
+        Get source of payment detail'
       responses:
         '200':
           description: source of payment model and pagination info
@@ -739,9 +792,10 @@ paths:
                         type: boolean
                         example: true
                       fixedValue:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         example: 100000.5
-                        nullable: true
                       maxPayments:
                         type: number
                         example: 3
@@ -749,9 +803,10 @@ paths:
                         type: string
                         example: '2020-09-30T00:00:00.000Z'
                       expiresAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         example: '2090-09-30T00:00:00.000Z'
-                        nullable: true
                       CompanyProduct:
                         type: object
                         properties:
@@ -780,33 +835,40 @@ paths:
                         type: number
                         example: 6
                       totalPayInsByState:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           accepted:
-                            type: number
+                            type:
+                            - number
+                            - 'null'
                             example: 1
-                            nullable: true
                           rejected:
-                            type: number
+                            type:
+                            - number
+                            - 'null'
                             example: 1
-                            nullable: true
                           pending:
-                            type: number
+                            type:
+                            - number
+                            - 'null'
                             example: 1
-                            nullable: true
                           cancelled:
-                            type: number
+                            type:
+                            - number
+                            - 'null'
                             example: 1
-                            nullable: true
                           abandoned:
-                            type: number
+                            type:
+                            - number
+                            - 'null'
                             example: 1
-                            nullable: true
                           initial:
-                            type: number
+                            type:
+                            - number
+                            - 'null'
                             example: 1
-                            nullable: true
-                        nullable: true
       parameters:
       - name: authorization
         in: query
@@ -821,3 +883,5 @@ paths:
         description: Source of payment id
         required: true
       operationId: SourcesOfPayment.sourceOfPaymentDetail
+      summary: Sources of payment source of payment detail
+      x-summary-source: derived
