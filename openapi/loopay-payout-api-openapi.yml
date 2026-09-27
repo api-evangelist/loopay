@@ -642,6 +642,74 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PayOutWithRelations:
+      title: PayOutWithRelations
+      type: object
+      description: '(tsType: PayOutWithRelations, schemaOptions: { includeRelations: true })'
+      properties:
+        id:
+          type: number
+        active:
+          type: boolean
+        Amount:
+          type: number
+        AmountUsd:
+          type: number
+        bankAccount:
+          type: string
+        bankAccountType:
+          type: string
+        bankBaseId:
+          type: number
+        beneficiaryName:
+          type: string
+        companyId:
+          type: number
+        companyProductId:
+          type: number
+        currencyId:
+          type: number
+        deleted:
+          type: boolean
+        documentNumber: {}
+        documentTypeId:
+          type: number
+        externalIdentifier:
+          type: string
+        metaData:
+          type: object
+        reversedAt:
+          type: string
+          format: date-time
+        startedProcessAt:
+          type: string
+          format: date-time
+        state:
+          type: string
+        trasnferedAt:
+          type: string
+          format: date-time
+        userId:
+          type: number
+        validatedAt:
+          type: string
+          format: date-time
+        uid:
+          type: string
+      required:
+      - Amount
+      - bankAccount
+      - bankAccountType
+      - bankBaseId
+      - beneficiaryName
+      - companyProductId
+      - currencyId
+      - documentNumber
+      - documentTypeId
+      - externalIdentifier
+      - userId
+      additionalProperties: false
+      x-typescript-type: PayOutWithRelations
     CreaateSelfPayOut:
       title: CreaateSelfPayOut
       type: object
@@ -755,71 +823,3 @@ components:
       - externalIdentifier
       - userId
       additionalProperties: false
-    PayOutWithRelations:
-      title: PayOutWithRelations
-      type: object
-      description: '(tsType: PayOutWithRelations, schemaOptions: { includeRelations: true })'
-      properties:
-        id:
-          type: number
-        active:
-          type: boolean
-        Amount:
-          type: number
-        AmountUsd:
-          type: number
-        bankAccount:
-          type: string
-        bankAccountType:
-          type: string
-        bankBaseId:
-          type: number
-        beneficiaryName:
-          type: string
-        companyId:
-          type: number
-        companyProductId:
-          type: number
-        currencyId:
-          type: number
-        deleted:
-          type: boolean
-        documentNumber: {}
-        documentTypeId:
-          type: number
-        externalIdentifier:
-          type: string
-        metaData:
-          type: object
-        reversedAt:
-          type: string
-          format: date-time
-        startedProcessAt:
-          type: string
-          format: date-time
-        state:
-          type: string
-        trasnferedAt:
-          type: string
-          format: date-time
-        userId:
-          type: number
-        validatedAt:
-          type: string
-          format: date-time
-        uid:
-          type: string
-      required:
-      - Amount
-      - bankAccount
-      - bankAccountType
-      - bankBaseId
-      - beneficiaryName
-      - companyProductId
-      - currencyId
-      - documentNumber
-      - documentTypeId
-      - externalIdentifier
-      - userId
-      additionalProperties: false
-      x-typescript-type: PayOutWithRelations
