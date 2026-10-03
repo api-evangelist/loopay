@@ -642,6 +642,53 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    CreaateSelfPayOut:
+      title: CreaateSelfPayOut
+      type: object
+      description: '(tsType: CreateSelfPayOutInput, schemaOptions: { title: ''CreaateSelfPayOut'' })'
+      properties:
+        Amount:
+          type: number
+        bankAccount:
+          type: string
+        bankAccountType:
+          type: string
+        bankBaseId:
+          type: number
+        beneficiaryName:
+          type: string
+        companyId:
+          type: number
+        companyProductId:
+          type: number
+        currencyId:
+          type: number
+        documentNumber: {}
+        documentTypeId:
+          type: number
+        externalIdentifier:
+          type: string
+        metaData:
+          type: object
+        expiresAt:
+          type: string
+          format: date-time
+        email:
+          type: string
+        phone:
+          type: string
+      required:
+      - Amount
+      - bankAccount
+      - bankAccountType
+      - bankBaseId
+      - beneficiaryName
+      - companyId
+      - companyProductId
+      - documentNumber
+      - documentTypeId
+      additionalProperties: false
+      x-typescript-type: CreateSelfPayOutInput
     PayOutWithRelations:
       title: PayOutWithRelations
       type: object
@@ -710,53 +757,6 @@ components:
       - userId
       additionalProperties: false
       x-typescript-type: PayOutWithRelations
-    CreaateSelfPayOut:
-      title: CreaateSelfPayOut
-      type: object
-      description: '(tsType: CreateSelfPayOutInput, schemaOptions: { title: ''CreaateSelfPayOut'' })'
-      properties:
-        Amount:
-          type: number
-        bankAccount:
-          type: string
-        bankAccountType:
-          type: string
-        bankBaseId:
-          type: number
-        beneficiaryName:
-          type: string
-        companyId:
-          type: number
-        companyProductId:
-          type: number
-        currencyId:
-          type: number
-        documentNumber: {}
-        documentTypeId:
-          type: number
-        externalIdentifier:
-          type: string
-        metaData:
-          type: object
-        expiresAt:
-          type: string
-          format: date-time
-        email:
-          type: string
-        phone:
-          type: string
-      required:
-      - Amount
-      - bankAccount
-      - bankAccountType
-      - bankBaseId
-      - beneficiaryName
-      - companyId
-      - companyProductId
-      - documentNumber
-      - documentTypeId
-      additionalProperties: false
-      x-typescript-type: CreateSelfPayOutInput
     PayOut:
       title: PayOut
       type: object
