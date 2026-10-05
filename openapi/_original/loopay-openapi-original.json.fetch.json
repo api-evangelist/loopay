@@ -1,0 +1,12 @@
+{
+ "url": "https://api.loopay.com/openapi.json",
+ "requested_url": "https://api.loopay.com/openapi.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 169213,
+ "sha256": "2e655f86a11152038fc882e571bc8a0e48e967738365e51bc9d7644b5ae33ae7",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.969), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
