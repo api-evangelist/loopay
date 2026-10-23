@@ -408,3 +408,9 @@ paths:
       operationId: Affiliate.getAffiliates
       summary: Affiliate get affiliates
       x-summary-source: derived
+x-provenance:
+  method: harvested
+  publisher: Loopay
+  source: https://api.loopay.com/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
