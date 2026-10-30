@@ -64,6 +64,142 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Loopay is a company surfaced as a portfolio company of 500-global and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Loopay is a Latin American B2B fintech infrastructure company headquartered in Bogotá, Colombia and backed by 500 Global. It provides cross-border and local business payments, international collections, mass payouts, multi-currency Banking-as-a-Service accounts, automated bank reconciliation, and treasury management for companies operating across Colombia, Peru, Mexico, and Ecuador. Loopay exposes a token-authenticated REST API (OpenAPI 3.0, 31 operations) that lets platforms create and track payouts, manage sources of payment and pay-ins, group affiliates, and read balances and ledger movements — settling supplier and beneficiary payments in under 24 hours.
 
-Backed by: 500-global — https://loopay.com
+**Areas:** Company · Payments · Fintech · Banking as a Service · Cross-Border Payments · Payouts · Treasury · Latin America
+
+## Loopay on APIs.io
+
+Everything profiled for Loopay is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/loopay/](https://apis.io/providers/loopay/)** — or go straight to one of the APIs or properties below.
+
+### APIs (15)
+
+- [Loopay Affiliate API](https://apis.io/apis/loopay/loopay-affiliate-api/) — The Affiliate API from Loopay — 4 operation(s) for affiliate.
+- [Loopay Bank API](https://apis.io/apis/loopay/loopay-bank-api/) — The Bank API from Loopay — 1 operation(s) for bank.
+- [Loopay Company API](https://apis.io/apis/loopay/loopay-company-api/) — The Company API from Loopay — 1 operation(s) for company.
+- [Loopay CompanyProduct API](https://apis.io/apis/loopay/loopay-companyproduct-api/) — The CompanyProduct API from Loopay — 1 operation(s) for companyproduct.
+- [Loopay Country API](https://apis.io/apis/loopay/loopay-country-api/) — The Country API from Loopay — 1 operation(s) for country.
+- [Loopay Currency API](https://apis.io/apis/loopay/loopay-currency-api/) — The Currency API from Loopay — 1 operation(s) for currency.
+- [Loopay Movements API](https://apis.io/apis/loopay/loopay-movements-api/) — The Movements API from Loopay — 1 operation(s) for movements.
+- [Loopay PaidMethods API](https://apis.io/apis/loopay/loopay-paidmethods-api/) — The PaidMethods API from Loopay — 1 operation(s) for paidmethods.
+- [Loopay PayIn API](https://apis.io/apis/loopay/loopay-payin-api/) — The PayIn API from Loopay — 2 operation(s) for payin.
+- [Loopay Payout API](https://apis.io/apis/loopay/loopay-payout-api/) — The Payout API from Loopay — 6 operation(s) for payout.
+- [Loopay PhysicalPoint API](https://apis.io/apis/loopay/loopay-physicalpoint-api/) — The PhysicalPoint API from Loopay — 1 operation(s) for physicalpoint.
+- [Loopay SourcesOfPayment API](https://apis.io/apis/loopay/loopay-sourcesofpayment-api/) — The SourcesOfPayment API from Loopay — 5 operation(s) for sourcesofpayment.
+- [Loopay SourcesOfPaymentAdmin API](https://apis.io/apis/loopay/loopay-sourcesofpaymentadmin-api/) — The SourcesOfPaymentAdmin API from Loopay — 3 operation(s) for sourcesofpaymentadmin.
+- [Loopay User API](https://apis.io/apis/loopay/loopay-user-api/) — The User API from Loopay — 2 operation(s) for user.
+- [Loopay Document type API](https://apis.io/apis/loopay/loopay-document-type-api/) — The Document type API from Loopay — 1 operation(s) for document type.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [loopay](https://apis.io/servers/loopay/loopay/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Loopay Agentic Access](https://apis.io/agentic-access/loopay/loopay-agentic-access/)
+
+#### Collections (15)
+
+Postman and Open Collection request collections.
+
+- [loopay-api Affiliate API](https://apis.io/collections/loopay/open-loopay-affiliate-api/)
+- [loopay-api Affiliate Bank API](https://apis.io/collections/loopay/open-loopay-bank-api/)
+- [loopay-api Affiliate Company API](https://apis.io/collections/loopay/open-loopay-company-api/)
+- [loopay-api Affiliate CompanyProduct API](https://apis.io/collections/loopay/open-loopay-companyproduct-api/)
+- [loopay-api Affiliate Country API](https://apis.io/collections/loopay/open-loopay-country-api/)
+- [loopay-api Affiliate Currency API](https://apis.io/collections/loopay/open-loopay-currency-api/)
+- [loopay-api Affiliate DocumentType API](https://apis.io/collections/loopay/open-loopay-documenttype-api/)
+- [loopay-api Affiliate Movements API](https://apis.io/collections/loopay/open-loopay-movements-api/)
+- [loopay-api Affiliate PaidMethods API](https://apis.io/collections/loopay/open-loopay-paidmethods-api/)
+- [loopay-api Affiliate PayIn API](https://apis.io/collections/loopay/open-loopay-payin-api/)
+- [loopay-api Affiliate Payout API](https://apis.io/collections/loopay/open-loopay-payout-api/)
+- [loopay-api Affiliate PhysicalPoint API](https://apis.io/collections/loopay/open-loopay-physicalpoint-api/)
+- [loopay-api Affiliate SourcesOfPayment API](https://apis.io/collections/loopay/open-loopay-sourcesofpayment-api/)
+- [loopay-api Affiliate SourcesOfPaymentAdmin API](https://apis.io/collections/loopay/open-loopay-sourcesofpaymentadmin-api/)
+- [loopay-api Affiliate User API](https://apis.io/collections/loopay/open-loopay-user-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Loopay Openapi Overlay](https://apis.io/overlays/loopay/loopay-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Loopay Authentication](https://apis.io/security/loopay/loopay-authentication/)
+- [Loopay Domain Security](https://apis.io/security/loopay/loopay-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://loopay.com)
+- [Documentation](https://api.loopay.com/explorer)
+- [API reference](https://api.loopay.com/explorer)
+- [Sign up](https://app.loopay.com/)
+- [Support](https://loopay.com/contacto/)
+- [Blog](https://loopay.com/blog-fintech-pagos-latinoamerica/)
+- [Terms of service](https://loopay.com/terminos-y-condiciones/)
+
+## API Evangelist rating
+
+**Kin Score 32.7** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 45.5 |
+| Contract governance | 4.5 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 54.2 |
+| Access clarity | 10.5 |
+
+**Agent readiness 23.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 18.8** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/loopay/](https://apis.io/providers/loopay/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Loopay: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/loopay/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
